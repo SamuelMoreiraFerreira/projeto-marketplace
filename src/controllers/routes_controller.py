@@ -11,7 +11,7 @@ def getBlueprints (routes_path):
 
         if os.path.isfile(filepath) and filename.endswith('.py'):
 
-            # module spec -> Especificação, um objeto que contém informações necessárias para o interpretador do Python carregar e executar o módulo
+            # module spec -> Especificação, um objeto que contém informações necessárias para o interpretador do Python carregar e executar um módulo
 
             spec = imp.spec_from_file_location('routes.' + filename[:-3], filepath)
             module = imp.module_from_spec(spec)
@@ -19,15 +19,19 @@ def getBlueprints (routes_path):
 
             # hasattr -> Verifica atributos do módulo
 
-            if hasattr(module, 'route') and hasattr(module, 'execute'):
+            if hasattr(module, 'blueprint'):
 
                 # getattr -> Resgata atributos do módulo
 
                 routes.append({
 
-                    "route": getattr(module, 'route'),
-                    "execute": getattr(module, 'execute')
+                    'blueprint': getattr(module, 'blueprint'),
+                    'prefix': getattr(module, 'prefix') if hasattr(module, 'prefix') else ''
 
                 })
+
+            else:
+
+                print('Erro ao carregar o arquivo: ' + filename)
 
     return routes
