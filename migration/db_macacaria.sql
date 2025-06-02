@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS tb_logs (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
 
     user_email TEXT NOT NULL,
-    date DATE DEFAULT NOW(),
+    date DATETIME DEFAULT NOW(),
     log_description TEXT,
     changed_table VARCHAR(20) NOT NULL
 
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS tb_address (
     city VARCHAR(60) NOT NULL,
     state VARCHAR(3) NOT NULL,
 
-    full_address TEXT NOT NULl
+         TEXT NOT NULl
 
 );
 
@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS tb_address (
 
 CREATE TABLE IF NOT EXISTS tb_users (
 
-    email TEXT PRIMARY KEY,
+    email VARCHAR(255) PRIMARY KEY,
 
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
+    first_name VARCHAR(250) NOT NULL,
+    last_name VARCHAR(250) NOT NULL,
 
     phone_number VARCHAR(20),
     address INT NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE tb_products (
 
     product_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    name TEXT NOT NULL,
+    name VARCHAR(250) NOT NULL,
     description TEXT,
 
     price DECIMAL(10,2) NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE tb_monkeys_classes (
 
     class_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    class TEXT NOT NULL,
+    class VARCHAR(250) NOT NULL,
     description TEXT
 
 );
@@ -136,7 +136,7 @@ CREATE TABLE tb_bloons_types (
 
     type_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    type TEXT NOT NULL
+    type VARCHAR(250) NOT NULL
 
 );
 
@@ -144,7 +144,7 @@ CREATE TABLE tb_bloons_types (
 
 CREATE TABLE tb_bloons (
 
-    bloon_id INT NOT NULL PRIMARY KEY,
+    bloon_id INT AUTO_INCREMENT PRIMARY KEY,
     
     tier TINYINT(5) NOT NULL,
 
@@ -167,7 +167,7 @@ CREATE TABLE tb_shopping_cart (
 
     cart_id INT NOT NULL PRIMARY KEY,
 
-    user_email TEXT NOT NULL,
+    user_email VARCHAR(250) NOT NULL,
 
     CONSTRAINT ct_tbUsers_tbShoppingCart
     FOREIGN KEY (user_email) 
@@ -204,11 +204,11 @@ CREATE TABLE tb_comments (
 
     comment_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    user_email TEXT NOT NULL,
+    user_email VARCHAR(250) NOT NULL,
     product_id INT NOT NULL,
 
     message TEXT NOT NULL,
-    date DATE DEFAULT NOW(),
+    date DATETIME DEFAULT NOW(),
     rating TINYINT(10) NOT NULL,
 
     CONSTRAINT ct_tbUsers_tbComments
@@ -255,7 +255,7 @@ BEGIN
     DECLARE user_salt VARCHAR(255);
     DECLARE user_password TEXT;
 
-    SELECT password INTO user_password, salt_password INTO user_salt FROM tb_users
+    SELECT password, salt_password INTO user_password, user_salt FROM tb_users
     WHERE tb_users.email = c_email;
 
     IF SHA2( CONCAT( c_password, user_salt), 256 ) = user_password THEN

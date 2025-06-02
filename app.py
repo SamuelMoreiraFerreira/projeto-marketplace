@@ -1,6 +1,7 @@
 from flask import Flask
 import os
 from controllers.routes_controller import getBlueprints
+from controllers.users_controllers import Users
 
 app = Flask(__name__)
 
