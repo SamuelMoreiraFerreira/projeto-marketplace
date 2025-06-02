@@ -5,4 +5,4 @@ blueprint = Blueprint('main', __name__)
 @blueprint.route('/')
 def main_page():
 
-    return 'oi'
+    return 'Hello World'
