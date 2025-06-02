@@ -1,14 +1,12 @@
 from flask import Blueprint
-from controllers.users_controllers import Users
+from controllers.user_controller import User
 
 blueprint = Blueprint('api_route', __name__)
 prefix = '/api'
 
 @blueprint.route('/users/validate/')
-def main_page():
+def user_validate():
 
-    cuzin = Users().validate('samuel.mferreira205@gmail.com', 'yu241958')
+    cuzin = User().validate('samuel.mferreira205@gmail.com', 'yu241958')
 
-    print(cuzin)
-
-    return 'HOLA'
+    return str(cuzin)

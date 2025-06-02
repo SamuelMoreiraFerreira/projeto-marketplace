@@ -1,7 +1,6 @@
 from flask import Flask
 import os
 from controllers.routes_controller import getBlueprints
-from controllers.users_controllers import Users
 
 app = Flask(__name__)
 
@@ -9,7 +8,7 @@ app = Flask(__name__)
 
 for route in getBlueprints(os.path.abspath('./routes/')):
 
-    # blueprint -> opção para agrupar um conjunto de rotas, manipulação de formulários, templates, etc.
+    # blueprint -> Opção do Flask para agrupar um conjunto de rotas, manipulação de formulários, templates, etc.
 
     app.register_blueprint(route['blueprint'], url_prefix=route['prefix'])
 
