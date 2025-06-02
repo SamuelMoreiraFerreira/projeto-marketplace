@@ -1,10 +1,19 @@
 from flask import Flask
+import os
+from controllers.routes_controller import getBlueprints
 
 app = Flask(__name__)
 
-@app.route('/')
-def main_page():
+#region Handler Routes
 
-    return 'Hello World'
+for route in getBlueprints(os.path.abspath('./routes/')):
 
-app.run(host='0.0.0.0', port=8080)
+    # blueprint -> opção para agrupar um conjunto de rotas, manipulação de formulários, templates, etc.
+
+    app.register_blueprint(route['blueprint'], url_prefix=route['prefix'])
+
+#endregion
+
+if __name__ == '__main__':
+
+    app.run(debug=True, host='0.0.0.0', port=8080)
