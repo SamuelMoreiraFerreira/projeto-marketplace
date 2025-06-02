@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "template_base.html" %}
+
+{% block style_proprio %}<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">{% endblock %}
+
+
+{% block content %}
     
-</body>
-</html>
+        <main class="macacaria__main">
+            
+        </main>
+{% endblock %}
