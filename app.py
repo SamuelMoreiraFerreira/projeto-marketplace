@@ -1,6 +1,6 @@
 from flask import Flask
 import os
-from controllers.routes_controller import getBlueprints
+from controllers.routes_controller import Routes
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # '.path.abspath(path)' -> Converte o caminho relativo à um caminho absoluto
 
-for route in getBlueprints(os.path.abspath('./routes/')):
+for route in Routes.get_blueprints(os.path.abspath('./routes/')):
 
     # blueprint -> Opção do Flask para agrupar um conjunto de rotas, manipulação de formulários, templates, etc.
 

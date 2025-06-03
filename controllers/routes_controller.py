@@ -1,53 +1,79 @@
 import os
 import importlib.util as imp
+from flask import jsonify
 
-def getBlueprints (routes_path):
+class Routes:
 
-    routes = []
+    @staticmethod
+    def default_response(status_code, data=None):
 
-    # '.listdir(path)' -> Lista todos os arquivos em pasta de um diretório
+        if not status_code:
 
-    for filename in os.listdir(routes_path):
+            return ''
 
-        # '.path.join()' -> União de partes de diretórios de forma segura (Portabilidade entre sistemas)
+        if data:
 
-        filepath = os.path.join(routes_path, filename)
+            # '**' -> Nesse contexto, desempacotamento de dicionário
 
-        if os.path.isfile(filepath) and filename.endswith('.py'):
+            return jsonify({
 
-            #region Importação Dinâmica de Módulos
-          
-            # spec -> Especificação, um objeto que contém informações necessárias para o interpretador do Python carregar e executar um módulo
+                'status_code': status_code,
+                **data
 
-            # '.spec_from_file_location(module_name, path)' -> Cria uma spec do módulo a partir do diretório do arquivo
+            })
+        
+        else:
 
-            spec = imp.spec_from_file_location('routes.' + filename[:-3], filepath)
+            return jsonify({ 'status_code': status_code })
 
-            # '.module_from_spec(spec)' -> Instanciamos um objeto de módulo vazio com base na spec - preparando o local para receber o conteúdo
+    @staticmethod
+    def get_blueprints (routes_path):
 
-            module = imp.module_from_spec(spec)
+        routes = []
 
-            # '.loader.exec_module(module)' -> Executa o conteúdo dentro do módulo criado (Realiza de fato o import)
+        # '.listdir(path)' -> Lista todos os arquivos em pasta de um diretório
 
-            spec.loader.exec_module(module)
+        for filename in os.listdir(routes_path):
 
-            #endregion
+            # '.path.join()' -> União de partes de diretórios de forma segura (Portabilidade entre sistemas)
 
-            # 'hasattr(obj, atr)' -> Verifica atributos de um objeto
+            filepath = os.path.join(routes_path, filename)
 
-            if hasattr(module, 'blueprint'):
+            if os.path.isfile(filepath) and filename.endswith('.py'):
 
-                # 'getattr(obj, atr)' -> Resgata atributos de um objeto
+                #region Importação Dinâmica de Módulos
+            
+                # spec -> Especificação, um objeto que contém informações necessárias para o interpretador do Python carregar e executar um módulo
 
-                routes.append({
+                # '.spec_from_file_location(module_name, path)' -> Cria uma spec do módulo a partir do diretório do arquivo
 
-                    'blueprint': getattr(module, 'blueprint'),
-                    'prefix': getattr(module, 'prefix') if hasattr(module, 'prefix') else ''
+                spec = imp.spec_from_file_location('routes.' + filename[:-3], filepath)
 
-                })
+                # '.module_from_spec(spec)' -> Instanciamos um objeto de módulo vazio com base na spec - preparando o local para receber o conteúdo
 
-            else:
+                module = imp.module_from_spec(spec)
 
-                print('Erro ao carregar o arquivo: ' + filename)
+                # '.loader.exec_module(module)' -> Executa o conteúdo dentro do módulo criado (Realiza de fato o import)
 
-    return routes
+                spec.loader.exec_module(module)
+
+                #endregion
+
+                # 'hasattr(obj, atr)' -> Verifica atributos de um objeto
+
+                if hasattr(module, 'blueprint'):
+
+                    # 'getattr(obj, atr)' -> Resgata atributos de um objeto
+
+                    routes.append({
+
+                        'blueprint': getattr(module, 'blueprint'),
+                        'prefix': getattr(module, 'prefix') if hasattr(module, 'prefix') else ''
+
+                    })
+
+                else:
+
+                    print('Erro ao carregar o arquivo: ' + filename)
+
+        return routes

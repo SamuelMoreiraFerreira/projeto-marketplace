@@ -13,32 +13,22 @@ class User:
 
         try:
 
-            # 'multi=True' -> Permite múltiplas instruções SQL
-
             cursor.execute(
                 
                 """
-                INSERT INTO tb_address (cep, city, state, full_address) VALUES (%s, %s, %s, %s); 
-                
-                INSERT INTO tb_users (email, first_name, last_name, phone_number, address, password) VALUES (%s, %s, %s, %s, LAST_INSERT_ID(), %s);
+                INSERT INTO tb_users (email, first_name, last_name, phone_number, address, password) VALUES (%s, %s, %s, %s, %s, %s);
                 """,
                 
                 (
-
-                    user_data.get('cep'),
-                    user_data.get('city'),
-                    user_data.get('state'),
-                    user_data.get('full_address'),
 
                     user_data.get('email'),
                     user_data.get('first_name'),
                     user_data.get('last_name'),
                     user_data.get('phone_number', None),
+                    user_data.get('address'),
                     user_data.get('password')
 
                 ), 
-                
-                multi=True
                 
             )
 
@@ -48,7 +38,7 @@ class User:
 
         except Error as e:
 
-            print(f'Error Validação de Usuários: {e}')
+            print(f'Error Criação de Usuário: {e}')
             
             return False
 
@@ -83,6 +73,37 @@ class User:
             connection_db.close()
 
     @staticmethod
+    def get_data(email):
+
+        connection_db = Connection.create()
+        cursor = connection_db.cursor(dictionary=True)
+
+        try:
+
+            cursor.execute('SELECT tb_users.email, tb_users.first_name, tb_users.last_name, tb_users.phone_number, tb_users.address FROM tb_users WHERE tb_users.email = %s;', (email, ))
+
+            user = cursor.fetchone()
+
+            if user:
+
+                return user
+            
+            else:
+
+                return False
+
+        except Error as e:
+
+            print(f'Error Encontrando Usuário: {e}')
+            
+            return False
+
+        finally:
+
+            cursor.close()
+            connection_db.close()
+
+    @staticmethod
     def validate(email, password):
 
         connection_db = Connection.create()
@@ -92,6 +113,7 @@ class User:
 
             # '.callproc(procedure_name, args)' -> Executa a procedure e retorna os valores dos parâmetros - incluindo o valor de retorno OUT que usamos para a verificação
 
+            # 'multi=True' -> Permite múltiplas instruções SQL
             # Resume: "cursor.execute('CALL procedure_name; SELECT @valueOUT;', multi=TRUE)"
 
             response_procedure = cursor.callproc('checkPassword', (email, password, 0))
