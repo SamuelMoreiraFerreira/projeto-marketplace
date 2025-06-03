@@ -22,3 +22,8 @@ def comments_by_product(product_id):
     else:
 
         return Routes.default_response(500)
+    
+@blueprint.route('/create/', methods=['POST'])
+def comments_create():
+
+    pass
