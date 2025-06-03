@@ -1,7 +1,7 @@
 from data.connection_controller import Connection
 from mysql.connector import Error
 
-class Comemnts:
+class Comments:
 
     @staticmethod
     def create(**comment_data):
