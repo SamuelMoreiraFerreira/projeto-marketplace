@@ -1,31 +1,18 @@
 CREATE DATABASE IF NOT EXISTS db_macacaria;
 USE db_macacaria;
 
+SET SQL_SAFE_UPDATES = 0;
+
 -- TABELA LOGS
 
 CREATE TABLE IF NOT EXISTS tb_logs (
 
     log_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    user_email TEXT NOT NULL,
-    date DATE DEFAULT NOW(),
+    user_email VARCHAR(255) NOT NULL,
+    date DATETIME DEFAULT NOW(),
     log_description TEXT,
     changed_table VARCHAR(20) NOT NULL
-
-);
-
--- TABELA ENDEREÇOS
-
-CREATE TABLE IF NOT EXISTS tb_address (
-
-    address_id INT AUTO_INCREMENT PRIMARY KEY,
-
-    cep VARCHAR(10) NOT NULL,
-
-    city VARCHAR(60) NOT NULL,
-    state VARCHAR(3) NOT NULL,
-
-    full_address TEXT NOT NULl
 
 );
 
@@ -33,20 +20,16 @@ CREATE TABLE IF NOT EXISTS tb_address (
 
 CREATE TABLE IF NOT EXISTS tb_users (
 
-    email TEXT PRIMARY KEY,
+    email VARCHAR(255) PRIMARY KEY,
 
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
+    first_name VARCHAR(250) NOT NULL,
+    last_name VARCHAR(250) NOT NULL,
 
     phone_number VARCHAR(20),
-    address INT NOT NULL,
+    address VARCHAR(250) NOT NULL,
 
     password TEXT NOT NULL,
     salt_password VARCHAR(255) NOT NULL,
-
-    CONSTRAINT ct_tbAddress_tbUsers
-    FOREIGN KEY (address)
-    REFERENCES tb_address(address_id),
 
     CHECK( LENGTH( password ) >= 8)
 
@@ -54,7 +37,7 @@ CREATE TABLE IF NOT EXISTS tb_users (
 
 -- TABELA TIPOS PRODUTOS
 
-CREATE TABLE tb_products_types (
+CREATE TABLE IF NOT EXISTS tb_products_types (
 
     type_id INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -64,11 +47,11 @@ CREATE TABLE tb_products_types (
 
 -- TABELA PRODUTOS
 
-CREATE TABLE tb_products (
+CREATE TABLE IF NOT EXISTS tb_products (
 
     product_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    name TEXT NOT NULL,
+    name VARCHAR(250) NOT NULL,
     description TEXT,
 
     price DECIMAL(10,2) NOT NULL,
@@ -87,7 +70,7 @@ CREATE TABLE tb_products (
 
 -- TABELA IMAGENS PROUTOS
 
-CREATE TABLE tb_products_images (
+CREATE TABLE IF NOT EXISTS tb_products_images (
 
     image_id INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -102,18 +85,18 @@ CREATE TABLE tb_products_images (
 
 -- TABELA CLASSE MACACOS
 
-CREATE TABLE tb_monkeys_classes (
+CREATE TABLE IF NOT EXISTS tb_monkeys_classes (
 
     class_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    class TEXT NOT NULL,
+    class VARCHAR(250) NOT NULL,
     description TEXT
 
 );
 
 -- TABELA MACACOS
 
-CREATE TABLE tb_monkeys (
+CREATE TABLE IF NOT EXISTS tb_monkeys (
 
     monkey_id INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -132,19 +115,19 @@ CREATE TABLE tb_monkeys (
 
 -- TABELA TIPOS BLOONS
 
-CREATE TABLE tb_bloons_types (
+CREATE TABLE IF NOT EXISTS tb_bloons_types (
 
     type_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    type TEXT NOT NULL
+    type VARCHAR(250) NOT NULL
 
 );
 
 -- TABELA BLOONS
 
-CREATE TABLE tb_bloons (
+CREATE TABLE IF NOT EXISTS tb_bloons (
 
-    bloon_id INT NOT NULL PRIMARY KEY,
+    bloon_id INT AUTO_INCREMENT PRIMARY KEY,
     
     tier TINYINT(5) NOT NULL,
 
@@ -163,11 +146,11 @@ CREATE TABLE tb_bloons (
 
 -- TABELA CARRINHO DE COMPRAS
 
-CREATE TABLE tb_shopping_cart (
+CREATE TABLE IF NOT EXISTS tb_shopping_cart (
 
     cart_id INT NOT NULL PRIMARY KEY,
 
-    user_email TEXT NOT NULL,
+    user_email VARCHAR(255) NOT NULL,
 
     CONSTRAINT ct_tbUsers_tbShoppingCart
     FOREIGN KEY (user_email) 
@@ -177,7 +160,7 @@ CREATE TABLE tb_shopping_cart (
 
 -- TABELA PRODUTOS CARRINHO DE COMPRAS
 
-CREATE TABLE tb_cart_products (
+CREATE TABLE IF NOT EXISTS tb_cart_products (
 
     cart_product_id INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -200,15 +183,15 @@ CREATE TABLE tb_cart_products (
 
 -- TABELA COMENTÁRIOS
 
-CREATE TABLE tb_comments (
+CREATE TABLE IF NOT EXISTS tb_comments (
 
     comment_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    user_email TEXT NOT NULL,
+    user_email VARCHAR(255) NOT NULL,
     product_id INT NOT NULL,
 
     message TEXT NOT NULL,
-    date DATE DEFAULT NOW(),
+    date DATETIME DEFAULT NOW(),
     rating TINYINT(10) NOT NULL,
 
     CONSTRAINT ct_tbUsers_tbComments
@@ -230,9 +213,9 @@ BEFORE INSERT
 ON tb_users
 FOR EACH ROW
 BEGIN
-
-    SET NEW.salt_password = UUID();
-    SET NEW.password = SHA2( CONCAT( NEW.password, NEW.salt_password ), 256 );
+    
+	SET NEW.salt_password = UUID();
+	SET NEW.password = SHA2( CONCAT( NEW.password, NEW.salt_password ), 256 );
 
 END $$
 
@@ -255,7 +238,7 @@ BEGIN
     DECLARE user_salt VARCHAR(255);
     DECLARE user_password TEXT;
 
-    SELECT password INTO user_password, salt_password INTO user_salt FROM tb_users
+    SELECT password, salt_password INTO user_password, user_salt FROM tb_users
     WHERE tb_users.email = c_email;
 
     IF SHA2( CONCAT( c_password, user_salt), 256 ) = user_password THEN
