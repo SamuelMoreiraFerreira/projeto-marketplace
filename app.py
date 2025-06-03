@@ -6,6 +6,8 @@ app = Flask(__name__)
 
 #region Handler Routes
 
+# '.path.abspath(path)' -> Converte o caminho relativo à um caminho absoluto
+
 for route in getBlueprints(os.path.abspath('./routes/')):
 
     # blueprint -> Opção do Flask para agrupar um conjunto de rotas, manipulação de formulários, templates, etc.
