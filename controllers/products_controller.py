@@ -1,6 +1,7 @@
 from data.connection_controller import Connection
+from mysql.connector import Error
 
-class Product:
+class Products:
 
     def get_products():
 
@@ -87,6 +88,45 @@ class Product:
         con.close()
         
         return result
+    
+    def get_highlights (length):
+
+        connection_db = Connection.create()
+        cursor = connection_db.cursor(dictionary=True)
+
+        try:
+
+            cursor.execute(
+                
+                """
+                SELECT tb_products.product_id, COALESCE(SUM(tb_cart_products.quantity), 0) AS 'sold' FROM tb_products 
+                LEFT JOIN tb_cart_products 
+                    ON tb_cart_products.product_id = tb_products.product_id
+                    AND tb_cart_products.finished = TRUE
+                GROUP BY 
+                    tb_products.product_id
+                ORDER BY 
+                    sold DESC,
+                    tb_products.product_id ASC
+                LIMIT %s;
+                """,
+
+                (length, )
+                
+            )
+
+            return cursor.fetchall()
+
+        except Error as e:
+
+            print(f'Erro Products Higlights: {e}')
+
+            return False
+        
+        finally:
+
+            cursor.close()
+            connection_db.close()
     
 
 #     SELECT name,description,price,tb_products_types.type,rating,tb_bloons_types.type FROM tb_products  
