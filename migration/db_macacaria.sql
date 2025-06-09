@@ -160,6 +160,7 @@ CREATE TABLE IF NOT EXISTS tb_shopping_cart (
     cart_id INT NOT NULL PRIMARY KEY,
 
     user_email VARCHAR(255) NOT NULL,
+    finished BOOL NOT NULL DEFAULT FALSE,
 
     CONSTRAINT ct_tbUsers_tbShoppingCart
     FOREIGN KEY (user_email) 
@@ -360,7 +361,7 @@ INSERT INTO tb_monkeys         (monkey_id, product_id, class) VALUES
 -- Sniper Monkey
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (7, 'Sniper Monkey', 'Atira em bloons de qualquer local no mapa, com mira de longo alcance.', 350.00, 100, 10, 2);
+  (7, 'Sniper Monkey', 'Atira em bloons de qualquer local no mapa, com mira de longo alcance.', 350.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (7, 'https://static.wikia.nocookie.net/bloonswiki/images/0/0e/Sniper_Monkey_BTD6.png', 7);
 INSERT INTO tb_monkeys         (monkey_id, product_id, class) VALUES
@@ -369,7 +370,7 @@ INSERT INTO tb_monkeys         (monkey_id, product_id, class) VALUES
 -- Monkey Sub
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (8, 'Monkey Sub', 'Torre subaquática que atira dardos em bloons aquáticos e não aquáticos próximas.', 325.00, 100, 10, 2);
+  (8, 'Monkey Sub', 'Torre subaquática que atira dardos em bloons aquáticos e não aquáticos próximas.', 325.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (8, 'https://static.wikia.nocookie.net/bloonswiki/images/2/22/Monkey_Sub_BTD6.png', 8);
 INSERT INTO tb_monkeys         (monkey_id, product_id, class) VALUES
@@ -378,7 +379,7 @@ INSERT INTO tb_monkeys         (monkey_id, product_id, class) VALUES
 -- Monkey Buccaneer
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (9, 'Monkey Buccaneer', 'Navio que dispara tiros de canhão e detecta bloons camuflados.', 350.00, 100, 10, 2);
+  (9, 'Monkey Buccaneer', 'Navio que dispara tiros de canhão e detecta bloons camuflados.', 350.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (9, 'https://static.wikia.nocookie.net/bloonswiki/images/6/6e/Monkey_Buccaneer_BTD6.png', 9);
 INSERT INTO tb_monkeys         (monkey_id, product_id, class) VALUES
@@ -387,7 +388,7 @@ INSERT INTO tb_monkeys         (monkey_id, product_id, class) VALUES
 -- Monkey Ace
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (10, 'Monkey Ace', 'Avião que lança tempestade de lâminas, bombas e lança-chamas em bloons abaixo.', 350.00, 100, 10, 2);
+  (10, 'Monkey Ace', 'Avião que lança tempestade de lâminas, bombas e lança-chamas em bloons abaixo.', 350.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (10, 'https://static.wikia.nocookie.net/bloonswiki/images/7/70/Monkey_Ace_BTD6.png', 10);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -396,7 +397,7 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 -- Heli Pilot
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (11, 'Heli Pilot', 'Helicóptero móvel que causa dano contínuo e pode patrulhar áreas.', 350.00, 100, 10, 2);
+  (11, 'Heli Pilot', 'Helicóptero móvel que causa dano contínuo e pode patrulhar áreas.', 350.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (11, 'https://static.wikia.nocookie.net/bloonswiki/images/4/4f/Heli_Pilot_BTD6.png', 11);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -405,7 +406,7 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 -- Mortar Monkey
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (12, 'Mortar Monkey', 'Dispara projéteis de longo alcance que explodem em área.', 400.00, 100, 10, 2);
+  (12, 'Mortar Monkey', 'Dispara projéteis de longo alcance que explodem em área.', 400.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (12, 'https://static.wikia.nocookie.net/bloonswiki/images/9/9f/Mortar_Monkey_BTD6.png', 12);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -414,7 +415,7 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 -- Dartling Gunner
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (13, 'Dartling Gunner', 'Canhão fixo que dispara rajadas de dardos em direção ao cursor.', 400.00, 100, 10, 2);
+  (13, 'Dartling Gunner', 'Canhão fixo que dispara rajadas de dardos em direção ao cursor.', 400.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (13, 'https://static.wikia.nocookie.net/bloonswiki/images/2/2c/Dartling_Gunner_BTD6.png', 13);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -423,7 +424,7 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 -- Wizard Monkey
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (14, 'Wizard Monkey', 'Lança magias que atingem múltiplos bloons e gera bombas flutuantes.', 500.00, 100, 10, 3);
+  (14, 'Wizard Monkey', 'Lança magias que atingem múltiplos bloons e gera bombas flutuantes.', 500.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (14, 'https://static.wikia.nocookie.net/bloonswiki/images/2/27/Wizard_Monkey_BTD6.png', 14);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -432,7 +433,7 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 -- Super Monkey
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (15, 'Super Monkey', 'Torre de altíssimo poder de fogo que dispara lasers de longo alcance.', 3000.00, 100, 10, 3);
+  (15, 'Super Monkey', 'Torre de altíssimo poder de fogo que dispara lasers de longo alcance.', 3000.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (15, 'https://static.wikia.nocookie.net/bloonswiki/images/a/a1/Super_Monkey_BTD6.png', 15);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -440,14 +441,17 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 
 -- Ninja Monkey
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES (16, 'Ninja Monkey', 'Ataca silenciosamente bloons camuflados com shurikens rápidos.', 650.00, 100, 10, 3);
-INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES (16, 'https://static.wikia.nocookie.net/bloonswiki/images/f/f4/Ninja_Monkey_BTD6.png', 16);
-INSERT INTO tb_monkeys (monkey_id, product_id, class) VALUES (16, 16, 3);
+INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES 
+  (16, 'Ninja Monkey', 'Ataca silenciosamente bloons camuflados com shurikens rápidos.', 650.00, 100, 10, 1);
+INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES 
+  (16, 'https://static.wikia.nocookie.net/bloonswiki/images/f/f4/Ninja_Monkey_BTD6.png', 16);
+INSERT INTO tb_monkeys (monkey_id, product_id, class) VALUES 
+  (16, 16, 3);
 
 -- Alchemist
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (17, 'Alchemist', 'Lança poções que fortalecem aliados e enfraquecem bloons próximos.', 800.00, 100, 10, 3);
+  (17, 'Alchemist', 'Lança poções que fortalecem aliados e enfraquecem bloons próximos.', 800.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (17, 'https://static.wikia.nocookie.net/bloonswiki/images/6/6f/Alchemist_BTD6.png', 17);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -456,7 +460,7 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 -- Druid
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (18, 'Druid', 'Convoca tornados e raizes para imobilizar e danificar bloons.', 650.00, 100, 10, 3);
+  (18, 'Druid', 'Convoca tornados e raizes para imobilizar e danificar bloons.', 650.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (18, 'https://static.wikia.nocookie.net/bloonswiki/images/0/05/Druid_BTD6.png', 18);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -465,7 +469,7 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 -- Monkey Village
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (19, 'Monkey Village', 'Proporciona buffs de área aos macacos e detecta bloons camuflados.', 625.00, 100, 10, 4);
+  (19, 'Monkey Village', 'Proporciona buffs de área aos macacos e detecta bloons camuflados.', 625.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (19, 'https://static.wikia.nocookie.net/bloonswiki/images/5/59/Monkey_Village_BTD6.png', 19);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -474,7 +478,7 @@ INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
 -- Engineer Monkey
 
 INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (20, 'Engineer Monkey', 'Constrói torres fixas de minas e lança granadas teleguiadas.', 900.00, 100, 10, 4);
+  (20, 'Engineer Monkey', 'Constrói torres fixas de minas e lança granadas teleguiadas.', 900.00, 100, 10, 1);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
   (20, 'https://static.wikia.nocookie.net/bloonswiki/images/4/49/Engineer_Monkey_BTD6.png', 20);
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
@@ -510,7 +514,7 @@ INSERT INTO tb_products (product_id, name, description, price, quantity, rating,
    'Bloon básico de tier 1, lento e sem resistência extra.',
    10.00, 1000, 1, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (21, 'https://static.wikia.nocookie.net/bloonswiki/images/1/1d/Red_Bloon_BTD6.png', 1001);
+  (21, 'https://static.wikia.nocookie.net/bloonswiki/images/1/1d/Red_Bloon_BTD6.png', 21);
 INSERT INTO tb_bloons (bloon_id, product_id) VALUES
   (1, 21);
 INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
