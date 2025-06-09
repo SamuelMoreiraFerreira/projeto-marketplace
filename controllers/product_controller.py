@@ -13,11 +13,7 @@ class Product:
 
             # obj-1 | obj-2 -> Metódo para mesclagem de dicionários (|= é equivalente)
 
-            data = {
-
-                'images': []
-
-            }
+            data = {}
 
             cursor.execute(
                 
@@ -88,7 +84,34 @@ class Product:
 
             #endregion
 
-            # Images
+            # Imagens
+
+            images = Product.get_images(id)
+
+            if images:
+
+                data['images'] = images
+
+        except Error as e:
+
+            print(f'Erro - Products "get_by_id": {e}')
+
+            return False
+        
+        finally:
+
+            cursor.close()
+            connection_db.close()
+
+    @staticmethod
+    def get_images (id):
+
+        connection_db = Connection.create()
+        cursor = connection_db.cursor(dictionary=True)
+
+        try:
+
+            data = []
 
             cursor.execute(
 
@@ -103,15 +126,15 @@ class Product:
 
             for product_image in cursor.fetchall():
 
-                data['images'].append(product_image['image_url'])
+                data.append(product_image['image_url'])
 
             return data
-
+        
         except Error as e:
 
-            print(f'Erro - Products "get_by_id": {e}')
+            print(f'Erro - Products "get_images": {e}')
 
-            return False
+            return []
         
         finally:
 

@@ -25,9 +25,9 @@ def products_highlights (length):
 
 #endregion
 
-@blueprint.route("/products")
+@blueprint.route("/get-all")
 def catalog_page():
 
-    products = jsonify(Products.get_products())
+    products = jsonify(Products.get_all())
 
-    return  render_template("page_catalogo.html",products=products)
+    return products

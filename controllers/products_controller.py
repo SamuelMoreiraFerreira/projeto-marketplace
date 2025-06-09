@@ -1,61 +1,47 @@
 from data.connection_controller import Connection
+from controllers.product_controller import Product
 from mysql.connector import Error
 
 class Products:
 
-    def get_products():
+    @staticmethod
+    def get_all():
 
-        con = Connection.create()
-        cursor = con.cursor(dictionary=True)
+        connection_db = Connection.create()
+        cursor = connection_db.cursor(dictionary=True)
 
-        sql = "SELECT name,description,price, image_url FROM tb_products INNER JOIN tb_products_images ON tb_products.product_id=tb_products_images.product_id;"
+        try:
 
-        cursor.execute(sql)
+            cursor.execute('SELECT MAX(tb_products.product_id) AS "max_id" FROM tb_products;')
 
-        result=cursor.fetchall()
+            data = []
 
-        cursor.close()
-        con.close()
+            max_id = cursor.fetchone()['max_id'] or 0
+
+            if max_id > 0:
+
+                for i in range(max_id):
+
+                    data.append(
+
+                        Product.get_by_id(i)
+
+                    )
+
+            return data
+
+        except Error as e:
+
+            print(f'Erro - Products "get_all": {e}')
+
+            return False
         
-        return result
+        finally:
+
+            cursor.close()
+            connection_db.close()
     
-    # def get_product(code):
-
-    #     con = Connection.create()
-    #     cursor = con.cursor(dictionary=True)
-
-    #     sql = """SELECT name,description,price,tb_products_types.type,rating FROM tb_products  
-    #             INNER JOIN tb_products_types ON tb_products.type =tb_products_types.type_id 
-    #             WHERE tb_products.product_id = %s;"""
-    #     values = (code,)
-
-    #     cursor.execute(sql,values)
-
-    #     result=cursor.fetchone()
-
-    #     cursor.close()
-    #     con.close()
-        
-    #     return result
-    
-    def get_product_images(code):
-        con = Connection.create()
-        cursor = con.cursor(dictionary=True)
-
-        sql = """SELECT image_url FROM tb_products 
-                INNER JOIN tb_products_images ON tb_products.product_id=tb_products_images.product_id  
-                WHERE tb_products.product_id = %s;"""
-        values = (code,)
-
-        cursor.execute(sql,values)
-
-        result=cursor.fetchall()
-
-        cursor.close()
-        con.close()
-        
-        return result
-    
+    @staticmethod
     def get_highlights (length):
 
         connection_db = Connection.create()
