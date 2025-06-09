@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
-
 from data.connection_controller import Connection
 from mysql.connector import Error
 
 class Product:
 
     @staticmethod
-    def get_by_id (id):
+    def get_by_id (id, fulldata:bool=False):
 
         connection_db = Connection.create()
         cursor = connection_db.cursor(dictionary=True)
@@ -38,51 +36,57 @@ class Product:
 
                 data |= product_data
             
-            # Macacos
+            #region Full Data
+    
+            if fulldata:
 
-            if data['type'] == 1:
+                # Macacos
 
-                cursor.execute(
+                if data['type'] == 1:
 
-                    """
-                    SELECT tb_monkeys_classes.class, tb_monkeys_classes.description AS 'class-description' FROM tb_monkeys_classes
-                    INNER JOIN tb_monkeys 
-                        ON tb_monkeys.monkey_id = tb_monkeys_classes.class_id
-                    WHERE tb_monkeys.product_id = %s;
-                    """,
+                    cursor.execute(
 
-                    (id, )
+                        """
+                        SELECT tb_monkeys_classes.class, tb_monkeys_classes.description AS 'class-description' FROM tb_monkeys_classes
+                        INNER JOIN tb_monkeys 
+                            ON tb_monkeys.monkey_id = tb_monkeys_classes.class_id
+                        WHERE tb_monkeys.product_id = %s;
+                        """,
 
-                )
+                        (id, )
 
-                monkey_data = cursor.fetchone()
+                    )
 
-                if monkey_data:
+                    monkey_data = cursor.fetchone()
 
-                    data |= monkey_data
+                    if monkey_data:
 
-            # Bloons
+                        data |= monkey_data
 
-            else:
+                # Bloons
 
-                cursor.execute(
+                else:
 
-                    """
-                    SELECT tb_bloons_types.type FROM tb_bloons_types
-                    INNER JOIN tb_bloons 
-                        ON tb_bloons.bloon_id = tb_bloons_types.type_id
-                    WHERE tb_bloons.product_id = %s;
-                    """,
+                    cursor.execute(
 
-                    (id, )
+                        """
+                        SELECT tb_bloons_types.type FROM tb_bloons_types
+                        INNER JOIN tb_bloons 
+                            ON tb_bloons.bloon_id = tb_bloons_types.type_id
+                        WHERE tb_bloons.product_id = %s;
+                        """,
 
-                )
+                        (id, )
 
-                bloon_data = cursor.fetchone()
+                    )
 
-                if bloon_data:
+                    bloon_data = cursor.fetchone()
 
-                    data |= bloon_data
+                    if bloon_data:
+
+                        data |= bloon_data
+
+            #endregion
 
             # Images
 

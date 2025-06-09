@@ -56,39 +56,6 @@ class Products:
         
         return result
     
-    def get_product(code):
-
-        con = Connection.create()
-        cursor = con.cursor(dictionary=True)
-
-        sql = """SELECT type_id FROM tb_products 
-                WHERE tb_products.product_id = %s;"""
-        values = (code,)
-
-        cursor.execute(sql,values)
-
-        result=cursor.fetchone()
-
-        if result==1:
-            sql = """SELECT name,description,price,tb_products_types.type,rating FROM tb_products  
-                INNER JOIN tb_products_types ON tb_products.type =tb_products_types.type_id 
-                WHERE tb_products.product_id = %s;"""
-        else:
-            sql = """SELECT name,description,price,tb_products_types.type,rating FROM tb_products  
-                INNER JOIN tb_products_types ON tb_products.type =tb_products_types.type_id 
-                WHERE tb_products.product_id = %s;"""
-            
-        values = (code,)
-
-        cursor.execute(sql,values)
-
-        result=cursor.fetchone()
-
-        cursor.close()
-        con.close()
-        
-        return result
-    
     def get_highlights (length):
 
         connection_db = Connection.create()
