@@ -67,6 +67,7 @@
 }
 
 /* Corpo */
+
 .cart {
   background-color: var(--sky-blue); 
   height: 80%;
@@ -108,16 +109,19 @@
 }
 
 .cart__item-title {
+  font-family: var(--font-title);
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.25rem;
 }
 
 .cart__item-description {
+  font-family: var(--font-description);
   font-size: 0.9rem;
 }
 
 .cart__item-price {
+  font-family: var(--font-highlighted);
   text-align: right;
 }
 
@@ -128,6 +132,7 @@
 .cart__item-remove {
   background-color: var(--bloon-red);
   color: var(--banana-snow);
+  font-family: var(--font-description);
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
@@ -153,6 +158,7 @@
 .cart__form {
   display: flex;
   flex-direction: column;
+  font-family: var(--font-description);
 }
 
 .cart__form-label {
@@ -213,7 +219,7 @@
     line-height: normal;
 }
 
-
+/* Medias */
 
 /* Celular (até 576px) */
 @media screen and (max-width: 576px) {
