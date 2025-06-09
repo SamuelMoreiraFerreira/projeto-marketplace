@@ -102,7 +102,9 @@ class Products:
                 SELECT tb_products.product_id, COALESCE(SUM(tb_cart_products.quantity), 0) AS 'sold' FROM tb_products 
                 LEFT JOIN tb_cart_products 
                     ON tb_cart_products.product_id = tb_products.product_id
-                    AND tb_cart_products.finished = TRUE
+                LEFT JOIN tb_shopping_cart
+                    ON tb_shopping_cart.cart_id = tb_cart_products.cart_id
+                    AND tb_shopping_cart.finished = TRUE
                 GROUP BY 
                     tb_products.product_id
                 ORDER BY 
