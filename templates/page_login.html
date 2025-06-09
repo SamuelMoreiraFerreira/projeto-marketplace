@@ -26,27 +26,94 @@
 
     <!-- CSS Local  -->
     <link rel="stylesheet" href="../static/css/variables.css">
-    <link rel="stylesheet" href="../static/css/style-main.css">
+    <link rel="stylesheet" href="../static/css/style-login.css">
 
 
 </head>
 
 <body>
-    <main class="macacaria__main">
-        <div class="login">
-            <form>
-                <label for="email">Endereço de email:</label>
-                <input type="email" id="email" name="email" required>
+    <section class="conteudo">
+        <!-- Header -->
+        <header class="header">
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="#!">Cadastre-se</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Login</a></li>
+            </ul>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <figure class="header__logo">
+                            <img src="../static/images/logo.svg" alt="logo Macacaria">
+                        </figure>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav d-flex justify-content-around align-items-center">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="#">Pagina Inicial</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Macacos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Bloons</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Melhorias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Conta</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Configurações</a>
+                            </li>
+                            <li class="nav-item header__carrinho">
+                                <a href="">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown header__perfil">
+                                <a class=" dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Cadastre-se</a></li>
+                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        <!-- Corpo -->
+        <main class="main">
+            <div class="login">
+                <form class="login__forms">
+                    <label for="email" class="forms__email">Endereço de email:</label>
+                    <input type="email" id="email" name="email" class="forms" required>
 
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha" required>
+                    <label for="senha" class="forms__senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" class="forms" required>
 
-                <button type="submit">Logar</button>
-            </form>
+                    <button type="submit" class="forms__btnLogin">Logar</button>
+                </form>
+                <div class="login__cadastro">
+                    <p>Não tem conta? <a href="#">Cadastre-se!</a></p>
+                </div>
+            </div>
+        </main>
 
-            <section>
-                <p>Não tem conta? <a href="#">Cadastre-se!</a></p>
-            </section>
-        </div>
-    </main>
+        <!-- Rodapé -->
+        <footer class="footer">
+            <p class="footer__description">© 2025 Macacaria</p>
+        </footer>
+    </section>
 </body>
