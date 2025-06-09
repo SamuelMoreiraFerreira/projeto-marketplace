@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, render_template
 from controllers.products_controller import Products
+from controllers.product_controller import Product
 
 
 blueprint = Blueprint("products_route", __name__)
@@ -14,7 +15,11 @@ def products_highlights ():
 
     for i in Products.get_highlights(4):
 
-        data.append(Products.get_product(i['product_id']))
+        data.append(
+
+            Product.get_by_id(i['product_id'])
+
+        )
 
     return data
 
