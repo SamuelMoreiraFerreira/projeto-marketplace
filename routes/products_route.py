@@ -8,16 +8,16 @@ prefix = '/api/products'
 
 #region Rota para Produtos em Destaques
 
-@blueprint.route('/get-highlights')
-def products_highlights ():
+@blueprint.route('/get-highlights/<length>')
+def products_highlights (length):
 
     data = []
 
-    for i in Products.get_highlights(4):
+    for highlight in Products.get_highlights(length):
 
         data.append(
 
-            Product.get_by_id(i['product_id'])
+            Product.get_by_id(highlight['product_id'])
 
         )
 
