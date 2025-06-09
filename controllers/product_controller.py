@@ -13,7 +13,7 @@ class Product:
 
         try:
 
-            # obj-1 | obj-2 -> Metódo para mesclagem de dicionários
+            # obj-1 | obj-2 -> Metódo para mesclagem de dicionários (|= é equivalente)
 
             data = {
 
@@ -32,7 +32,11 @@ class Product:
                 
             )
 
-            data = data | cursor.fetchone()
+            product_data = cursor.fetchone()
+
+            if product_data:
+
+                data |= product_data
             
             # Macacos
 
@@ -41,7 +45,7 @@ class Product:
                 cursor.execute(
 
                     """
-                    SELECT tb_monkeys_classes.class, tb_monkeys_classes.description FROM tb_monkeys_classes
+                    SELECT tb_monkeys_classes.class, tb_monkeys_classes.description AS 'class-description' FROM tb_monkeys_classes
                     INNER JOIN tb_monkeys ON tb_monkeys.monkey_id = tb_monkeys_classes.class_id
                     WHERE tb_monkeys.product_id = %s;
                     """,
@@ -50,7 +54,11 @@ class Product:
 
                 )
 
-                data = data | cursor.fetchone()
+                monkey_data = cursor.fetchone()
+
+                if monkey_data:
+
+                    data |= monkey_data
 
             # Bloons
 
@@ -68,7 +76,11 @@ class Product:
 
                 )
 
-                data = data | cursor.fetchone()
+                bloon_data = cursor.fetchone()
+
+                if bloon_data:
+
+                    data |= bloon_data
 
             # Images
 

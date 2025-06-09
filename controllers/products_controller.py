@@ -113,7 +113,7 @@ class Products:
                 LIMIT %s;
                 """,
 
-                (length, )
+                (int(length), )
                 
             )
 
