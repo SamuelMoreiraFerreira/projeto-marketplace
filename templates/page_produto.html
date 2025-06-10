@@ -107,10 +107,13 @@
                     <span class="rate__quantity">29 Avaliações</span>
                 </div>
                 <h3 class="product__price">25 bananas</h3>
-                <form action="" class="product__form">
-                    <input type="number" name="product__quantity" id="productQuantity" class="product__quantity"
-                        step="1" />
-                    <button class="product__button">Adicionar ao carrinho</button>
+                <form class="product__form">
+                    <div class="product__quantity-control">
+                        <button type="button" class="quantity__button quantity__button--decrease">-</button>
+                        <input type="number" name="product__quantity" id="productQuantity" class="product__quantity" min="1" max="99" value="1" />
+                        <button type="button" class="quantity__button quantity__button--increase">+</button>
+                    </div>
+                    <button type="button" class="product__button">Adicionar ao carrinho</button>
                 </form>
             </div>
 
@@ -153,7 +156,6 @@
                         <button class="user-comment__button">Comentar</button>
                     </div>
                 </form>
-                </form>
                 <div class="comments__all-comments">
                     <div class="all-comments__item">
                         <h4 class="item__name">Vitor Parelli Masalskas Moreira Rodrigues da Silva</h4>
@@ -178,6 +180,9 @@
             <p class="footer__description">© 2025 Macacaria</p>
         </footer>
     </section>
+
+    <!-- javascript local -->
+    <script src="/static/js/scriptProduto.js"></script>
 </body>
 
 </html>
