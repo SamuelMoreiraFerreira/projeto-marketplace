@@ -89,12 +89,23 @@
                 </div>
             </nav>
         </header>
+
         <!-- Corpo -->
         <main class="catalogo">
-            <section class="catalogo__filtros">
-                <input type="text" placeholder="Filtrar por:" class="catalogo__input filtro">
-                <input type="text" placeholder="Classificar por:" class="catalogo__input classificar">
-            </section>
+            <form class="catalogo__filtros">
+                <select id="filtrar" name="filtrar" class="catalogo__select filtro">
+                    <option disabled selected>Filtrar por:</option>
+                    <option value="macacos">Macacos</option>
+                    <option value="bloons">Bloons</option>
+                    <option value="melhorias">Melhorias</option>
+                </select>
+
+                <select id="classificar" name="classificar" class="catalogo__select classificar">
+                    <option disabled selected>Classificar por:</option>
+                    <option value="menor-preco">Menor preço</option>
+                    <option value="maior-preco">Maior preço</option>
+                </select>
+            </form>
             <section class="catalogo__produtos">
                 <!-- Exemplo de card -->
                 <div class="catalogo__card">
@@ -109,7 +120,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Outros cards aqui... -->
             </section>
         </main>
         <!-- Rodapé -->
