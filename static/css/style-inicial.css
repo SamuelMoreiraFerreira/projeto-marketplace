@@ -45,7 +45,10 @@
 .header__carrinho{
     width: 53px;
     height: 53px;
-    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     border-radius: 50%;
     
@@ -55,12 +58,18 @@
 .header__perfil{
     width: 53px;
     height: 53px;
-    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
 
     border-radius: 50%;
     
     background-color: var(--bloon-red);
 }
+
 
 .dropdown-menu{
     background-color: var(--banana-yellow);
@@ -94,13 +103,20 @@
     line-height: normal;
 }
 
-.main__produtos{
-    width: 100%;
-    height: 355px;
 
+
+.main__produtos{
+
+    width: 80%;
+    height: 355px;
+    
+    display: flex;
     justify-content: center;
     align-items: center;
+    
+
 }
+
 
 .main__subtitle{
     color: var(--banana-snow);
@@ -231,4 +247,3 @@
         font-size: 32px;
     }
 }
-

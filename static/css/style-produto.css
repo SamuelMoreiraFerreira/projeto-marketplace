@@ -46,7 +46,10 @@
 .header__carrinho{
     width: 53px;
     height: 53px;
-    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     border-radius: 50%;
     
@@ -56,7 +59,12 @@
 .header__perfil{
     width: 53px;
     height: 53px;
-    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
 
     border-radius: 50%;
     
