@@ -34,15 +34,18 @@ class Carts:
 
             response = cursor.fetchone()
 
+            keys = ['cart_product_id', 'product_id', 'quantity']
+
             data = {
 
                 'user': response['user'],
 
-                'products': 
-
-                    response['products'].split('|')
-
-                    .split(':')
+                'products': dict(
+                    zip(
+                        keys,
+                        response['products'].split('|').split(':')
+                    )
+                )
 
             }
 
