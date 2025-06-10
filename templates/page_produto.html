@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +28,7 @@
     <link rel="stylesheet" href="../static/css/variables.css">
     <link rel="stylesheet" href="../static/css/style-produto.css">
 </head>
+
 <body>
     <section class="conteudo">
         <header class="header">
@@ -93,18 +95,26 @@
         <main class="main">
 
             <div class="product">
-                <h4 class="product__category">Categoria: </h4>
+                <h4 class="product__category">Categoria: Primário</h4>
                 <img src="/static/images/aaa.png" alt="macaco dardo" class="product__image" />
                 <h2 class="product__name">Macaco Dardo</h2>
-                <p class="product__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt quam accusantium nobis iusto placeat iure, illo cum impedit quia in quasi quidem harum, molestiae eligendi inventore perspiciatis, at vero ex.</p>
-                <figure class="rate__stars">
-                    <img src="" alt="star1"><img src="" alt="star2"><img src="" alt="star3"><img src="" alt="star4"><img src="" alt="star5">
-                </figure>
-                <span class="rate__quantity">29 Avaliações</span>
+                <p class="product__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt quam
+                    accusantium nobis iusto placeat iure, illo cum impedit quia in quasi quidem harum, molestiae
+                    eligendi inventore perspiciatis, at vero ex.</p>
+                <div class="product__rate">
+                    <figure class="rate__stars">
+                        <img src="/static/images/full_star.svg" alt="star1"><img src="/static/images/full_star.svg"
+                            alt="star2"><img src="/static/images/full_star.svg" alt="star3"><img
+                            src="/static/images/empity_star.svg" alt="star4"><img src="/static/images/empity_star.svg"
+                            alt="star5">
+                    </figure>
+                    <span class="rate__quantity">29 Avaliações</span>
+                </div>
                 <h3 class="product__price">25 bananas</h3>
                 <form action="" class="product__form">
-                    <input type="number" name="product__quantity" id="productQuantity" class="product__quantity" step="1" />
-                    <button class="product__buy">Adicionar ao carrinho</button>
+                    <input type="number" name="product__quantity" id="productQuantity" class="product__quantity"
+                        step="1" />
+                    <button class="product__button">Adicionar ao carrinho</button>
                 </form>
             </div>
 
@@ -112,32 +122,51 @@
                 <h2 class="comments__title">Comentários</h2>
                 <hr class="hr" />
                 <form action="" class="comments__user-comment">
-                    <textarea name="user-comment__comment" id="" cols="50" rows="2" placeholder="Digite seu comentário..."></textarea>
+                    <textarea name="user-comment__comment" id="" cols="50" rows="2"
+                        placeholder="Digite seu comentário..." class="user-comment__comment"></textarea>
 
+                    <div class="user-comment__radio">
+                        <div class="radio__item">
+                            <input type="radio" name="user-comment__rate" id="star1" value="1" class="rate__input">
+                            <label for="star1" class="rate__label"><img src="/static/images/empity_star.svg"
+                                    alt="star1"></label>
+                        </div>
+                        <div class="radio__item">
+                            <input type="radio" name="user-comment__rate" id="star2" value="2" class="rate__input">
+                            <label for="star2" class="rate__label"><img src="/static/images/empity_star.svg"
+                                    alt="star2"></label>
+                        </div>
+                        <div class="radio__item">
+                            <input type="radio" name="user-comment__rate" id="star3" value="3" class="rate__input">
+                            <label for="star3" class="rate__label"><img src="/static/images/empity_star.svg"
+                                    alt="star3"></label>
+                        </div>
+                        <div class="radio__item">
+                            <input type="radio" name="user-comment__rate" id="star4" value="4" class="rate__input">
+                            <label for="star4" class="rate__label"><img src="/static/images/empity_star.svg"
+                                    alt="star4"></label>
+                        </div>
+                        <div class="radio__item">
+                            <input type="radio" name="user-comment__rate" id="star5" value="5" class="rate__input">
+                            <label for="star5" class="rate__label"><img src="/static/images/empity_star.svg"
+                                    alt="star5"></label>
+                        </div>
 
-                    <input type="radio" name="user-comment__rate" id="star1" value="1" class="rate__input">
-                    <label for="star1" class="rate__label"><img src="" alt="star1"></label>
-
-                    <input type="radio" name="user-comment__rate" id="star1" value="2" class="rate__input">
-                    <label for="star1" class="rate__label"><img src="" alt="star2"></label>
-
-                    <input type="radio" name="user-comment__rate" id="star1" value="3" class="rate__input">
-                    <label for="star1" class="rate__label"><img src="" alt="star3"></label>
-
-                    <input type="radio" name="user-comment__rate" id="star1" value="4" class="rate__input">
-                    <label for="star1" class="rate__label"><img src="" alt="star4"></label>
-
-                    <input type="radio" name="user-comment__rate" id="star1" value="5" class="rate__input">
-                    <label for="star1" class="rate__label"><img src="" alt="star5"></label>
-
-                    <button class="user-comment__button">Comentar</button>
+                        <button class="user-comment__button">Comentar</button>
+                    </div>
+                </form>
                 </form>
                 <div class="comments__all-comments">
                     <div class="all-comments__item">
                         <h4 class="item__name">Vitor Parelli Masalskas Moreira Rodrigues da Silva</h4>
-                        <p class="item__comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, dolorem. Ipsum, recusandae! Animi exercitationem earum amet numquam! Laboriosam, nobis? Maiores eaque aspernatur consequuntur quae placeat non facilis nisi perferendis numquam.</p>
+                        <p class="item__comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, dolorem.
+                            Ipsum, recusandae! Animi exercitationem earum amet numquam! Laboriosam, nobis? Maiores eaque
+                            aspernatur consequuntur quae placeat non facilis nisi perferendis numquam.</p>
                         <figure class="item__stars">
-                            <img src="" alt="star1"><img src="" alt="star2"><img src="" alt="star3"><img src="" alt="star4"><img src="" alt="star5">
+                            <img src="/static/images/full_star.svg" alt="star1"><img src="/static/images/full_star.svg"
+                                alt="star2"><img src="/static/images/full_star.svg" alt="star3"><img
+                                src="/static/images/empity_star.svg" alt="star4"><img
+                                src="/static/images/empity_star.svg" alt="star5">
                         </figure>
                     </div>
                 </div>
@@ -152,4 +181,5 @@
         </footer>
     </section>
 </body>
+
 </html>
