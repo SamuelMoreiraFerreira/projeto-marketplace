@@ -142,6 +142,37 @@
     line-height: normal;
 }
 
+.product__form {
+    display: flex; 
+    align-items: center;
+    gap: 15px;
+}
+
+.product__quantity-control {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--banana-snow);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.quantity__button {
+    background: transparent;
+    border: none;
+    color: var(--banana-snow);
+    font-family: Poppins; 
+    font-size: 28px; 
+    font-weight: bold;
+    height: 3.5rem;
+    width: 40px;
+    cursor: pointer;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 .product__quantity{
     border: 2px solid var(--banana-snow) !important;
     width: 20% !important;
@@ -165,7 +196,19 @@
     margin-left: 10px;
 }
 
+.product__quantity {
+    margin: 0 !important;
 
+    width: 60px !important;
+    height: 3.5rem !important; 
+    text-align: center !important;
+    border: none !important;
+    background: transparent !important; 
+    color: var(--banana-snow) !important; 
+    font-family: Poppins !important; 
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
 
 
 
@@ -215,6 +258,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
 .radio__item {
@@ -227,7 +271,7 @@
 }
 
 .user-comment__radio input{
-    position: static !important; 
+    position: static !important;
 }
 
 .user-comment__button{
@@ -276,6 +320,16 @@
     align-items: center;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Para navegadores Firefox */
+input[type="number"] {
+    appearance: textfield;
+}
 
 /* Rodapé */
 
