@@ -1,5 +1,4 @@
-from flask import Blueprint, jsonify, Response
-import json
+from flask import Blueprint, jsonify
 from controllers.product_controller import Product
 
 blueprint = Blueprint("product_route", __name__)

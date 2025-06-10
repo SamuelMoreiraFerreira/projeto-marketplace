@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template
+from flask import Blueprint, jsonify
 from controllers.products_controller import Products
 from controllers.product_controller import Product
 
