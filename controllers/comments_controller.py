@@ -34,7 +34,7 @@ class Comments:
 
         except Error as e:
 
-            print(f'Error Criação de Comentário: {e}')
+            print(f'Error - Comments "create": {e}')
             
             return False
 
@@ -57,7 +57,7 @@ class Comments:
 
         except Error as e:
 
-            print(f'Error Get Comentários: {e}')
+            print(f'Error - Comments "get_all_by_product": {e}')
             
             return False
 
