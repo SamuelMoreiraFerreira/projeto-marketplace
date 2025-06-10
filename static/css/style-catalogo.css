@@ -72,26 +72,38 @@
     gap: 2rem;
   }
   
-  .catalogo__filtros {
+  .catalogo__filtros{
     display: flex;
     width: 40%;
     gap: 2rem;
     justify-content: flex-start;
   }
   
-  .catalogo__input {
+  .catalogo__select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+
     padding: 1rem 1.5rem;
-    border: var(--border-weight) solid var(--banana-yellow) !important;
-    font-size: 1.6rem;
+
+    border: var(--border-weight) solid var(--banana-yellow);
     border-radius: 0.5rem;
-    font-family: var(--font-description) !important;
-    background-color: var(--banana-yellow) !important;
-    color: var(--ancient-trunk) !important;
+
+    font-size: 1.6rem;
+    font-family: var(--font-description);
     font-weight: bold;
+
+    background-color: var(--banana-yellow);
+    color: var(--ancient-trunk);
+
+    cursor: pointer;
   }
 
-  .catalogo__input::placeholder{
-    color: white;
+
+  .catalogo__select::placeholder{
+    color: var(--ancient-trunk);
   }
   
   .catalogo__produtos {
@@ -120,14 +132,14 @@
   .catalogo__titulo {
     font-family: var(--font-title);
     font-size: 2rem;
-    color: var(--ancient-trunk);
+    color: var(--banana-snow);
     margin-top: 1rem;
   }
   
   .catalogo__descricao {
     font-size: 1.4rem;
     margin: 0.5rem 0;
-    color: var(--ancient-trunk);
+    color: var(--banana-snow);
   }
   
   .catalogo__acoes {
@@ -149,9 +161,10 @@
   }
   
   .catalogo__preco {
-    font-size: 1.4rem;
+    font-family: var(--font-highlighted);
+    font-size: 1.8rem;
     font-weight: bold;
-    color: var(--ancient-trunk);
+    color: var(--banana-snow);
   }
   
 /* Rodapé */
