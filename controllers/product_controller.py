@@ -67,8 +67,8 @@ class Product:
 
                         """
                         SELECT tb_bloons_types.type FROM tb_bloons_types
-                        INNER JOIN tb_bloons 
-                            ON tb_bloons.bloon_id = tb_bloons_types.type_id
+                        INNER JOIN tb_bloon_type_relation
+                            ON tb_bloon_type_relation.type_id = tb_bloons_types.type_id
                         WHERE tb_bloons.product_id = %s;
                         """,
 
@@ -91,6 +91,8 @@ class Product:
             if images:
 
                 data['images'] = images
+
+            return data
 
         except Error as e:
 

@@ -149,7 +149,15 @@ class Products:
                 
             )
 
-            return cursor.fetchall()
+            highlights = cursor.fetchall()
+
+            data = []
+
+            for product in highlights:
+
+                data.append(Product.get_by_id(product['product_id'], False, cursor))
+
+            return data
 
         except Error as e:
 
