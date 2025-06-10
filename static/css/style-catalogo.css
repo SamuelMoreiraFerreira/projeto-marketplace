@@ -74,9 +74,9 @@
   
   .catalogo__filtros {
     display: flex;
+    width: 40%;
     gap: 2rem;
     justify-content: flex-start;
-    flex-wrap: wrap;
   }
   
   .catalogo__input {
@@ -88,6 +88,10 @@
     background-color: var(--banana-yellow) !important;
     color: var(--ancient-trunk) !important;
     font-weight: bold;
+  }
+
+  .catalogo__input::placeholder{
+    color: white;
   }
   
   .catalogo__produtos {
