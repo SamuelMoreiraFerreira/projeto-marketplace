@@ -110,11 +110,25 @@
     font-weight: 700;
 }
 
+.forms__btnLogin {
+    background-color: var(--bloon-red);
+    color: var(--banana-snow);
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
 .forms{
     width: 362px;
     height: 40px;
     
     background-color: var(--banana-snow);
+}
+
+.login__cadastro {
+    margin-top: 20px;
+    font-weight: bold;
 }
 
 
