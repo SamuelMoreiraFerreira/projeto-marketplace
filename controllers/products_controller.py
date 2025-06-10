@@ -5,28 +5,107 @@ from mysql.connector import Error
 class Products:
 
     @staticmethod
-    def get_all():
+    def get_all(filters = None):
+
+        # Filters:
+        #
+        # type: 1 (Macaco) ou 2 (Bloon)
+        #
+        # class_id: ID da Classe do Macaco
+        # bloon_type_id: ID do Tipo de Bloon
 
         connection_db = Connection.create()
         cursor = connection_db.cursor(dictionary=True)
 
         try:
 
-            cursor.execute('SELECT MAX(tb_products.product_id) AS "max_id" FROM tb_products;')
+            # 'GROUP_CONCAT()' -> Concatena valores de várias linhas em uma única coluna
 
-            data = []
+            base_sql = [
 
-            max_id = cursor.fetchone()['max_id'] or 0
+                'SELECT',
 
-            if max_id > 0:
+                'tb_products.product_id,',
 
-                for i in range(max_id):
+                'tb_products.name,',
+                'tb_products.description,',
 
-                    data.append(
+                'tb_products.price,',
+                'tb_products.quantity,',
+                'tb_products.rating,',
 
-                        Product.get_by_id(i)
+                'tb_products_types.type AS "product_type",',
+                'tb_monkeys_classes.class AS "monkey_class",',
+                'GROUP_CONCAT(tb_bloons_types.type) AS "bloon_types",',
 
-                    )
+                'GROUP_CONCAT(tb_products_images.image_url) AS "images"',
+
+                'FROM tb_products',
+
+                'JOIN tb_products_types ON tb_products.type = tb_products_types.type_id',
+
+                'LEFT JOIN tb_monkeys ON tb_products.product_id = tb_monkeys.product_id',
+                'LEFT JOIN tb_monkeys_classes ON tb_monkeys.class = tb_monkeys_classes.class_id',
+
+                'LEFT JOIN tb_bloons ON tb_products.product_id = tb_bloons.product_id',
+                'LEFT JOIN tb_bloon_type_relation ON tb_bloons.bloon_id = tb_bloon_type_relation.bloon_id',
+                'LEFT JOIN tb_bloons_types ON tb_bloon_type_relation.type_id = tb_bloons_types.type_id',
+
+                'LEFT JOIN tb_products_images ON tb_products.product_id = tb_products_images.product_id'
+
+            ]
+
+            conditions = []
+            values = []
+
+            #region Filtrando
+
+            if filters is not None:
+
+                # 'atr in dict' -> Verifica se o atributo está presente no dicionário 
+
+                # Tipo de Produto
+
+                if 'type' in filters:
+
+                    conditions.append("tb_products.type = %s")
+                    values.append(filters['type'])
+
+                # Classe do Macaco
+
+                if 'class_id' in filters:
+
+                    conditions.append("tb_monkeys_classes.class_id = %s")
+                    values.append(filters['class_id'])
+
+                # Tipo de Bloon
+
+                if 'bloon_type_id' in filters:
+
+                    conditions.append("tb_bloons_types.type_id = %s")
+                    values.append(filters['bloon_type_id'])
+
+            if len(conditions) > 0:
+
+                # 'str.join(list)' -> Concatena a lista usando o separador (str) entre eles
+
+                base_sql.append('WHERE ' + (' AND '.join(conditions)))
+
+            #endregion
+
+            base_sql.append('GROUP BY tb_products.product_id, tb_products.name, tb_products.description, tb_products.price, tb_products.quantity, tb_products.rating, tb_products_types.type, tb_monkeys_classes.class')
+
+            base_sql.append('ORDER BY tb_products.product_id ASC;')
+
+            cursor.execute(
+
+                ' '.join(base_sql), 
+
+                tuple(values)
+
+            )
+
+            data = cursor.fetchall()
 
             return data
 
@@ -82,6 +161,7 @@ class Products:
 
             cursor.close()
             connection_db.close()
+
     
 
 #     SELECT name,description,price,tb_products_types.type,rating,tb_bloons_types.type FROM tb_products  
