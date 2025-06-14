@@ -14,7 +14,7 @@ class Carts:
 
                 """
                 SELECT 
-                    tb_shopping_cart.user,
+                    tb_shopping_cart.user_email,
                     GROUP_CONCAT(
                         CONCAT(
                             tb_cart_products.cart_product_id, ":",
@@ -34,20 +34,28 @@ class Carts:
 
             response = cursor.fetchone()
 
-            keys = ['cart_product_id', 'product_id', 'quantity']
-
             data = {
 
-                'user': response['user'],
+                'user': response['user_email'],
 
-                'products': dict(
-                    zip(
-                        keys,
-                        response['products'].split('|').split(':')
-                    )
-                )
+                'products': []
 
             }
+
+            keys = ('cart_product_id', 'product_id', 'quantity')
+
+            for product in (response['products'].split('|')):
+
+                data['products'].append(
+
+                    dict.fromkeys(
+                        keys,
+                        tuple(product.split(':'))
+                    )
+
+                )
+
+            print(data)
 
             return data
         
