@@ -18,12 +18,12 @@ class Product:
             cursor.execute(
                 
                 """
-                SELECT,
+                SELECT
 
                 tb_products.product_id AS "id",
 
-                tb_products.name.
-                tb_products.description.
+                tb_products.name,
+                tb_products.description,
 
                 tb_products.price,
                 tb_products.quantity,
@@ -56,7 +56,7 @@ class Product:
                     ON tb_products.product_id = tb_products_images.product_id
 
                 WHERE tb_products.product_id = %s;
-                """
+                """,
 
                 (id, )
                 
