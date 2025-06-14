@@ -23,7 +23,34 @@ def comments_by_product(product_id):
 
         return Routes.default_response(500)
     
-@blueprint.route('/create/', methods=['POST'])
-def comments_create():
+@blueprint.route('/create/<product_id>', methods=['POST'])
+def comments_create(product_id):
 
-    pass
+    user_email = request.form.get('user_email')
+
+    message = request.form.get('message')
+    rating = request.form.get('rating')
+
+    if Comments.create({
+
+        user_email, product_id,
+        message, rating
+
+    }):
+        
+        return Routes.default_response(200)
+    
+    else:
+
+        return Routes.default_response(500)
+    
+@blueprint.route('/delete/<comment_id>', methods=['POST'])
+def comments_create(comment_id):
+
+    if Comments.delete(comment_id):
+        
+        return Routes.default_response(200)
+    
+    else:
+
+        return Routes.default_response(500)
