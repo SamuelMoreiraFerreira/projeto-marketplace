@@ -44,7 +44,7 @@ def comments_create(product_id):
 
         return Routes.default_response(500)
     
-@blueprint.route('/delete/<comment_id>', methods=['POST'])
+@blueprint.route('/delete/<comment_id>')
 def comments_create(comment_id):
 
     if Comments.delete(comment_id):
