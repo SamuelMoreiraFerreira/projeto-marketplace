@@ -21,6 +21,7 @@ class Comments:
 
                     comment_data.get('user_email'),
                     comment_data.get('product_id'),
+
                     comment_data.get('message'),
                     comment_data.get('rating')
 
@@ -35,6 +36,31 @@ class Comments:
         except Error as e:
 
             print(f'Error - Comments "create": {e}')
+            
+            return False
+
+        finally:
+
+            cursor.close()
+            connection_db.close()
+
+    @staticmethod
+    def delete(id):
+
+        connection_db = Connection.create()
+        cursor = connection_db.cursor()
+
+        try:
+
+            cursor.execute('DELETE FROM tb_comments WHERE tb_comments.comment_id = %s;', (id, ))
+
+            cursor.commit()
+
+            return True
+
+        except Error as e:
+
+            print(f'Error - Comments "delete": {e}')
             
             return False
 
