@@ -169,17 +169,3 @@ class Products:
 
             cursor.close()
             connection_db.close()
-
-    
-
-#     SELECT name,description,price,tb_products_types.type,rating,tb_bloons_types.type FROM tb_products  
-#                 INNER JOIN tb_products_types ON tb_products.type =tb_products_types.type_id 
-#                 INNER JOIN tb_bloons ON tb_products.product_id=tb_bloons.product_id
-#                 INNER JOIN tb_bloons_types ON tb_bloons.type=tb_bloons_types.type_id
-#                 WHERE tb_products.product_id = 2;
-                
-# SELECT name,tb_products.description,price,tb_products_types.type,rating,tb_monkeys_classes.class FROM tb_products  
-#                 INNER JOIN tb_products_types ON tb_products.type =tb_products_types.type_id 
-#                 INNER JOIN tb_monkeys ON tb_products.product_id=tb_monkeys.product_id
-#                 INNER JOIN tb_monkeys_classes ON tb_monkeys.class=tb_monkeys_classes.class_id
-#                 WHERE tb_products.product_id = 2;
