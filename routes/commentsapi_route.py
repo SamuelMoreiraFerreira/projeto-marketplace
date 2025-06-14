@@ -10,6 +10,8 @@ def comments_by_product(product_id):
 
     comments = Comments.get_all_by_product(product_id)
 
+    print('oi')
+
     if comments:
 
         return Routes.default_response(200, { 
@@ -45,7 +47,7 @@ def comments_create(product_id):
         return Routes.default_response(500)
     
 @blueprint.route('/delete/<comment_id>')
-def comments_create(comment_id):
+def comments_delete(comment_id):
 
     if Comments.delete(comment_id):
         

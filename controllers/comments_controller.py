@@ -29,7 +29,7 @@ class Comments:
                 
             )
 
-            cursor.commit()
+            connection_db.commit()
 
             return True
 
@@ -54,9 +54,15 @@ class Comments:
 
             cursor.execute('DELETE FROM tb_comments WHERE tb_comments.comment_id = %s;', (id, ))
 
-            cursor.commit()
+            connection_db.commit()
 
-            return True
+            if cursor.rowcount > 0:
+
+                return True
+            
+            else:
+
+                return False
 
         except Error as e:
 

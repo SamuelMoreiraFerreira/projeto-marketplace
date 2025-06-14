@@ -11,20 +11,14 @@ class Routes:
 
             return ''
 
-        if data:
+        # '**' -> Nesse contexto, desempacotamento de dicionário
 
-            # '**' -> Nesse contexto, desempacotamento de dicionário
+        return jsonify({
 
-            return jsonify({
+            'status_code': status_code,
+            'data': data
 
-                'status_code': status_code,
-                **data
-
-            })
-        
-        else:
-
-            return jsonify({ 'status_code': status_code })
+        })
 
     @staticmethod
     def get_blueprints (routes_path):

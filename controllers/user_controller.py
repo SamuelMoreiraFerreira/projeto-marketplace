@@ -32,7 +32,7 @@ class User:
                 
             )
 
-            cursor.commit()
+            connection_db.commit()
 
             return True
 
@@ -57,9 +57,15 @@ class User:
 
             cursor.execute('DELETE FROM tb_users WHERE tb_users.email = %s;', (email, ))
 
-            cursor.commit()
+            connection_db.commit()
 
-            return True
+            if cursor.rowcount > 0:
+
+                return True
+            
+            else:
+
+                return False
 
         except Error as e:
 
