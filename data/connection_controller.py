@@ -26,6 +26,6 @@ class Connection:
 
                 except mysql.connector.Error as e:
 
-                        print(f'Erro ao criar conexão com a DB: {e}')
+                        print(f'Erro - Connection "create": {e}')
 
                         return False
