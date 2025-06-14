@@ -79,7 +79,7 @@ def user_getdata(email):
 
     if data:
 
-        return Routes.default_response(200, { 'data': data })
+        return Routes.default_response(200, { 'user-data': data })
     
     # Erro
 

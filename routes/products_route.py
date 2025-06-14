@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from controllers.products_controller import Products
+from controllers.routes_controller import Routes
 
 
 blueprint = Blueprint("products_route", __name__)
@@ -17,6 +18,12 @@ def products_highlights (length):
 @blueprint.route("/get-all")
 def catalog_page():
 
-    products = jsonify(Products.get_all())
+    products = Products.get_all()
 
-    return products
+    if products:
+
+        return Routes.default_response(200, products)
+
+    else:
+
+        return Routes.default_response(500)
