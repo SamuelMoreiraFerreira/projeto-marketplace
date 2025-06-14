@@ -16,7 +16,7 @@ class Categorys:
 
         except Error as e:
 
-            print(f'Error Categorys "bloons": {e}')
+            print(f'Erro - Categorys "bloons": {e}')
             
             return False
 
@@ -38,7 +38,7 @@ class Categorys:
 
         except Error as e:
 
-            print(f'Error Categorys "monkeys": {e}')
+            print(f'Erro - Categorys "monkeys": {e}')
             
             return False
 

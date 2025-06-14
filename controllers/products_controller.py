@@ -161,7 +161,7 @@ class Products:
 
         except Error as e:
 
-            print(f'Erro Products Higlights: {e}')
+            print(f'Erro - Products "get_highlights": {e}')
 
             return False
         
