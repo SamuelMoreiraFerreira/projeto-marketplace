@@ -107,6 +107,10 @@ class Products:
 
             data = cursor.fetchall()
 
+            for product in data:
+
+                product['images'] = product['images'].split(',')
+
             return data
 
         except Error as e:

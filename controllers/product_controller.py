@@ -62,7 +62,11 @@ class Product:
                 
             )
 
-            return cursor.fetchone()
+            data = cursor.fetchone()
+
+            data['images'] = data['images'].split(',')
+
+            return data
 
             # #region Full Data
     
