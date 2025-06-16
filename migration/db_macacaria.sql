@@ -263,6 +263,44 @@ END $$
 
 DELIMITER ;
 
+-- PROCEDURE ADD ITEM
+
+DELIMITER $$
+
+CREATE PROCEDURE addItemCart (
+
+  IN p_cart_id INT, 
+  IN p_product_id INT, 
+  IN p_quantity INT
+
+)
+
+BEGIN
+
+  DECLARE existing_product_cart INT;
+
+  SELECT tb_cart_products.cart_product_id INTO existing_product_cart FROM tb_cart_products
+  WHERE tb_cart_products.cart_id = p_cart_id AND tb_cart_products.product_id = p_product_id;
+
+  -- CASO JÁ EXISTA O PRODUTO NO CARRINHO, APENAS SOMA AS QUANTIDADES
+
+  IF existing_product_cart IS NOT NULL THEN
+
+    UPDATE tb_cart_products
+    SET tb_cart_products.quantity = p_quantity + tb_cart_products.quantity
+    WHERE tb_cart_products.cart_product_id = existing_product_cart;
+
+  ELSE
+
+    INSERT INTO tb_cart_products (cart_id, product_id, quantity)
+    VALUES (p_cart_id, product_id, quantity);
+
+  END IF;
+
+END $$
+
+DELIMITER ;
+
 -- TRIGGER COMENTÁRIOS
 
 DELIMITER $$
