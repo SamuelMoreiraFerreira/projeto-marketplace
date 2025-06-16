@@ -60,13 +60,13 @@ def user_create():
 
     }):
 
-        return jsonify({ 'status_code': 200 })
+        return Routes.default_response(200)
     
     # Erro
 
     else:
 
-        return jsonify({ 'status_code': 200 })
+        return Routes.default_response(500)
     
 
 
