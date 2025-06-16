@@ -27,7 +27,10 @@
     <link rel="stylesheet" href="../static/css/variables.css">
     <link rel="stylesheet" href="../static/css/style-catalogo.css">
 
-    <link rel="shortcut icon" type="imagex/png" href="../static/images/icone.ico">    
+    <link rel="shortcut icon" type="imagex/png" href="../static/images/icone.ico">  
+    
+    <script src="../static/js/catalogoScript.js" type="module" defer></script>
+
 </head>
 
 <body>
@@ -90,81 +93,26 @@
         <!-- Corpo -->
         <main class="catalogo">
             <form class="catalogo__filtros">
+
+                <label name="filtrar">Filtrar:</label>
                 <select id="filtrar" name="filtrar" class="catalogo__select filtro">
-                    <option disabled selected>Filtrar por:</option>
-                    <option value="macacos">Macacos</option>
-                    <option value="bloons">Bloons</option>
-                    <option value="melhorias">Melhorias</option>
+                    <option value="0" selected>Todos</option>
+                    <option value="1">Macacos</option>
+                    <option value="2">Bloons</option>
                 </select>
 
+                <label name="filtrar">Classificar por:</label>
                 <select id="classificar" name="classificar" class="catalogo__select classificar">
-                    <option disabled selected>Classificar por:</option>
-                    <option value="menor-preco">Menor preço</option>
-                    <option value="maior-preco">Maior preço</option>
+                    <option value="0" selected>Por ID</option>
+                    <option value="1">Menor preço</option>
+                    <option value="2">Maior preço</option>
                 </select>
+
+                <label name="categorias">Categorias:</label>
+                <select id="categorias" name="categorias" class="catalogo__select categorias"></select>
+
             </form>
             <section class="catalogo__produtos">
-                <!-- Exemplo de card -->
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
             </section>
         </main>
         <!-- Rodapé -->

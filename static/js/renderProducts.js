@@ -49,22 +49,20 @@ function renderProducts(productsArr, productsContainer)
         const price = document.createElement('span');
         purchaseButton.classList.add('catalogo__preco');
 
-        const strongText = document.createElement('strong');
-        strongText.textContent = `${product.price} Bananas`;
+        const strong = document.createElement('strong');
+        strong.textContent = `${product.price} Bananas`;
 
-        const textPrice = document.createTextNode('Valor:');
-
-        price.appendChild(textPrice);
-        price.appendChild(strongText);
+        price.appendChild(strong);
 
         actionsGroup.appendChild(price);
+
+        //#endregion
         
         infoContainer.appendChild(actionsGroup);
 
         //#endregion
 
         productCard.appendChild(infoContainer);
-
         productsContainer.appendChild(productCard);
 
     });
