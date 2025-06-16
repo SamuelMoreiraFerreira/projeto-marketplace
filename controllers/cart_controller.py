@@ -130,6 +130,7 @@ class Carts:
             cursor.close()
             connection_db.close()
 
+    @staticmethod
     def add_item(cart_id, product_id, quantity):
 
         connection_db = Connection.create()

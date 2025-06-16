@@ -4,6 +4,7 @@ from mysql.connector import Error
 
 class User:
 
+    @staticmethod
     def login(email):
 
         user_data = User.get_data(email)
@@ -16,7 +17,8 @@ class User:
         else:
 
             return False
-        
+
+    @staticmethod   
     def get_session():
 
         if 'user' in session:
@@ -27,6 +29,7 @@ class User:
 
             return False
 
+    @staticmethod
     def logout():
 
         session.clear()

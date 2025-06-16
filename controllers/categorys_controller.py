@@ -3,6 +3,7 @@ from mysql.connector import Error
 
 class Categorys:
 
+    @staticmethod
     def bloons():
 
         connection_db = Connection.create()
@@ -25,6 +26,7 @@ class Categorys:
             cursor.close()
             connection_db.close()
 
+    @staticmethod
     def monkeys():
 
         connection_db = Connection.create()
