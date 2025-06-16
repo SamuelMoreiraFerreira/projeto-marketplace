@@ -11,9 +11,18 @@ class User:
         if user_data:
 
             session['user'] = user_data
-
             return True
 
+        else:
+
+            return False
+        
+    def get_session():
+
+        if 'user' in session:
+
+            return session['user']
+        
         else:
 
             return False
