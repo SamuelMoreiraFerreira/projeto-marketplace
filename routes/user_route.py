@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from controllers.user_controller import User
 from controllers.routes_controller import Routes
 
-blueprint = Blueprint('userapi_route', __name__)
+blueprint = Blueprint('user_route', __name__)
 prefix = '/api/users'
 
 @blueprint.route('/validate/', methods=['POST'])
@@ -60,13 +60,13 @@ def user_create():
 
     }):
 
-        return jsonify({ 'status_code': 200 })
+        return Routes.default_response(200)
     
     # Erro
 
     else:
 
-        return jsonify({ 'status_code': 200 })
+        return Routes.default_response(500)
     
 
 

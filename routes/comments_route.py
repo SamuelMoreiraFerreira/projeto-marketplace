@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from controllers.comments_controller import Comments
 from controllers.routes_controller import Routes
 
-blueprint = Blueprint('commetnsapi_route', __name__)
+blueprint = Blueprint('comments_route', __name__)
 prefix = '/api/comments'
 
 @blueprint.route('/get-all/<product_id>')
