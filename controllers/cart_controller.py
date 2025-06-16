@@ -137,7 +137,7 @@ class Carts:
 
         try:
 
-            cursor.execute('INSERT INTO tb_cart_products (cart_id, product_id, quantity) VALUES (%s, %s, %s)', (cart_id, product_id, quantity))
+            cursor.callproc('addItemCart', (cart_id, product_id, quantity))
 
             connection_db.commit()
 
