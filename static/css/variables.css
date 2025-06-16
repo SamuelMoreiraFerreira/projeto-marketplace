@@ -1,0 +1,30 @@
+/* Lilita One - Google Fonts CDN */
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+/* Poppins - Google Fonts CDN */
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Poppins:wght@400;600;800&display=swap');
+
+/* Chewy - Google Fonts CDN */
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Lilita+One&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root
+{
+
+    font-size: 62.5%;
+
+    --sky-blue: #81D4FA;
+    --banana-yellow: #FDD835;
+    --jungle-green: #4CAF50;
+    --bloon-red: #E53935;
+
+    --ancient-trunk: #3E2723;
+    --banana-snow: #FFFFFF;
+    --monkey-mist: #F5F5F5;
+
+    --font-title: "Lilita One";
+    --font-description: "'Poppins', Arial, sans-serif";
+    --font-highlighted: "'Chewy', 'Comic Sans MS', cursive";
+
+    --border-weight: 2px;
+
+}

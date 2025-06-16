@@ -1,0 +1,177 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Conteudo */
+
+.conteudo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Cabeçalho */
+
+.header{
+    width: 100%;
+    height: 12%;
+}
+
+.navbar{
+    width: 100%;
+    height: 80px;
+    
+    background-color: var(--jungle-green) !important;
+}
+
+
+.navbar-nav{
+    width: 100%;
+    height: 100%;
+    
+    font-family: var(--font-title);
+    font-size: 16px;
+}
+
+.nav-link{
+    color: var(--banana-snow);
+}
+
+.header__carrinho{
+    width: 53px;
+    height: 53px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    
+    background-color: var(--banana-yellow);
+}
+
+.header__perfil{
+    width: 53px;
+    height: 53px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+    border-radius: 50%;
+    
+    background-color: var(--bloon-red);
+}
+
+.dropdown-menu{
+    background-color: var(--banana-yellow);
+}
+
+/* Corpo */
+.main {
+    width: 100%;
+    height: 90%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--sky-blue);
+}
+
+.cadastro {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cadastro__form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cadastro__label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--ancient-trunk);
+}
+
+.cadastro__input {
+    background-color: var(--banana-snow);
+    color: var(--ancient-trunk);
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid var(--monkey-mist);
+    margin-bottom: 15px;
+}
+
+.cadastro__btn {
+    background-color: var(--bloon-red);
+    color: var(--banana-snow);
+    padding: 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.cadastro__login {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Rodapé */
+
+.footer{
+    width: 100%;
+    height: 5%;
+
+
+    background-color: var(--jungle-green);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__description{
+    color: var(--banana-snow);
+    font-family: var(--font-description);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* Medias */
+
+@media screen and (max-width: 576px) {
+    .header{
+        width: 100%;
+        height: 15%;
+    }
+
+    .header__logo img {
+        width: 80px;
+        height: 60px;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1024px) {
+    .header{
+        width: 100%;
+        height: 15%;
+    }
+
+    .header__logo img {
+        width: 80px;
+        height: 60px;
+    }
+}

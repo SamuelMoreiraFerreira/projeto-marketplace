@@ -1,0 +1,257 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Conteudo */
+
+.conteudo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Cabeçalho */
+
+.header{
+    width: 100%;
+    height: 12%;
+}
+
+.navbar{
+    width: 100%;
+    height: 80px;
+    
+    background-color: var(--jungle-green) !important;
+}
+
+
+.navbar-nav{
+    width: 100%;
+    height: 100%;
+    
+    font-family: var(--font-title);
+    font-size: 16px;
+}
+
+.nav-link{
+    color: var(--banana-snow);
+}
+
+.header__carrinho{
+    width: 53px;
+    height: 53px;
+
+    display: flex;
+    justify-content: center;
+
+
+    border-radius: 50%;
+    
+    background-color: var(--banana-yellow);
+}
+
+.header__perfil{
+    width: 53px;
+    height: 53px;
+
+    display: flex;
+    justify-content: center;
+
+
+    border-radius: 50%;
+    
+    background-color: var(--bloon-red);
+}
+
+.dropdown-menu{
+    background-color: var(--banana-yellow);
+}
+
+/* Corpo */
+
+.cart {
+  background-color: var(--sky-blue); 
+  height: 85%;
+}
+
+.cart__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  height: 50%;
+}
+
+.cart__items {
+  flex: 1 1 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  height: 50vh;
+}
+
+.cart__item {
+  display: flex;
+  align-items: center;
+  background-color: var(--jungle-green);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.cart__item-image {
+  width: 80px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.cart__item-info {
+  flex: 1;
+}
+
+.cart__item-title {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.cart__item-description {
+  font-family: var(--font-description);
+  font-size: 0.9rem;
+}
+
+.cart__item-price {
+  font-family: var(--font-highlighted);
+  text-align: right;
+}
+
+.cart__item-price p {
+  margin: 0 0 0.5rem 0;
+}
+
+.cart__item-remove {
+  background-color: var(--bloon-red);
+  color: var(--banana-snow);
+  font-family: var(--font-description);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.cart__item-remove:hover {
+  background-color: var(--bloon-red);
+}
+
+.cart__checkout {
+  flex: 1 1 300px;
+  background-color: var(--jungle-green);
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: var(--banana-snow) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cart__form {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-description);
+}
+
+.cart__form-label {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+.cart__form-input {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--banana-snow);
+  color: var(--ancient-trunk);
+}
+
+.cart__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.cart__btn {
+  background-color: var(--bloon-red);
+  color: var(--banana-snow);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cart__btn:hover {
+  background-color: var(--bloon-red);
+}
+
+/* Rodapé */
+
+.footer{
+    width: 100%;
+    height: 5%;
+
+
+    background-color: var(--jungle-green);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__description{
+    color: var(--banana-snow);
+    font-family: var(--font-description);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* Medias */
+
+/* Celular (até 576px) */
+@media screen and (max-width: 576px) {
+    .header{
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header__logo img {
+        width: 80px;
+        height: 60px;
+    }
+}
+
+/* Tablet (577px até 758px) */
+@media screen and (min-width: 577px) and (max-width: 758px) {
+    .header{
+        width: 100%;
+        height: 10%;
+    }
+
+    .header__logo img {
+        width: 80px;
+        height: 60px;
+    }
+}
