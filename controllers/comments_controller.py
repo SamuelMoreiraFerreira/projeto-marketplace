@@ -83,7 +83,30 @@ class Comments:
 
         try:
 
-            cursor.execute('SELECT tb_comments.comment_id, tb_comments.user_email, tb_comments.message, tb_comments.date, tb_comments.rating FROM tb_comments WHERE tb_comments.product_id = %s;', (product_id, ))
+            cursor.execute(
+                
+                """
+                SELECT 
+
+                    tb_comments.comment_id, 
+
+                    CONCAT(tb_users.first_name, " ", tb_users.last_name) AS "user", 
+
+                    tb_comments.message, 
+                    tb_comments.date, 
+                    tb_comments.rating 
+
+                FROM tb_comments 
+
+                INNER JOIN tb_users
+                    ON tb_comments.user_email = tb_users.email
+
+                WHERE tb_comments.product_id = %s;
+                """, 
+                
+                (product_id, )
+                
+            )
 
             return cursor.fetchall()
 

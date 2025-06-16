@@ -93,26 +93,44 @@
         <main class="main">
 
             <div class="product">
-                <h4 class="product__category">Categoria: Primário</h4>
-                <img src="/static/images/aaa.png" alt="macaco dardo" class="product__image" />
-                <h2 class="product__name">Macaco Dardo</h2>
-                <p class="product__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt quam
-                    accusantium nobis iusto placeat iure, illo cum impedit quia in quasi quidem harum, molestiae
-                    eligendi inventore perspiciatis, at vero ex.</p>
+                <h4 class="product__category">Categoria: 
+                    {% if product.product_type == 'Macacos' %}
+                    {{ product.monkey_class }}
+                    {% else %}
+                    {{ product.bloon_types }}
+                    {% endif %}
+                </h4>
+                <img src="{{ product.images[0] }}" alt="{{ product.name }}" class="product__image" />
+                <h2 class="product__name">{{ product.name }}</h2>
+                <p class="product__description">{{ product.description }}</p>
                 <div class="product__rate">
                     <figure class="rate__stars">
-                        <img src="/static/images/full_star.svg" alt="star1"><img src="/static/images/full_star.svg"
-                            alt="star2"><img src="/static/images/full_star.svg" alt="star3"><img
-                            src="/static/images/empity_star.svg" alt="star4"><img src="/static/images/empity_star.svg"
-                            alt="star5">
+                        {% for i in range(5) %}
+
+                        {% if i < product.rating %}
+                            <img src="/static/images/full_star.svg" alt="full-star">
+                        {% else %}
+                            <img
+                            src="/static/images/empity_star.svg" alt="empty-star">
+                        {% endif %}
+
+                        {% endfor %}
                     </figure>
-                    <span class="rate__quantity">29 Avaliações</span>
+                    <span class="rate__quantity">
+                        {{ product.rate_quantity }}
+
+                        {% if product.rate_quantity > 1 %}
+                            Avaliações
+                        {% else %}
+                            Avaliação
+                        {% endif %}
+                    </span>
                 </div>
-                <h3 class="product__price">25 bananas</h3>
+                <h3 class="product__price">{{ product.price }} Bananas</h3>
                 <form class="product__form">
                     <div class="product__quantity-control">
                         <button type="button" class="quantity__button quantity__button--decrease">-</button>
-                        <input type="number" name="product__quantity" id="productQuantity" class="product__quantity" min="1" max="99" value="1" />
+                        <input type="number" name="product__quantity" id="productQuantity" class="product__quantity" min="1" max="{{ product.quantity }}" value="1" />
                         <button type="button" class="quantity__button quantity__button--increase">+</button>
                     </div>
                     <button type="button" class="product__button">Adicionar ao carrinho</button>
@@ -159,18 +177,24 @@
                     </div>
                 </form>
                 <div class="comments__all-comments">
+                    {% for comment in comments %}
                     <div class="all-comments__item">
-                        <h4 class="item__name">Vitor Parelli Masalskas Moreira Rodrigues da Silva</h4>
-                        <p class="item__comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, dolorem.
-                            Ipsum, recusandae! Animi exercitationem earum amet numquam! Laboriosam, nobis? Maiores eaque
-                            aspernatur consequuntur quae placeat non facilis nisi perferendis numquam.</p>
+                        <h4 class="item__name">{{ comment.user }}</h4>
+                        <p class="item__comment">{{ comment.message }}</p>
                         <figure class="item__stars">
-                            <img src="/static/images/full_star.svg" alt="star1"><img src="/static/images/full_star.svg"
-                                alt="star2"><img src="/static/images/full_star.svg" alt="star3"><img
-                                src="/static/images/empity_star.svg" alt="star4"><img
-                                src="/static/images/empity_star.svg" alt="star5">
+                        {% for i in range(5) %}
+
+                        {% if i < comment.rating %}
+                            <img src="/static/images/full_star.svg" alt="full-star">
+                        {% else %}
+                            <img
+                            src="/static/images/empity_star.svg" alt="empty-star">
+                        {% endif %}
+
+                        {% endfor %}
                         </figure>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
 
