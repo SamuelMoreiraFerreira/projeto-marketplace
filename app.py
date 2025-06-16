@@ -3,6 +3,7 @@ import os
 from controllers.routes_controller import Routes
 
 app = Flask(__name__)
+app.secret_key = 'SamuelVitorLucas'
 
 #region Handler Routes
 

@@ -1,7 +1,28 @@
+from flask import session
 from data.connection_controller import Connection
 from mysql.connector import Error
 
 class User:
+
+    def login(email):
+
+        user_data = User.get_data(email)
+
+        if user_data:
+
+            session['user'] = user_data
+
+            return True
+
+        else:
+
+            return False
+
+    def logout():
+
+        session.clear()
+
+        return True
 
     # '**' -> Indica para a função a presença de argumentos nomeados extras (Argumentos que você especifica o nome do parâmetro junto com seu valor)
 
@@ -38,7 +59,7 @@ class User:
 
         except Error as e:
 
-            print(f'Error Criação de Usuário: {e}')
+            print(f'Erro - User "create": {e}')
             
             return False
 
@@ -69,7 +90,7 @@ class User:
 
         except Error as e:
 
-            print(f'Error Excluindo Usuário: {e}')
+            print(f'Erro - User "delete": {e}')
             
             return False
 
@@ -100,7 +121,7 @@ class User:
 
         except Error as e:
 
-            print(f'Error Encontrando Usuário: {e}')
+            print(f'Erro - User "get_data": {e}')
             
             return False
 
@@ -128,7 +149,7 @@ class User:
 
         except Error as e:
 
-            print(f'Error Validação de Usuário: {e}')
+            print(f'Erro - User "validate": {e}')
             
             return False
 
