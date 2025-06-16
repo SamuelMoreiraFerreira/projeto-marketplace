@@ -39,7 +39,7 @@ function renderProducts(productsArr, productsContainer)
         // Btn Ver Mais
 
         const purchaseButton = document.createElement('a');
-        purchaseButton.setAttribute('href', `/product/${product.id}`)
+        purchaseButton.setAttribute('href', `/product/${product.product_id}`)
         purchaseButton.textContent = 'Ver Mais';
         purchaseButton.classList.add('catalogo__botao');
 

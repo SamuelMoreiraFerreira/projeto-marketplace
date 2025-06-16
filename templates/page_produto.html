@@ -93,11 +93,13 @@
         <main class="main">
 
             <div class="product">
-                <h4 class="product__category">Categoria: 
+                <h4 class="product__category">
+                    Categoria: 
+                    
                     {% if product.product_type == 'Macacos' %}
-                    {{ product.monkey_class }}
+                        {{ product.monkey_class }}
                     {% else %}
-                    {{ product.bloon_types }}
+                        {{ product.bloon_types }}
                     {% endif %}
                 </h4>
                 <img src="{{ product.images[0] }}" alt="{{ product.name }}" class="product__image" />
@@ -141,8 +143,13 @@
                 <h2 class="comments__title">Comentários</h2>
                 <hr class="hr" />
                 <form action="" class="comments__user-comment">
-                    <textarea name="user-comment__comment" id="" cols="50" rows="2"
-                        placeholder="Digite seu comentário..." class="user-comment__comment"></textarea>
+                    <textarea 
+                        name="user-comment__comment" 
+                        cols="50" rows="2"
+                        placeholder="Digite seu comentário..." 
+                        class="user-comment__comment"
+                    >
+                    </textarea>
 
                     <div class="user-comment__radio">
                         <div class="radio__inputs">

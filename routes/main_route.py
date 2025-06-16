@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 from controllers.product_controller import Product
 from controllers.comments_controller import Comments
 
@@ -21,6 +21,5 @@ def produto_page(product_id):
     comments_data = Comments.get_all_by_product(product_id)
 
     product_data['rate_quantity'] = len(comments_data)
-    product_data['price'] = str(product_data['price']).replace('.', ',') 
 
-    return render_template('page_produto.html', product=product_data, comments=comments_data)
+    return render_template('page_produto.html', is_login=('user' in session), product=product_data, comments=comments_data)

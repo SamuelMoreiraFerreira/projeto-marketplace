@@ -28,4 +28,3 @@ const markStar = (index)=>{
         starsLabel[i].src = '/static/images/full_star.svg';
     }
 };
-
