@@ -98,8 +98,13 @@
     height: 100%;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
+
+}
+
+.teste{
+    width: 400px;
 }
 
 .forms__email, .forms__senha{
@@ -118,22 +123,21 @@
     border: none;
     cursor: pointer;
 
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .forms{
     width: 362px;
     height: 40px;
     
-    background-color: var(--banana-snow);
+    background-color: var(--banana-snow) !important;
     
 }
 
 .login__cadastro {
-    margin-top: 20px;
     font-weight: bold;
 
-    font-size: 16px;
+    font-size: 1.8rem;
 }
 
 
@@ -158,4 +162,9 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.header__nav.show .nav__li{
+    align-self: end;
+    margin-right: 1rem;
 }

@@ -226,6 +226,11 @@
     line-height: normal;
 }
 
+.header__nav.show .nav__li{
+    align-self: end;
+    margin-right: 1rem;
+}
+
 /* Medias */
 
 /* Celular (até 576px) */

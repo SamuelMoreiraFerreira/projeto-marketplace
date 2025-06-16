@@ -150,6 +150,11 @@
   line-height: normal;
 }
 
+.header__nav.show .nav__li{
+    align-self: end;
+    margin-right: 1rem;
+}
+
 /* Medias */
 
 @media screen and (max-width: 1024px) {

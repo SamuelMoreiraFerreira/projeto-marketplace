@@ -335,6 +335,11 @@ input[type="number"] {
     appearance: textfield;
 }
 
+.header__nav.show .nav__li{
+    align-self: end;
+    margin-right: 1rem;
+}
+
 /* Rodapé */
 
 .footer{

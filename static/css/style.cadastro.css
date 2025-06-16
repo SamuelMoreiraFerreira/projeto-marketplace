@@ -48,7 +48,6 @@
 
     display: flex;
     justify-content: center;
-    align-items: center;
 
     border-radius: 50%;
     
@@ -61,9 +60,6 @@
 
     display: flex;
     justify-content: center;
-    align-items: center;
-
-
 
     border-radius: 50%;
     
@@ -107,7 +103,7 @@
 }
 
 .cadastro__input {
-    background-color: var(--banana-snow);
+    background-color: var(--banana-snow) !important;
     color: var(--ancient-trunk);
     padding: 10px;
     font-size: 16px;
@@ -131,6 +127,11 @@
 
     margin-top: 20px;
     font-weight: bold;
+}
+
+.header__nav.show .nav__li{
+    align-self: end;
+    margin-right: 1rem;
 }
 
 /* Rodapé */
