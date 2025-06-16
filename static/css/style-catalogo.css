@@ -125,68 +125,6 @@
   color: var(--ancient-trunk);
 }
 
-.catalogo__produtos {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(4, 200px);
-  gap: 10rem;
-}
-
-.catalogo__card {
-  background-color: var(--jungle-green);
-  border: var(--border-weight) solid var(--ancient-trunk);
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  font-family: var(--font-description);
-}
-
-.catalogo__imagem {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  padding: 1rem;
-}
-
-.catalogo__titulo {
-  font-family: var(--font-title);
-  font-size: 2rem;
-  color: var(--banana-snow);
-  margin-top: 1rem;
-}
-
-.catalogo__descricao {
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-  color: var(--banana-snow);
-}
-
-.catalogo__acoes {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-}
-
-.catalogo__botao {
-  background-color: var(--bloon-red);
-  color: var(--banana-snow);
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1.4rem;
-  font-weight: bold;
-  border-radius: 0.4rem;
-  cursor: pointer;
-}
-
-.catalogo__preco {
-  font-family: var(--font-highlighted);
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--banana-snow);
-  padding: 1rem;
-}
 
 /* Rodapé */
 
