@@ -135,17 +135,38 @@ class Products:
             cursor.execute(
                 
                 """
-                SELECT tb_products.product_id, COALESCE(SUM(tb_cart_products.quantity), 0) AS 'sold' FROM tb_products 
-                LEFT JOIN tb_cart_products 
+                SELECT
+
+                tb_products.product_id AS 'id',
+
+                tb_products.name,
+                tb_products.description,
+
+                tb_products.price,
+                tb_products.rating,
+
+                COALESCE(SUM(tb_cart_products.quantity), 0) AS 'sold',
+
+                GROUP_CONCAT(tb_products_images.image_url) AS 'images'
+
+                FROM tb_products
+
+                JOIN tb_cart_products 
                     ON tb_cart_products.product_id = tb_products.product_id
+
                 LEFT JOIN tb_shopping_cart
                     ON tb_shopping_cart.cart_id = tb_cart_products.cart_id
                     AND tb_shopping_cart.finished = TRUE
-                GROUP BY 
-                    tb_products.product_id
-                ORDER BY 
+
+                INNER JOIN tb_products_images
+                    ON tb_products.product_id = tb_products_images.product_id
+
+                GROUP BY tb_products.product_id
+
+                ORDER BY
                     sold DESC,
                     tb_products.product_id ASC
+                
                 LIMIT %s;
                 """,
 
@@ -153,13 +174,11 @@ class Products:
                 
             )
 
-            highlights = cursor.fetchall()
+            data = cursor.fetchall()
 
-            data = []
+            for highlight in data:
 
-            for product in highlights:
-
-                data.append(Product.get_by_id(product['product_id'], False, cursor))
+                highlight['images'] = highlight['images'].split(',')
 
             return data
 

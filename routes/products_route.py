@@ -11,7 +11,15 @@ prefix = '/api/products'
 @blueprint.route('/get-highlights/<length>')
 def products_highlights (length):
 
-    return Products.get_highlights(length)
+    highlights = Products.get_highlights(length)
+
+    if highlights:
+
+        return Routes.default_response(200, highlights)
+
+    else:
+
+        return Routes.default_response(500)
 
 #endregion
 

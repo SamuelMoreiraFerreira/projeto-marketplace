@@ -54,8 +54,10 @@ class Product:
 
                 LEFT JOIN tb_products_images 
                     ON tb_products.product_id = tb_products_images.product_id
+                
+                WHERE tb_products.product_id = %s
 
-                WHERE tb_products.product_id = %s;
+                GROUP BY tb_products.product_id, tb_products.name, tb_products.description, tb_products.price, tb_products.quantity, tb_products.rating, tb_products_types.type, tb_monkeys_classes.class;
                 """,
 
                 (id, )
@@ -68,71 +70,9 @@ class Product:
 
             return data
 
-            # #region Full Data
-    
-            # if fulldata:
-
-            #     # Macacos
-
-            #     if data['type'] == 1:
-
-            #         cursor.execute(
-
-            #             """
-            #             SELECT tb_monkeys_classes.class, tb_monkeys_classes.description AS 'class-description' FROM tb_monkeys_classes
-            #             INNER JOIN tb_monkeys 
-            #                 ON tb_monkeys.monkey_id = tb_monkeys_classes.class_id
-            #             WHERE tb_monkeys.product_id = %s;
-            #             """,
-
-            #             (id, )
-
-            #         )
-
-            #         monkey_data = cursor.fetchone()
-
-            #         if monkey_data:
-
-            #             data |= monkey_data
-
-            #     # Bloons
-
-            #     else:
-
-            #         cursor.execute(
-
-            #             """
-            #             SELECT tb_bloons_types.type FROM tb_bloons_types
-            #             INNER JOIN tb_bloon_type_relation
-            #                 ON tb_bloon_type_relation.type_id = tb_bloons_types.type_id
-            #             WHERE tb_bloons.product_id = %s;
-            #             """,
-
-            #             (id, )
-
-            #         )
-
-            #         bloon_data = cursor.fetchone()
-
-            #         if bloon_data:
-
-            #             data |= bloon_data
-
-            # #endregion
-
-            # # Imagens
-
-            # images = Product.get_images(id)
-
-            # if images:
-
-            #     data['images'] = images
-
-            # return data
-
         except Error as e:
 
-            print(f'Erro - Products "get_by_id": {e}')
+            print(f'Erro - Product "get_by_id": {e}')
 
             return False
         
@@ -170,7 +110,7 @@ class Product:
         
         except Error as e:
 
-            print(f'Erro - Products "get_images": {e}')
+            print(f'Erro - Product "get_images": {e}')
 
             return []
         
