@@ -1,10 +1,13 @@
 //#region Carrosel
 
-// $('.carousel').carousel({
+const carousel = document.querySelector('.carousel');
 
-//     interval: 2000
+new bootstrap.Carousel(carousel, {
 
-// });
+    interval: 2000,
+    touch: false
+
+});
 
 //#endregion
 
