@@ -24,7 +24,7 @@
 
 .navbar {
   width: 100%;
-  height: 80px;
+  height: 12%;
 
   background-color: var(--jungle-green) !important;
   position: fixed;
@@ -72,6 +72,13 @@
 }
 
 /* Corpo  */
+
+.main{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+}
 
 .catalogo {
   background-color: var(--sky-blue);
