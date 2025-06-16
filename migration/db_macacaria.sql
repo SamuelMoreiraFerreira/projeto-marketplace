@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS tb_products (
 
     price DECIMAL(10,2) NOT NULL,
     quantity INT UNSIGNED NOT NULL,
-    rating TINYINT(10) UNSIGNED DEFAULT 10,
+    rating TINYINT(5) UNSIGNED DEFAULT 5,
     
     type INT NOT NULL,
 
@@ -138,9 +138,9 @@ CREATE TABLE IF NOT EXISTS tb_bloons (
 
 CREATE TABLE IF NOT EXISTS tb_bloon_type_relation (
 
-	relation_id INT AUTO_INCREMENT PRIMARY KEY,
+    relation_id INT AUTO_INCREMENT PRIMARY KEY,
 
-	bloon_id INT NOT NULL,
+    bloon_id INT NOT NULL,
     type_id INT NOT NULL,
     
     CONSTRAINT ct_tbBloons_tbBloonTypeRelation
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS tb_comments (
 
     message TEXT NOT NULL,
     date DATETIME DEFAULT NOW(),
-    rating TINYINT(10) UNSIGNED NOT NULL,
+    rating TINYINT(5) UNSIGNED DEFAULT 5,
 
     CONSTRAINT ct_tbUsers_tbComments
     FOREIGN KEY (user_email) 
@@ -313,7 +313,7 @@ BEGIN
 
     -- NOTA DO PRODUTO
 
-    DECLARE product_rating TINYINT(10);
+    DECLARE product_rating TINYINT(5);
 
     SELECT AVG(rating) INTO product_rating FROM tb_comments
     WHERE tb_comments.product_id = NEW.product_id
@@ -791,3 +791,57 @@ INSERT INTO tb_bloons (bloon_id, product_id) VALUES
   (19, 39);
 INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
   (19, 19, 19);
+  
+  -- Usuário 1
+INSERT INTO tb_users (email, first_name, last_name, phone_number, address, password, salt_password)
+VALUES ('mario@example.com', 'Mario', 'Verde', '11999999999', 'Rua Cogumelo 1', 'senha1234', '');
+
+-- Usuário 2
+INSERT INTO tb_users (email, first_name, last_name, phone_number, address, password, salt_password)
+VALUES ('luigi@example.com', 'Luigi', 'Verde', '11988888888', 'Rua Cogumelo 2', 'senha5678', '');
+
+-- Usuário 3
+INSERT INTO tb_users (email, first_name, last_name, phone_number, address, password, salt_password)
+VALUES ('peach@example.com', 'Peach', 'Princesa', '11977777777', 'Castelo Real', 'senha91011', '');
+
+-- Carrinho do Mario
+INSERT INTO tb_shopping_cart (cart_id, user_email, finished)
+VALUES (1, 'mario@example.com', FALSE);
+
+-- Carrinho do Luigi
+INSERT INTO tb_shopping_cart (cart_id, user_email, finished)
+VALUES (2, 'luigi@example.com', TRUE);
+
+-- Carrinho da Peach
+INSERT INTO tb_shopping_cart (cart_id, user_email, finished)
+VALUES (3, 'peach@example.com', FALSE);
+
+-- Carrinho do Mario (cart_id = 1)
+INSERT INTO tb_cart_products (product_id, cart_id, quantity)
+VALUES 
+  (5, 1, 2),   -- 2x produto 5
+  (12, 1, 1);  -- 1x produto 12
+
+-- Carrinho do Luigi (cart_id = 2)
+INSERT INTO tb_cart_products (product_id, cart_id, quantity)
+VALUES 
+  (7, 2, 1),   -- 1x produto 7
+  (20, 2, 3);  -- 3x produto 20
+
+-- Carrinho da Peach (cart_id = 3)
+INSERT INTO tb_cart_products (product_id, cart_id, quantity)
+VALUES 
+  (3, 3, 2),   -- 2x produto 3
+  (33, 3, 1);  -- 1x produto 33
+
+-- Comentário do Mario para o produto 5
+INSERT INTO tb_comments (user_email, product_id, message, rating)
+VALUES ('mario@example.com', 5, 'Excelente macaco atirador!', 2);
+
+-- Comentário do Luigi para o produto 7
+INSERT INTO tb_comments (user_email, product_id, message, rating)
+VALUES ('luigi@example.com', 7, 'Bom contra bloons camuflados.', 3);
+
+-- Comentário da Peach para o produto 33
+INSERT INTO tb_comments (user_email, product_id, message, rating)
+VALUES ('peach@example.com', 33, 'Muito fofo e eficaz!', 5);
