@@ -1,5 +1,6 @@
 const starsInput = document.querySelectorAll('.radio__inputs input');
 const starsLabel = document.querySelectorAll('.radio__inputs img');
+const rating = 0;
 
 document.addEventListener('DOMContentLoaded',()=>{
     starsInput.forEach((element,index)=>{
@@ -9,22 +10,34 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.querySelector('.quantity__button--increase').addEventListener('click',increaseQuantity);
 });
 
-const decreaseQuantity = ()=>{
+const decreaseQuantity = ()=> {
+
     const inputElem = document.querySelector('#productQuantity');
     let value = parseInt(inputElem.value);
-    if(value>1)inputElem.value = value-1;
+    
+    if (value > 1)inputElem.value = value - 1;
+
 };
 
-const increaseQuantity = ()=>{
+const increaseQuantity = ()=> {
+
     const inputElem = document.querySelector('#productQuantity');
     let value = parseInt(inputElem.value);
-    if(value>=1)inputElem.value = value+1;
+
+    if (value >= 1) inputElem.value = value+1;
+
 };
 
 
-const markStar = (index)=>{
+const markStar = (index)=> {
+
+    console.log(index);
+
     starsLabel.forEach(label=>label.src='/static/images/empity_star.svg');
-    for(let i=0;i<=index;i++){
+
+    for (let i = 0; i <= index; i++)
+    {
         starsLabel[i].src = '/static/images/full_star.svg';
     }
+
 };

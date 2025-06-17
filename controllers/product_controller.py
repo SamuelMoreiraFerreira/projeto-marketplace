@@ -25,7 +25,7 @@ class Product:
                 tb_products.name,
                 tb_products.description,
 
-                REPLACE(CAST(tb_products.price AS CHAR), ".", ",") AS "price",
+                REPLACE(CAST(tb_products.price AS CHAR), '.', ',') AS "price",
                 tb_products.quantity,
                 tb_products.rating,
 

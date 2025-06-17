@@ -90,7 +90,7 @@ class Comments:
 
                     tb_comments.comment_id, 
 
-                    CONCAT(tb_users.first_name, " ", tb_users.last_name) AS "user", 
+                    CONCAT(tb_users.first_name, ' ', tb_users.last_name) AS "user", 
 
                     tb_comments.message, 
                     tb_comments.date, 
