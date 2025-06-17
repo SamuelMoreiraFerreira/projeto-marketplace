@@ -1,14 +1,21 @@
-<h1 align="center" justify=""center> Macacaria - Store </h1>
+<h1>🐒 Macacaria Store – A loja dos macacos do Bloons TD 6!</h1>
 <p align="center">
 <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=%20FINALIZADO&color=GREEN&style=for-the-badge"/>
 </p>
-<h2> Descrição do projeto </h2>
-<p> O projeto Macacaria store é um projeto cujo o objetivo é uma loja onde tenha como os produtos do jogo BloonsTD6. O intuito do projeto é apenas fazer o site e não vender os produtos já que o mesmo não tem estoque </p>
+
+# Descrição do Projeto
+<p> O projeto Macacaria Store tem como objetivo criar um site de loja fictícia com produtos inspirados no jogo Bloons TD 6. A proposta é exclusivamente desenvolver o site como uma vitrine virtual, sem a intenção de realizar vendas, já que não há estoque disponível. </p>
 
 # :hammer: Funcionalidades do projeto
 - `Funcionalidade 1`: Avaliar os produtos
 - `Funcionalidade 2`: O usuario poderá se cadastrar e fazer login com sua própria conta
 - `Funcionalidade 3`: Adcionar produtos aos carrinhos
+
+# 🔧 Tecnologias e Ferramentas
+
+- HTML5, CSS3, Javacript e Python
+- [Flask]
+- [onrender]
 
 # 🛠️ Abrir e rodar o projeto
 **Basta entrar no site: https://macacaria.onrender.com**
