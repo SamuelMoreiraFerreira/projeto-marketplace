@@ -10,8 +10,6 @@ def comments_by_product(product_id):
 
     comments = Comments.get_all_by_product(product_id)
 
-    print('oi')
-
     if comments:
 
         return Routes.default_response(200, { 
@@ -28,17 +26,19 @@ def comments_by_product(product_id):
 @blueprint.route('/create/<product_id>', methods=['POST'])
 def comments_create(product_id):
 
-    user_email = request.form.get('user_email')
+    data = request.get_json()
 
-    message = request.form.get('message')
-    rating = request.form.get('rating')
+    user_email = data.get('user_email')
 
-    if Comments.create({
+    message = data.get('message')
+    rating = data.get('rating')
+
+    if Comments.create(
 
         user_email, product_id,
         message, rating
 
-    }):
+    ):
         
         return Routes.default_response(200)
     

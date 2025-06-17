@@ -13,6 +13,8 @@
 
     width: 100%;
     height: 100%;
+
+    overflow: hidden;
 }
 
 /* HEADER */
@@ -72,14 +74,17 @@
 
 
 .dropdown-menu{
-    background-color: var(--banana-yellow);
+    background-color: var(--banana-yellow); 
+
+
+    font-size: 16px;
 }
 
 /* MAIN */
 
 .main{
     width: 100%;
-    height: 83%;
+    height: 100%;
 
     display: flex;
     justify-content: center;
@@ -114,6 +119,11 @@
     justify-content: center;
     align-items: center;
     
+}
+
+.carousel{
+    width: 300px;
+    height: 100%;
 }
 
 
@@ -173,6 +183,17 @@
     line-height: normal;
 }
 
+.header__nav.show .nav__li{
+    align-self: end;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--banana-yellow);
+}
+
+.header__nav.show .header__perfil{
+    background-color: var(--bloon-red);
+}
 /* MEDIAS */
 
 /* Celular (até 576px) */
@@ -187,23 +208,23 @@
         height: 60px;
     }
 
-    .main__destaques {
-        flex-direction: column;
-        align-items: center;
-
+    .catalogo__produtos {
+        display: grid;
+        grid-template-columns: 1fr !important;
         gap: 24px;
-
+        justify-items: center;
         width: 100%;
         height: auto;
-        display: flex;
-
-        margin-bottom: 2rem;
-    }
-
-    .destaques__image {
-        width: 60px;
-        height: 60px;
-    }
+      }
+    
+      .catalogo__card {
+        width: 90%;
+        max-width: 250px;
+        height: auto;
+        background-color: var(--jungle-green);
+        padding: 1rem;
+        border-radius: 10px;
+      }
 
     .main__title {
         font-size: 24px;
@@ -217,6 +238,12 @@
 
 
 @media screen and (min-width: 577px) and (max-width: 1024px) {
+
+    .main__title{
+        justify-self: center;
+        font-size: 4rem;
+    }
+
     .header{
         width: 100%;
         height: 15%;
@@ -227,33 +254,29 @@
         height: 60px;
     }
 
-    .main__destaques {
+    .catalogo__produtos {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, auto);
-
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 24px;
-
         justify-items: center;
-        align-items: center;
-
         width: 100%;
         height: auto;
+      }
+    
+      .catalogo__card {
+        width: 90%;
+        max-width: 250px;
+        height: auto;
+        background-color: var(--jungle-green);
+        padding: 1rem;
+        border-radius: 10px;
+      }
+}
 
-        margin-bottom: 2rem;    
-    }
-
-    .destaques__image {
-        width: 160px;
-        height: 160px;
-    }
-
-    .main__title {
-        font-size: 48px;
-        text-align: center;
-    }
-
-    .main__subtitle {
-        font-size: 32px;
-    }
+.catalogo__card img
+{
+    display: block;
+    max-width: 100%;
+    height: 200px;
+    object-fit:contain;
 }

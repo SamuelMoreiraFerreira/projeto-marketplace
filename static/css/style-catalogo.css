@@ -91,6 +91,15 @@
   margin-top: 12vh;
 }
 
+.catalogo__produtos {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(4, 200px);
+  gap: 10rem;
+  margin-bottom: 20px;
+}
+
 .catalogo__filtros {
   display: flex;
   width: 40%;
@@ -125,68 +134,6 @@
   color: var(--ancient-trunk);
 }
 
-.catalogo__produtos {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(4, 200px);
-  gap: 10rem;
-}
-
-.catalogo__card {
-  background-color: var(--jungle-green);
-  border: var(--border-weight) solid var(--ancient-trunk);
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  font-family: var(--font-description);
-}
-
-.catalogo__imagem {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  padding: 1rem;
-}
-
-.catalogo__titulo {
-  font-family: var(--font-title);
-  font-size: 2rem;
-  color: var(--banana-snow);
-  margin-top: 1rem;
-}
-
-.catalogo__descricao {
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-  color: var(--banana-snow);
-}
-
-.catalogo__acoes {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-}
-
-.catalogo__botao {
-  background-color: var(--bloon-red);
-  color: var(--banana-snow);
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1.4rem;
-  font-weight: bold;
-  border-radius: 0.4rem;
-  cursor: pointer;
-}
-
-.catalogo__preco {
-  font-family: var(--font-highlighted);
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--banana-snow);
-  padding: 1rem;
-}
 
 /* Rodapé */
 
@@ -212,12 +159,32 @@
   line-height: normal;
 }
 
+.header__nav.show .nav__li{
+    align-self: end;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--banana-yellow);
+}
+
+.header__nav.show .header__perfil{
+    background-color: var(--bloon-red);
+}
+
 /* Medias */
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px ) {
+
+  .header img{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+
   .catalogo__produtos {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 24px;
     justify-items: center;
     width: 100%;
@@ -232,12 +199,22 @@
     padding: 1rem;
     border-radius: 10px;
   }
+  .catalogo__filtros{
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+  }
+
+  .catalogo__select{
+      width: 50vw;
+  }
 }
 
 @media screen and (max-width: 576px) {
   .catalogo__produtos {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 24px;
     justify-items: center;
     width: 100%;

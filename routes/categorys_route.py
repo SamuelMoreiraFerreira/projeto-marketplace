@@ -5,6 +5,24 @@ from controllers.routes_controller import Routes
 blueprint = Blueprint("categorys_route", __name__)
 prefix = '/api/categorys'
 
+@blueprint.route('/all')
+def category_all ():
+
+    categorys = {
+
+        'bloons': Categorys.bloons(),
+        'monkeys': Categorys.monkeys()
+
+    }
+
+    if categorys:
+
+        return Routes.default_response(200, categorys)
+    
+    else:
+
+        return Routes.default_response(500)
+
 #region Rota Get Categorys Bloons
 
 @blueprint.route('/bloons')
@@ -14,7 +32,7 @@ def category_bloons ():
 
     if categorys_bloons:
 
-        return Routes.default_response(200, category_bloons)
+        return Routes.default_response(200, categorys_bloons)
     
     else:
 
@@ -31,7 +49,7 @@ def category_monkeys ():
 
     if categorys_monkeys:
 
-        return Routes.default_response(200, category_monkeys)
+        return Routes.default_response(200, categorys_monkeys)
     
     else:
 

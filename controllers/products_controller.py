@@ -5,7 +5,10 @@ from mysql.connector import Error
 class Products:
 
     @staticmethod
-    def get_all(filters = None):
+    def get_all(filters = None, order = None):
+
+        print(filters)
+        print(order)
 
         # Filters:
         #
@@ -13,6 +16,8 @@ class Products:
         #
         # class_id: ID da Classe do Macaco
         # bloon_type_id: ID do Tipo de Bloon
+        #
+        # order: 1 (ASC - Menor Preço) ou 2 (DESC - Maior Preço)
 
         connection_db = Connection.create()
         cursor = connection_db.cursor(dictionary=True)
@@ -30,7 +35,7 @@ class Products:
                 'tb_products.name,',
                 'tb_products.description,',
 
-                'tb_products.price,',
+                'REPLACE(CAST(tb_products.price AS CHAR), \'.\', \',\') AS "price",',
                 'tb_products.quantity,',
                 'tb_products.rating,',
 
@@ -38,7 +43,7 @@ class Products:
                 'tb_monkeys_classes.class AS "monkey_class",',
                 'GROUP_CONCAT(tb_bloons_types.type) AS "bloon_types",',
 
-                'GROUP_CONCAT(tb_products_images.image_url) AS "images"',
+                'tb_products_images.image_url AS "images"',
 
                 'FROM tb_products',
 
@@ -48,8 +53,7 @@ class Products:
                 'LEFT JOIN tb_monkeys_classes ON tb_monkeys.class = tb_monkeys_classes.class_id',
 
                 'LEFT JOIN tb_bloons ON tb_products.product_id = tb_bloons.product_id',
-                'LEFT JOIN tb_bloon_type_relation ON tb_bloons.bloon_id = tb_bloon_type_relation.bloon_id',
-                'LEFT JOIN tb_bloons_types ON tb_bloon_type_relation.type_id = tb_bloons_types.type_id',
+                'LEFT JOIN tb_bloons_types ON tb_bloons.type_id = tb_bloons_types.type_id',
 
                 'LEFT JOIN tb_products_images ON tb_products.product_id = tb_products_images.product_id'
 
@@ -66,21 +70,21 @@ class Products:
 
                 # Tipo de Produto
 
-                if 'type' in filters:
+                if 'type' in filters and filters['type'] != 0:
 
                     conditions.append("tb_products.type = %s")
                     values.append(filters['type'])
 
                 # Classe do Macaco
 
-                if 'class_id' in filters:
+                if 'class_id' in filters and filters['class_id'] != 0:
 
                     conditions.append("tb_monkeys_classes.class_id = %s")
                     values.append(filters['class_id'])
 
                 # Tipo de Bloon
 
-                if 'bloon_type_id' in filters:
+                if 'bloon_type_id' in filters and filters['bloon_type_id'] != 0:
 
                     conditions.append("tb_bloons_types.type_id = %s")
                     values.append(filters['bloon_type_id'])
@@ -95,7 +99,17 @@ class Products:
 
             base_sql.append('GROUP BY tb_products.product_id, tb_products.name, tb_products.description, tb_products.price, tb_products.quantity, tb_products.rating, tb_products_types.type, tb_monkeys_classes.class')
 
-            base_sql.append('ORDER BY tb_products.product_id ASC;')
+            #region Ordenar
+
+            if order != 0:
+
+                base_sql.append(f'ORDER BY tb_products.price { "ASC" if order == 1 else "DESC" };')
+
+            else:
+
+                base_sql.append('ORDER BY tb_products.product_id ASC;')
+
+            #endregion
 
             cursor.execute(
 
@@ -106,10 +120,6 @@ class Products:
             )
 
             data = cursor.fetchall()
-
-            for product in data:
-
-                product['images'] = product['images'].split(',')
 
             return data
 
@@ -135,17 +145,38 @@ class Products:
             cursor.execute(
                 
                 """
-                SELECT tb_products.product_id, COALESCE(SUM(tb_cart_products.quantity), 0) AS 'sold' FROM tb_products 
-                LEFT JOIN tb_cart_products 
+                SELECT
+
+                tb_products.product_id AS 'id',
+
+                tb_products.name,
+                tb_products.description,
+
+                REPLACE(CAST(tb_products.price AS CHAR), \'.\', \',\') AS "price",
+                tb_products.rating,
+
+                COALESCE(SUM(tb_cart_products.quantity), 0) AS 'sold',
+
+                GROUP_CONCAT(tb_products_images.image_url) AS 'images'
+
+                FROM tb_products
+
+                JOIN tb_cart_products 
                     ON tb_cart_products.product_id = tb_products.product_id
+
                 LEFT JOIN tb_shopping_cart
                     ON tb_shopping_cart.cart_id = tb_cart_products.cart_id
                     AND tb_shopping_cart.finished = TRUE
-                GROUP BY 
-                    tb_products.product_id
-                ORDER BY 
+
+                INNER JOIN tb_products_images
+                    ON tb_products.product_id = tb_products_images.product_id
+
+                GROUP BY tb_products.product_id
+
+                ORDER BY
                     sold DESC,
                     tb_products.product_id ASC
+                
                 LIMIT %s;
                 """,
 
@@ -153,13 +184,11 @@ class Products:
                 
             )
 
-            highlights = cursor.fetchall()
+            data = cursor.fetchall()
 
-            data = []
+            for highlight in data:
 
-            for product in highlights:
-
-                data.append(Product.get_by_id(product['product_id'], False, cursor))
+                highlight['images'] = highlight['images'].split(',')
 
             return data
 

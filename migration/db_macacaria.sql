@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS tb_products (
 
     price DECIMAL(10,2) NOT NULL,
     quantity INT UNSIGNED NOT NULL,
-    rating TINYINT(10) UNSIGNED DEFAULT 10,
+    rating TINYINT(5) UNSIGNED DEFAULT 5,
     
     type INT NOT NULL,
 
@@ -127,37 +127,25 @@ CREATE TABLE IF NOT EXISTS tb_bloons (
 
     bloon_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
+
+    type_id INT NOT NULL,
+    tier INT NOT NULL,
     
     CONSTRAINT ct_tbProducts_tbBloons
     FOREIGN KEY (product_id) 
-    REFERENCES tb_products(product_id)
+    REFERENCES tb_products(product_id),
 
-);
-
--- TABELA RELAÇÃO BLOON E TIPOS
-
-CREATE TABLE IF NOT EXISTS tb_bloon_type_relation (
-
-	relation_id INT AUTO_INCREMENT PRIMARY KEY,
-
-	bloon_id INT NOT NULL,
-    type_id INT NOT NULL,
-    
-    CONSTRAINT ct_tbBloons_tbBloonTypeRelation
-    FOREIGN KEY (bloon_id)
-    REFERENCES tb_bloons(bloon_id),
-    
-    CONSTRAINT ct_tbBloonsTypes_tbBloonTypeRelation
-    FOREIGN KEY (type_id)
+    CONSTRAINT ct_tbBloonsTypes_tbBloons
+    FOREIGN KEY (type_id) 
     REFERENCES tb_bloons_types(type_id)
-
+    
 );
 
 -- TABELA CARRINHO DE COMPRAS
 
 CREATE TABLE IF NOT EXISTS tb_shopping_cart (
 
-    cart_id INT NOT NULL PRIMARY KEY,
+    cart_id INT AUTO_INCREMENT PRIMARY KEY,
 
     user_email VARCHAR(255) NOT NULL,
     finished BOOL NOT NULL DEFAULT FALSE,
@@ -200,7 +188,7 @@ CREATE TABLE IF NOT EXISTS tb_comments (
 
     message TEXT NOT NULL,
     date DATETIME DEFAULT NOW(),
-    rating TINYINT(10) UNSIGNED NOT NULL,
+    rating TINYINT(5) UNSIGNED DEFAULT 5,
 
     CONSTRAINT ct_tbUsers_tbComments
     FOREIGN KEY (user_email) 
@@ -293,7 +281,7 @@ BEGIN
   ELSE
 
     INSERT INTO tb_cart_products (cart_id, product_id, quantity)
-    VALUES (p_cart_id, product_id, quantity);
+    VALUES (p_cart_id, p_product_id, p_quantity);
 
   END IF;
 
@@ -313,7 +301,7 @@ BEGIN
 
     -- NOTA DO PRODUTO
 
-    DECLARE product_rating TINYINT(10);
+    DECLARE product_rating TINYINT(5);
 
     SELECT AVG(rating) INTO product_rating FROM tb_comments
     WHERE tb_comments.product_id = NEW.product_id
@@ -522,272 +510,252 @@ INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
 INSERT INTO tb_monkeys          (monkey_id, product_id, class) VALUES
   (20, 20, 4);
 
--- TIPOS BLOONS
+-- CATEGORIAS DE BLOONS
 
 INSERT INTO tb_bloons_types (type_id, type) VALUES
-  (1, 'Vermelho'),
-  (2, 'Azul'),
-  (3, 'Verde'),
-  (4, 'Amarelo'),
-  (5, 'Rosa'),
-  (6, 'Roxo'),
-  (7, 'Preto'),
-  (8, 'Branco'),
-  (9, 'Zebra'),
-  (10, 'Chumbo'),
-  (11, 'Cerâmico'),
-  (12, 'Camo'),
-  (13, 'Regrow'),
-  (14, 'Fortificado'),
-  (15, 'MOAB'),
-  (16, 'BFB'),
-  (17, 'ZOMG'),
-  (18, 'DDT'),
-  (19, 'BAD');
-  
--- Red Bloon
+  (1, 'Normal'),
+  (2, 'Moab');
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (21, 'Red Bloon',
-   'Bloon básico de tier 1, lento e sem resistência extra.',
-   10.00, 1000, 1, 2);
+-- RED BLOON
+
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (21, 'Red Bloon', 
+   'O lendário Bloon vermelho – rápido como o vento e implacável no pop!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (21, 'https://static.wikia.nocookie.net/bloonswiki/images/1/1d/Red_Bloon_BTD6.png', 21);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (1, 21);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (1, 1, 1);
+  (21, 'https://static.wikia.nocookie.net/bloons/images/0/0c/RedBloon.png', 21);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (21, 21, 1, 1);
 
--- Blue Bloon
+-- BLUE BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (22, 'Blue Bloon',
-   'Bloon de tier 2, mais rápido que o Red Bloon e contém um Red Bloon dentro.',
-   15.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (22, 'Blue Bloon', 
+   'O Bloon azul – mais resistente e veloz que o vermelho, um verdadeiro desafio!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (22, 'https://static.wikia.nocookie.net/bloonswiki/images/2/2d/Blue_Bloon_BTD6.png', 22);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (2, 22);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (2, 2, 2);
+  (22, 'https://static.wikia.nocookie.net/bloons/images/7/7c/BlueBloon.png', 22);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (22, 22, 1, 2);
 
--- Green Bloon
+-- GREEN BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (23, 'Green Bloon',
-   'Bloon de tier 3, mais rápido que o Blue Bloon e contém um Blue Bloon dentro.',
-   20.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (23, 'Green Bloon', 
+   'O Bloon verde – durão e persistente, não cai com qualquer estourada!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (23, 'https://static.wikia.nocookie.net/bloonswiki/images/0/0a/Green_Bloon_BTD6.png', 23);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (3, 23);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (3, 3, 3);
+  (23, 'https://static.wikia.nocookie.net/bloons/images/3/34/GreenBloon.png', 23);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (23, 23, 1, 3);
 
--- Yellow Bloon
+-- YELLOW BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (24, 'Yellow Bloon',
-   'Bloon de tier 4, muito rápido e contém um Green Bloon dentro.',
-   25.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (24, 'Yellow Bloon', 
+   'O Bloon amarelo – veloz como um raio, exige reflexos afiados!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (24, 'https://static.wikia.nocookie.net/bloonswiki/images/5/5b/Yellow_Bloon_BTD6.png', 24);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (4, 24);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (4, 4, 4);
+  (24, 'https://static.wikia.nocookie.net/bloons/images/5/5f/YellowBloon.png', 24);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (24, 24, 1, 4);
 
--- Pink Bloon
+-- PINK BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (25, 'Pink Bloon',
-   'Bloon de tier 5, extremamente rápido e contém um Yellow Bloon dentro.',
-   30.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (25, 'Pink Bloon', 
+   'O Bloon rosa – mais rápido que todos, só os melhores caçadores o alcançam!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (25, 'https://static.wikia.nocookie.net/bloonswiki/images/3/31/Pink_Bloon_BTD6.png', 25);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (5, 25);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (5, 5, 5);
+  (25, 'https://static.wikia.nocookie.net/bloons/images/b/bd/PinkBloon.png', 25);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (25, 25, 1, 5);
 
--- Purple Bloon
+-- BLACK BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (26, 'Purple Bloon',
-   'Bloon de tier 6, carrega dois Pink Bloons e é resistente ao gelo.',
-   35.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (26, 'Black Bloon', 
+   'O Bloon preto – imune a ataques explosivos, um verdadeiro fantasma voador!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (26, 'https://static.wikia.nocookie.net/bloonswiki/images/a/a2/Purple_Bloon_BTD6.png', 26);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (6, 26);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (6, 6, 6);
+  (26, 'https://static.wikia.nocookie.net/bloons/images/1/14/BlackBloon.png', 26);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (26, 26, 1, 6);
 
--- Black Bloon
+-- WHITE BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (27, 'Black Bloon',
-   'Bloon de tier 7, carrega dois Purple Bloons e é imune a explosões.',
-   40.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (27, 'White Bloon', 
+   'O Bloon branco – imune a efeitos de gelo, desliza pelos campos gelados!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (27, 'https://static.wikia.nocookie.net/bloonswiki/images/5/50/Black_Bloon_BTD6.png', 27);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (7, 27);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (7, 7, 7);
+  (27, 'https://static.wikia.nocookie.net/bloons/images/c/c8/WhiteBloon.png', 27);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (27, 27, 1, 7);
 
--- White Bloon
+-- LEAD BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (28, 'White Bloon',
-   'Bloon de tier 8, carrega dois Black Bloons e é imune a gelo.',
-   40.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (28, 'Lead Bloon', 
+   'O Bloon de chumbo – indestrutível por projéteis simples, um verdadeiro tanque voador!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (28, 'https://static.wikia.nocookie.net/bloonswiki/images/7/70/White_Bloon_BTD6.png', 28);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (8, 28);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (8, 8, 8);
+  (28, 'https://static.wikia.nocookie.net/bloons/images/2/22/LeadBloon.png', 28);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (28, 28, 1, 8);
 
--- Zebra Bloon
+-- ZEBRA BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (29, 'Zebra Bloon',
-   'Bloon de tier 9, combinação de Black e White, imune a gelo e explosões.',
-   45.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (29, 'Zebra Bloon', 
+   'O Bloon zebra – combinação fatal de chumbo e gelo, pura diversidade destruidora!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (29, 'https://static.wikia.nocookie.net/bloonswiki/images/9/98/Zebra_Bloon_BTD6.png', 29);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (9, 29);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (9, 9, 9);
+  (29, 'https://static.wikia.nocookie.net/bloons/images/6/67/ZebraBloon.png', 29);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (29, 29, 1, 9);
 
--- Lead Bloon (Chumbo)
+-- RAINBOW BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (30, 'Lead Bloon',
-   'Bloon de tier 10, pesado e imune a lâminas, apenas projéteis explosivos afetam.',
-   50.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (30, 'Rainbow Bloon', 
+   'O Bloon arco-íris – multi-camadas brilhantes, um verdadeiro arco-íris de desafios!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (30, 'https://static.wikia.nocookie.net/bloonswiki/images/3/3c/Lead_Bloon_BTD6.png', 30);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (10, 30);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (10, 10, 10);
+  (30, 'https://static.wikia.nocookie.net/bloons/images/4/4a/RainbowBloon.png', 30);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (30, 30, 1, 10);
 
--- Ceramic Bloon (Cerâmico)
+-- CERAMIC BLOON
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (31, 'Ceramic Bloon',
-   'Bloon de tier 11, extremamente resistente; ao estourar, libera quatro Lead Bloons.',
-   60.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (31, 'Ceramic Bloon', 
+   'O Bloon cerâmico – camadas após camadas de pura resistência, difícil de estourar!', 
+   500.00, 1000, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (31, 'https://static.wikia.nocookie.net/bloonswiki/images/7/7f/Ceramic_Bloon_BTD6.png', 31);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (11, 31);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (11, 11, 11);
-
--- Camo Bloon
-
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (32, 'Camo Bloon',
-   'Bloon de tier 12, invisível para torres sem detecção e contém um Pink Bloon ao estourar.',
-   70.00, 1000, 1, 2);
-INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (32, 'https://static.wikia.nocookie.net/bloonswiki/images/0/05/Camo_Bloon_BTD6.png', 32);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (12, 32);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (12, 12, 12);
-
--- Regrow Bloon
-
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (33, 'Regrow Bloon',
-   'Bloon de tier 13, regenera camadas com o tempo e contém um Camo Bloon ao estourar.',
-   80.00, 1000, 1, 2);
-INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (33, 'https://static.wikia.nocookie.net/bloonswiki/images/8/8b/Regrow_Bloon_BTD6.png', 33);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (13, 33);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (13, 13, 13);
-
--- Fortified Bloon (Fortificado)
-
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (34, 'Fortified Bloon',
-   'Bloon de tier 14, camada metálica extra resistente que envolve outro bloon principal.',
-   90.00, 1000, 1, 2);
-INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (34, 'https://static.wikia.nocookie.net/bloonswiki/images/9/9e/Fortified_Bloon_BTD6.png', 34);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (14, 34);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (14, 14, 14);
+  (31, 'https://static.wikia.nocookie.net/bloons/images/9/9d/CeramicBloon.png', 31);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (31, 31, 1, 11);
 
 -- MOAB
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (35, 'MOAB',
-   'Mother Of All Bloons, grande bloon de tier 15 com alta durabilidade; ao estourar, libera quatro Ceramic Bloons.',
-   100.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (32, 'MOAB', 
+   'O colosso voador – centenas de tiros para trazê-lo abaixo. Se escapar, prepare-se para o caos!', 
+   1500.00, 100, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (35, 'https://static.wikia.nocookie.net/bloonswiki/images/6/6a/MOAB_BTD6.png', 35);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (15, 35);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (15, 15, 15);
+  (32, 'https://static.wikia.nocookie.net/bloons/images/9/99/BTD6_MOAB.png', 32);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (32, 32, 2, 12);
 
 -- BFB
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (36, 'BFB',
-   'Brutal Flying Behemoth, tier 16, explode em quatro ZOMGs ao ser destruída; muito resistente.',
-   150.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (33, 'BFB', 
+   'O Brutal Flying Behemoth – destruição em massa em forma de dirigível. Segure a linha de defesa!', 
+   1500.00, 100, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (36, 'https://static.wikia.nocookie.net/bloonswiki/images/4/43/BFB_BTD6.png', 36);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (16, 36);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (16, 16, 16);
+  (33, 'https://static.wikia.nocookie.net/bloons/images/2/2b/BTD6_BFB.png', 33);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (33, 33, 2, 13);
 
 -- ZOMG
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (37, 'ZOMG',
-   'Zeppelin Of Mighty Gargantuaness, tier 17, extremamente resistente e grande; explode em quatro DDTs ao ser destruída.',
-   200.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (34, 'ZOMG', 
+   'O Terrível ZOMG – monstrosidade blindada que desafia todos os limites da defesa!', 
+   1500.00, 100, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (37, 'https://static.wikia.nocookie.net/bloonswiki/images/c/c7/ZOMG_BTD6.png', 37);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (17, 37);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (17, 17, 17);
+  (34, 'https://static.wikia.nocookie.net/bloons/images/3/3e/BTD6_ZOMG.png', 34);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (34, 34, 2, 14);
 
--- 18 DDT
+-- DDT
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (38, 'DDT',
-   'Bloon rápido de tier 18, imune a gelo e incendiário; carrega atributos de Black e Camo Bloons.',
-   250.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (35, 'DDT', 
+   'Fast and Stealthy DDT – veloz e quase invisível, um pesadelo furtivo nos céus!', 
+   1500.00, 100, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (38, 'https://static.wikia.nocookie.net/bloonswiki/images/a/ad/DDT_Bloon_BTD6.png', 38);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (18, 38);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (18, 18, 18);
+  (35, 'https://static.wikia.nocookie.net/bloons/images/5/5a/BTD6_DDT.png', 35);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (35, 35, 2, 15);
 
 -- BAD
 
-INSERT INTO tb_products (product_id, name, description, price, quantity, rating, type) VALUES
-  (39, 'BAD',
-   'Big Airship of Doom, tier 19, o inimigo final; extremamente resistente, ao estourar libera BFBs, ZOMGs e muitos outros bloons.',
-   500.00, 1000, 1, 2);
+INSERT INTO tb_products (product_id, name, description, price, quantity, type) VALUES
+  (36, 'BAD', 
+   'The Biggest And Darkest – o ápice da destruição aérea. Apenas os mais poderosos resistem!', 
+   1500.00, 100, 2);
 INSERT INTO tb_products_images (image_id, image_url, product_id) VALUES
-  (39, 'https://static.wikia.nocookie.net/bloonswiki/images/1/13/BAD_Bloon_BTD6.png', 39);
-INSERT INTO tb_bloons (bloon_id, product_id) VALUES
-  (19, 39);
-INSERT INTO tb_bloon_type_relation (relation_id, bloon_id, type_id) VALUES
-  (19, 19, 19);
+  (36, 'https://static.wikia.nocookie.net/bloons/images/8/8d/BTD6_BAD.png', 36);
+INSERT INTO tb_bloons (bloon_id, product_id, type_id, tier) VALUES
+  (36, 36, 2, 16);
+  
+  -- Usuário 1
+INSERT INTO tb_users (email, first_name, last_name, phone_number, address, password, salt_password)
+VALUES ('mario@example.com', 'Mario', 'Verde', '11999999999', 'Rua Cogumelo 1', 'senha1234', '');
+
+-- Usuário 2
+INSERT INTO tb_users (email, first_name, last_name, phone_number, address, password, salt_password)
+VALUES ('luigi@example.com', 'Luigi', 'Verde', '11988888888', 'Rua Cogumelo 2', 'senha5678', '');
+
+-- Usuário 3
+INSERT INTO tb_users (email, first_name, last_name, phone_number, address, password, salt_password)
+VALUES ('peach@example.com', 'Peach', 'Princesa', '11977777777', 'Castelo Real', 'senha91011', '');
+
+-- Carrinho do Mario
+INSERT INTO tb_shopping_cart (cart_id, user_email, finished)
+VALUES (1, 'mario@example.com', FALSE);
+
+-- Carrinho do Luigi
+INSERT INTO tb_shopping_cart (cart_id, user_email, finished)
+VALUES (2, 'luigi@example.com', TRUE);
+
+-- Carrinho da Peach
+INSERT INTO tb_shopping_cart (cart_id, user_email, finished)
+VALUES (3, 'peach@example.com', FALSE);
+
+-- Carrinho do Mario (cart_id = 1)
+INSERT INTO tb_cart_products (product_id, cart_id, quantity)
+VALUES 
+  (5, 1, 2),   -- 2x produto 5
+  (12, 1, 1);  -- 1x produto 12
+
+-- Carrinho do Luigi (cart_id = 2)
+INSERT INTO tb_cart_products (product_id, cart_id, quantity)
+VALUES 
+  (7, 2, 1),   -- 1x produto 7
+  (20, 2, 3);  -- 3x produto 20
+
+-- Carrinho da Peach (cart_id = 3)
+INSERT INTO tb_cart_products (product_id, cart_id, quantity)
+VALUES 
+  (3, 3, 2),   -- 2x produto 3
+  (33, 3, 1);  -- 1x produto 33
+
+-- Comentário do Mario para o produto 5
+INSERT INTO tb_comments (user_email, product_id, message, rating)
+VALUES ('mario@example.com', 5, 'Excelente macaco atirador!', 2);
+
+-- Comentário do Luigi para o produto 7
+INSERT INTO tb_comments (user_email, product_id, message, rating)
+VALUES ('luigi@example.com', 7, 'Bom contra bloons camuflados.', 3);
+
+-- Comentário da Peach para o produto 33
+INSERT INTO tb_comments (user_email, product_id, message, rating)
+VALUES ('peach@example.com', 33, 'Muito fofo e eficaz!', 5);
+
+-- 1) Aponta todas as imagens de produtos do tipo "Macacos" (type = 1)
+UPDATE tb_products_images AS img
+JOIN tb_products AS p
+  ON img.product_id = p.product_id
+SET img.image_url = 'https://imgur.com/a/JJO8lsx'
+WHERE p.type = 1;
+
+-- 2) Aponta todas as imagens de produtos do tipo "Bloons" (type = 2)
+UPDATE tb_products_images AS img
+JOIN tb_products AS p
+  ON img.product_id = p.product_id
+SET img.image_url = 'https://imgur.com/a/lIrsOe3'
+WHERE p.type = 2;

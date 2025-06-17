@@ -21,12 +21,18 @@
     <!-- Material icons google -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
 
+    <!-- Link Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
     <!-- OBSERVAÇÂO: COLOCAR ICONES DO FONT AWESOME PARA PONTO A MAIS !!! -->
     <script src="https://kit.fontawesome.com/91808f6bac.js" crossorigin="anonymous" defer></script>
 
     <!-- CSS Local  -->
     <link rel="stylesheet" href="../static/css/variables.css">
     <link rel="stylesheet" href="../static/css/style-login.css">
+
+    <script src="../static/js/loginScript.js" type="module" defer></script>
+    <script src="../static/js/headerScript.js" type="module" defer></script>
 
     <link rel="shortcut icon" type="imagex/png" href="../static/images/icone.ico">
 </head>
@@ -38,7 +44,7 @@
         <header class="header">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <figure class="header__logo">
                             <img src="../static/images/logo.svg" alt="logo Macacaria">
                         </figure>
@@ -51,36 +57,30 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav d-flex justify-content-around align-items-center">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">Pagina Inicial</a>
+                                <a class="nav-link" aria-current="page" href="/">Pagina Inicial</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Catálogo</a>
+                                <a class="nav-link" href="/catalog">Catálogo</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Macacos</a>
+                            <li class="nav-item nav__li">
+                                <a class="nav-link" href="/catalog?type=1">Macacos</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Bloons</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Melhorias</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Conta</a>
+                            <li class="nav-item nav__li">
+                                <a class="nav-link" href="/catalog?type=2">Bloons</a>
                             </li>
                             <li class="nav-item header__carrinho">
-                                <a href="">
+                                <a href="/cart">
                                     <i class="fa-solid fa-cart-shopping" style="color: var(--banana-snow);"></i>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown header__perfil">
+                            <li class="nav-item dropdown header__perfil nav__li">
                                 <a class=" dropdown" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <i class="fa-solid fa-user" style="color: var(--banana-snow);"></i>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Cadastre-se</a></li>
-                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                <ul class="dropdown-menu" id="user-info">
+                                    <li><a class="dropdown-item" href="/register">Cadastre-se</a></li>
+                                    <li><a class="dropdown-item" href="/login">Login</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -102,7 +102,7 @@
                     <button type="submit" class="forms__btnLogin">Logar</button>
                 </form>
                 <div class="login__cadastro">
-                    <p>Não tem conta? <a href="#">Cadastre-se!</a></p>
+                    <p>Não tem conta? <a href="/register">Cadastre-se!</a></p>
                 </div>
             </div>
         </main>

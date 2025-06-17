@@ -4,7 +4,69 @@ from mysql.connector import Error
 class Carts:
 
     @staticmethod
-    def create(**cart_data):
+    def finish(id):
+        
+        connection_db = Connection.create()
+        cursor = connection_db.cursor()
+
+        try:
+
+            cursor.execute('UPDATE tb_shopping_cart SET tb_shopping_cart.finished = TRUE WHERE tb_shopping_cart.cart_id = %s;', (id, ))
+
+            connection_db.commit()
+
+            return True
+
+        except Error as e:
+
+            print(f'Erro - Cart "finish": {e}')
+            
+            return False
+
+        finally:
+
+            cursor.close()
+            connection_db.close()
+
+    @staticmethod
+    def get_by_user(email):
+        
+        connection_db = Connection.create()
+        cursor = connection_db.cursor(dictionary=True)
+        
+        try:
+            
+            cursor.execute(
+                
+                """
+                SELECT tb_shopping_cart.cart_id AS "id" FROM tb_shopping_cart
+                WHERE tb_shopping_cart.user_email = %s AND tb_shopping_cart.finished = FALSE
+                ORDER BY tb_shopping_cart.cart_id DESC
+                LIMIT 1;
+                """,
+            
+                (email, )
+                
+            )
+            
+            cart_id = cursor.fetchone()
+
+            return cart_id
+            
+        except Error as e:
+            
+            print(f'Erro - Cart "get_cart_user": {e}')
+            
+            return False
+
+        finally:
+
+            cursor.close()
+            connection_db.close()
+            
+
+    @staticmethod
+    def create(email):
 
         # cart_data:
         #
@@ -16,26 +78,13 @@ class Carts:
 
         try:
 
-            cursor.execute('INSERT INTO tb_shopping_cart (user_email) VALUES (%s);', (cart_data.get('user'), ))
+            cursor.execute('SELECT tb_shopping_cart.cart_id FROM tb_shopping_cart WHERE tb_shopping_cart.user_email = %s AND tb_shopping_cart.finished = FALSE LIMIT 1;', (email, ))
+            
+            existing_cart = cursor.fetchone()
+            
+            if existing_cart is None:
 
-            cart_id = cursor.lastrowid
-
-            for product in cart_data.get('products'):
-
-                cursor.execute(
-                    
-                    """
-                    INSERT INTO tb_cart_products (cart_id, product_id, quantity)
-                    VALUES (%s, %s, %s);
-                    """, 
-                    
-                    (
-                        cart_id, 
-                        product.id,
-                        product.quantity
-                    )
-                    
-                )   
+                cursor.execute('INSERT INTO tb_shopping_cart (user_email) VALUES (%s);', (email, ))
 
             connection_db.commit()
 
@@ -66,11 +115,15 @@ class Carts:
                 SELECT 
                     tb_shopping_cart.user_email,
                     GROUP_CONCAT(
-                        CONCAT(
-                            tb_cart_products.cart_product_id, ':',
-                            tb_cart_products.product_id, ':',
-                            tb_products.name, ':',
-                            tb_cart_products.quantity                       
+                        CONCAT_WS(
+                            '#@#',
+                            tb_cart_products.cart_product_id,
+                            tb_cart_products.product_id,
+                            tb_products.name,
+                            tb_cart_products.quantity,
+                            tb_products.description,
+                            tb_products.price,
+                            tb_products_images.image_url 
                         ) SEPARATOR '|'
                     ) AS 'products'
                 FROM tb_shopping_cart
@@ -78,6 +131,13 @@ class Carts:
                     ON tb_shopping_cart.cart_id = tb_cart_products.cart_id
                 INNER JOIN tb_products
                     ON tb_cart_products.product_id = tb_products.product_id
+                INNER JOIN tb_products_images
+                    ON tb_products.product_id = tb_products_images.product_id
+                    AND tb_products_images.image_id = (
+                        SELECT MIN(image_id)
+                        FROM tb_products_images AS img
+                        WHERE img.product_id = tb_products.product_id
+                    )
                 WHERE tb_shopping_cart.cart_id = %s;
                 """,
 
@@ -98,7 +158,7 @@ class Carts:
 
                 }
 
-                keys = ('cart_product_id', 'product_id', 'product', 'quantity')
+                keys = ('cart_product_id', 'product_id', 'name', 'quantity', 'description', 'price', 'image')
 
                 for product in (response['products'].split('|')):
 
@@ -108,11 +168,11 @@ class Carts:
 
                         dict(zip(
                             keys,
-                            tuple(product.split(':'))
+                            tuple(product.split('#@#'))
                         ))
 
                     )
-
+                    
                 return data
 
             else:

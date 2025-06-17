@@ -4,7 +4,7 @@ from mysql.connector import Error
 class Comments:
 
     @staticmethod
-    def create(**comment_data):
+    def create(user_email, product_id, message, rating):
 
         connection_db = Connection.create()
         cursor = connection_db.cursor()
@@ -19,11 +19,11 @@ class Comments:
                 
                 (
 
-                    comment_data.get('user_email'),
-                    comment_data.get('product_id'),
+                    user_email,
+                    product_id,
 
-                    comment_data.get('message'),
-                    comment_data.get('rating')
+                    message,
+                    rating
 
                 ), 
                 
@@ -83,7 +83,30 @@ class Comments:
 
         try:
 
-            cursor.execute('SELECT tb_comments.comment_id, tb_comments.user_email, tb_comments.message, tb_comments.date, tb_comments.rating FROM tb_comments WHERE tb_comments.product_id = %s;', (product_id, ))
+            cursor.execute(
+                
+                """
+                SELECT 
+
+                    tb_comments.comment_id, 
+
+                    CONCAT(tb_users.first_name, ' ', tb_users.last_name) AS "user", 
+
+                    tb_comments.message, 
+                    tb_comments.date, 
+                    tb_comments.rating 
+
+                FROM tb_comments 
+
+                INNER JOIN tb_users
+                    ON tb_comments.user_email = tb_users.email
+
+                WHERE tb_comments.product_id = %s;
+                """, 
+                
+                (product_id, )
+                
+            )
 
             return cursor.fetchall()
 
