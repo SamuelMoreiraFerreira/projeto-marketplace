@@ -18,7 +18,7 @@ async function getProducts () {
 
     // Ordenar Por
 
-    if (selectOrderBy?.value != 0) args.push(`order=${selectOrderBy.value}`);
+    if (selectOrderBy.value != 0) args.push(`order=${selectOrderBy.value}`);
 
     // Filtrar por Categoria
 
@@ -38,6 +38,8 @@ async function getProducts () {
     }
 
     url += args.join('&');
+
+    console.log(url);
 
     const response = await fetchApi(url);
     return response.data;
@@ -108,15 +110,38 @@ async function displaySelectCategorys ()
 async function catalogo ()
 {
 
-    catalogoContainer.innerHTML = '';
-
     const products = await getProducts();
+
+    catalogoContainer.innerHTML = '';
     renderProducts(products, catalogoContainer);
 
 }
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    //#region Filtrar por URL
+
+    const currentUrl = window.location.href;
+    let args = currentUrl.split('?')[1].split('&');
+
+    if (args.length > 0)
+    {       
+        
+        const typeIndex = args.findIndex(arg => arg.startsWith('type='));
+
+        if (typeIndex >= 0)
+        {
+
+            const typeValue = args[typeIndex].charAt(args[typeIndex].length - 1);
+
+            if (['0', '1', '2'].includes(typeValue)) selectProductType.value = typeValue;
+
+        }
+
+    }
+
+    //#endregion
+    
     catalogo();
     displaySelectCategorys();
 

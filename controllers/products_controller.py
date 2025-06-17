@@ -35,7 +35,7 @@ class Products:
                 'tb_products.name,',
                 'tb_products.description,',
 
-                'REPLACE(CAST(tb_products.price AS CHAR), ".", ",") AS "price",',
+                'REPLACE(CAST(tb_products.price AS CHAR), \'.\', \',\') AS "price",',
                 'tb_products.quantity,',
                 'tb_products.rating,',
 
@@ -111,6 +111,8 @@ class Products:
                 base_sql.append('ORDER BY tb_products.product_id ASC;')
 
             #endregion
+
+            print(' '.join(base_sql));
 
             cursor.execute(
 

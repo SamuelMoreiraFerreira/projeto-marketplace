@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Destaques
 
-    const highlights = await fetchApi('/api/products/get-highlights/4');
+    let highlights = await fetchApi('/api/products/get-highlights/4');
+    highlights = highlights.data;
+
     renderProducts(highlights, highlightsContainer);
 
 });
