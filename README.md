@@ -9,7 +9,7 @@
 # :hammer: Funcionalidades do projeto
 - `Funcionalidade 1`: Avaliar os produtos
 - `Funcionalidade 2`: O usuario poderá se cadastrar e fazer login com sua própria conta
-- `Funcionalidade 3`: Adcionar produtos aos carrinhos
+- `Funcionalidade 3`: Adicionar produtos aos carrinhos
 
 # 🔧 Tecnologias e Ferramentas
 
