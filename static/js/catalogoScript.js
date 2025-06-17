@@ -12,20 +12,26 @@ async function getProducts () {
     let url = '/api/products/get-all?';
     let args = []
 
+    // Macaco ou Bloon
+
     if (selectProductType.value != 0) args.push(`type=${selectProductType.value}`);
 
+    // Ordenar Por
+
     if (selectOrderBy?.value != 0) args.push(`order=${selectOrderBy.value}`);
+
+    // Filtrar por Categoria
 
     if (selectCategorias.value != 0)
     {
 
         const filterCategory = selectCategorias.value.split('-');
 
-        // Macacos
+        // Categorias Macacos
 
         if (filterCategory[0] == '1') args.push(`class_id=${filterCategory[1]}`);
 
-        // Bloons
+        // Categorias Bloons
 
         else if (filterCategory[0] == '2') args.push(`bloon_type_id=${filterCategory[1]}`);
 
