@@ -19,4 +19,6 @@
 **Bastan entrar no site: https://macacaria.onrender.com**
 
 # Autores
-| [<img loading="lazy" width=115><br><sub>Vitor Henrique Fonseca</sub>](https://github.com/vitor-henri) |  
+| [<img loading="lazy" width=115><sub>Vitor Henrique Fonseca</sub>](https://github.com/vitor-henri) |  
+| [<img loading="lazy" width=115><sub>Vitor Henrique Fonseca</sub>](https://github.com/SamuelMoreiraFerreira) |  
+| [<img loading="lazy" width=115><sub>Vitor Henrique Fonseca</sub>](https://github.com/LuconhaOliveira) |  
