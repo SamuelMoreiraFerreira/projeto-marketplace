@@ -88,7 +88,7 @@ async function renderCart() {
         else {
             Swal.fire({
                 title: "Erro",
-                text: "O carro não contém nenhum item",
+                text: "O carrinho não contém nenhum item",
                 icon: "sucess",
                 interval: 1000
             })
