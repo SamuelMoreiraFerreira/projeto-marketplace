@@ -41,7 +41,8 @@ class Carts:
                 """
                 SELECT tb_shopping_cart.cart_id AS "id" FROM tb_shopping_cart
                 WHERE tb_shopping_cart.user_email = %s AND tb_shopping_cart.finished = FALSE
-                ORDER BY tb_shopping_cart.cart_id DESC;
+                ORDER BY tb_shopping_cart.cart_id DESC
+                LIMIT 1;
                 """,
             
                 (email, )
@@ -50,8 +51,6 @@ class Carts:
             
             cart_id = cursor.fetchone()
 
-            print(cart_id)
-            
             return cart_id
             
         except Error as e:
@@ -79,28 +78,13 @@ class Carts:
 
         try:
 
-            print(email)
+            cursor.execute('SELECT tb_shopping_cart.cart_id FROM tb_shopping_cart WHERE tb_shopping_cart.user_email = %s AND tb_shopping_cart.finished = FALSE LIMIT 1;', (email, ))
+            
+            existing_cart = cursor.fetchone()
+            
+            if existing_cart is None:
 
-            cursor.execute('INSERT INTO tb_shopping_cart (user_email) VALUES (%s);', (email, ))
-
-            # cart_id = cursor.lastrowid
-
-            # for product in cart_data.get('products'):
-
-            #     cursor.execute(
-                    
-            #         """
-            #         INSERT INTO tb_cart_products (cart_id, product_id, quantity)
-            #         VALUES (%s, %s, %s);
-            #         """, 
-                    
-            #         (
-            #             cart_id, 
-            #             product.id,
-            #             product.quantity
-            #         )
-                    
-            #     )   
+                cursor.execute('INSERT INTO tb_shopping_cart (user_email) VALUES (%s);', (email, ))
 
             connection_db.commit()
 

@@ -4,7 +4,7 @@ from mysql.connector import Error
 class Comments:
 
     @staticmethod
-    def create(**comment_data):
+    def create(user_email, product_id, message, rating):
 
         connection_db = Connection.create()
         cursor = connection_db.cursor()
@@ -19,11 +19,11 @@ class Comments:
                 
                 (
 
-                    comment_data.get('user_email'),
-                    comment_data.get('product_id'),
+                    user_email,
+                    product_id,
 
-                    comment_data.get('message'),
-                    comment_data.get('rating')
+                    message,
+                    rating
 
                 ), 
                 

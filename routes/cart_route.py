@@ -38,14 +38,22 @@ def cart_get_by_user():
     if 'user' in session:
         
         cart_id = Carts.get_by_user(session['user']['email'])
-        
-        if hasattr(cart_id, 'id'):
+
+        if cart_id:
 
             return Routes.default_response(200, { 'cart_id': cart_id['id'] })
         
         else:
 
-            return cart_create()
+            if Carts.create(session['user']['email']):
+                
+                return cart_get_by_user()
+            
+            else:
+                
+                print('VTMNC')
+                
+                return Routes.default_response(500)
     
     else:
         

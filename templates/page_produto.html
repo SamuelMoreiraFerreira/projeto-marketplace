@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="../static/css/style-produto.css">
 
     <script src="../static/js/headerScript.js" type="module" defer></script>
+    <script src="/static/js/scriptProduto.js" type="module" defer></script>
 
     <link rel="shortcut icon" type="imagex/png" href="../static/images/icone.ico">
 </head>
@@ -146,7 +147,7 @@
                 <hr class="hr" />
                 <form action="" class="comments__user-comment">
                     <textarea 
-                        name="user-comment__comment" 
+                        name="message" 
                         cols="50" rows="2"
                         placeholder="Digite seu comentário..." 
                         class="user-comment__comment"
@@ -191,6 +192,7 @@
                         <h4 class="item__name">{{ comment.user }}</h4>
                         <p class="item__comment">{{ comment.message }}</p>
                         <figure class="item__stars">
+
                         {% for i in range(5) %}
 
                         {% if i < comment.rating %}
@@ -216,8 +218,6 @@
         </footer>
     </section>
 
-    <!-- javascript local -->
-    <script src="/static/js/scriptProduto.js" type="module"></script>
 </body>
 
 </html>

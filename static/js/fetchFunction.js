@@ -16,7 +16,7 @@ async function fetchApi(url, data={})
     catch (e)
     {
 
-        console.log(`Erro - Fetch API "${url}"`);
+        console.log(`Erro - Fetch API "${url}": ${e}`);
         return false;
 
     }

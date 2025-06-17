@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS tb_bloons (
 
 CREATE TABLE IF NOT EXISTS tb_shopping_cart (
 
-    cart_id INT NOT NULL PRIMARY KEY,
+    cart_id INT AUTO_INCREMENT PRIMARY KEY,
 
     user_email VARCHAR(255) NOT NULL,
     finished BOOL NOT NULL DEFAULT FALSE,

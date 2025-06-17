@@ -2,7 +2,7 @@
 
 const starsInput = document.querySelectorAll('.radio__inputs input');
 const starsLabel = document.querySelectorAll('.radio__inputs img');
-const rating = 0;
+let rating = 0;
 
 document.addEventListener('DOMContentLoaded',()=>{
     starsInput.forEach((element,index)=>{
@@ -33,7 +33,7 @@ const increaseQuantity = ()=> {
 
 const markStar = (index)=> {
 
-    console.log(index);
+    rating = index;
 
     starsLabel.forEach(label=>label.src='/static/images/empity_star.svg');
 
@@ -51,44 +51,92 @@ import { fetchApi } from './fetchFunction.js';
 const purchaseButton = document.querySelector('.product__button');
 const quantity = document.getElementById('productQuantity');
 
-document.addEventListener('DOMContentLoaded', function () {
+const commentButton = document.querySelector('.user-comment__button');
+const messageInput = document.querySelector('.user-comment__comment');
 
-    purchaseButton.addEventListener('click', async function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
-        const response = await fetchApi('/api/users/logged');
+    const response = (await fetchApi('/api/users/logged')).data;
+    
+    console.log(response);
 
-        if (response?.data?.is_logged == true)
+    if (!response?.is_logged)
+    {
+        commentButton.setAttribute('disabled', ''); 
+    }
+
+    commentButton.addEventListener('click', async function (event) {
+        
+        event.preventDefault();
+
+        const url = window.location.pathname.split('/');
+        const productID = url[url.length - 1];
+
+        const comment = await fetchApi(`/api/comments/create/${productID}`, {
+
+            method: 'POST',
+
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+
+                message: messageInput.value,
+                rating: (rating + 1),
+                user_email: response.user_data.email
+
+            })
+
+        });
+
+        console.log(comment)
+
+        if (comment.status_code == 200)
         {
-
-            const url = window.location.pathname.split('/');
-
-            const cart = await fetchApi(`/api/carts/get-by-user`);
-
-            const added = await fetchApi(`/api/carts/add-item/${cart.data.cart_id}?product_id=${url[url.length - 1]}&quantity=${quantity.value}`);
-
-            if (added.status_code == 200)
-            {
-
-                console.log('FUNCIONOU PORRA');
-
-                // SWEET ALERT DE CONFIRMAÇÃO
-            }
-
-            else
-            {
-
-                console.log('ALGUMA COISA DEU ERRADO');
-
-                // SWAL ERRO
-            }
-
+            window.location.reload();
         }
 
         else
         {
-            location.href = '/login';
+            // SWAL DE ERRO
         }
 
     });
+
+    purchaseButton.addEventListener('click', async function () {
+
+        if (!response?.is_logged)
+        {
+            location.href = '/login';
+        }
+
+        console.log('TO AQUI');
+
+        const cart = await fetchApi(`/api/carts/get-by-user`);
+
+        console.log(cart);
+
+        const added = await fetchApi(`/api/carts/add-item/${cart.data.cart_id}?product_id=${productID}&quantity=${quantity.value}`);
+
+        if (added.status_code == 200)
+        {
+
+            console.log('FUNCIONOU PORRA');
+
+            // SWEET ALERT DE CONFIRMAÇÃO
+        }
+
+        else
+        {
+
+            console.log('ALGUMA COISA DEU ERRADO');
+
+            // SWAL ERRO
+        }
+
+    });
+
+    
 
 });
