@@ -1,23 +1,23 @@
 import { fetchApi } from './fetchFunction.js';
 
-const formLogin = document.querySelector('.login__forms');
+const registerForm = document.querySelector('.cadastro__form');
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    formLogin.addEventListener('submit', async function (event) {
+    registerForm.addEventListener('submit', async function (event) {
 
         event.preventDefault();
 
         const formData = new FormData(this);
 
-        let validate = await fetchApi('/api/users/validate', {
+        let register = await fetchApi('/api/users/create', {
 
             method: 'POST',
             body: formData
 
         });
 
-        if (validate.status_code == 200)
+        if (register.status_code == 200)
         {
 
             const data = Object.fromEntries(formData.entries());
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log('oi');
 
-            // Sweet Alert de Email ou Senha Errados
+            // Sweet Alert de Erro SLA
 
         }
 

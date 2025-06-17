@@ -1,9 +1,20 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, session
 from controllers.user_controller import User
 from controllers.routes_controller import Routes
 
 blueprint = Blueprint('user_route', __name__)
 prefix = '/api/users'
+
+@blueprint.route('/logged')
+def user_logged():
+    
+    if 'user' in session:
+        
+        return Routes.default_response(200, { 'is_logged': True, 'user_data': session['user'] })
+    
+    else:
+        
+        return Routes.default_response(200, { 'is_logged': False })
 
 @blueprint.route('/validate/', methods=['POST'])
 def user_validate():
@@ -42,23 +53,22 @@ def user_delete(email):
 def user_create():
 
     email = request.form.get('email')
-    password = request.form.get('password')
+    password = request.form.get('senha')
 
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
+    name = (request.form.get('nome') or []).split(' ')
 
-    phone_number = request.form.get('phone_number')
-    address = request.form.get('address')
+    phone_number = request.form.get('telefone')
+    address = request.form.get('endereco')
 
     # Sucesso - Usuário Criado
 
-    if User.create({
+    if len(name) >= 2 and User.create(
 
         email, password, 
-        first_name, last_name, 
+        name[0], ' '.join(name[1:]), 
         phone_number, address
 
-    }):
+    ):
 
         return Routes.default_response(200)
     

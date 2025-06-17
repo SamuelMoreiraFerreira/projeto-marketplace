@@ -32,7 +32,13 @@ def register_page():
 @blueprint.route('/login')
 def login_page():
 
-    return render_template('page_login.html')
+    user_data = None
+
+    if 'user' in session:
+        
+        user_data = session['user']
+
+    return render_template('page_login.html', user_data=user_data)
 
 @blueprint.route('/cart')
 def cart_page():

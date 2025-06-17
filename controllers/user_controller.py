@@ -39,7 +39,7 @@ class User:
     # '**' -> Indica para a função a presença de argumentos nomeados extras (Argumentos que você especifica o nome do parâmetro junto com seu valor)
 
     @staticmethod
-    def create(**user_data):
+    def create(email, password, first_name, last_name, phone_number, address):
 
         connection_db = Connection.create()
         cursor = connection_db.cursor()
@@ -54,12 +54,12 @@ class User:
                 
                 (
 
-                    user_data.get('email'),
-                    user_data.get('first_name'),
-                    user_data.get('last_name'),
-                    user_data.get('phone_number', None),
-                    user_data.get('address'),
-                    user_data.get('password')
+                    email,
+                    first_name,
+                    last_name,
+                    phone_number or None,
+                    address,
+                    password
 
                 ), 
                 

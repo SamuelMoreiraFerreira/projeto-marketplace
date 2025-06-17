@@ -6,11 +6,36 @@ function renderProducts(productsArr, productsContainer)
         const productCard = document.createElement('div');
         productCard.classList.add('catalogo__card')
 
-        // Image
+        // Carrosel
 
-        const image = document.createElement('img');
-        image.setAttribute('src', product.images[0]);
-        productCard.appendChild(image);
+        const carousel = document.createElement('div');
+        carousel.className = 'carousel slide';
+        carousel.setAttribute('data-bs-ride', 'carousel');
+
+        const inner = document.createElement('div');
+        inner.className = 'carousel-inner';
+
+        product.images.forEach((image, index) => {
+
+            const carouselItem = document.createElement('div');
+            carouselItem.className = 'carousel-item';
+
+            if (index == 0)
+            {
+                carouselItem.classList.add('active');
+            }
+
+            const img = document.createElement('img');
+            img.className = 'd-block w-100';
+            img.setAttribute('src', image);
+
+            carouselItem.appendChild(img);
+            inner.appendChild(carouselItem);
+
+        });
+
+        carousel.appendChild(inner);
+        productCard.appendChild(carousel);
 
         const infoContainer = document.createElement('div');
         infoContainer.classList.add('catalogo__info');

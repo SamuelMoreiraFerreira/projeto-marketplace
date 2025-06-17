@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="../static/css/style-login.css">
 
     <script src="../static/js/loginScript.js" type="module" defer></script>
+    <script src="../static/js/headerScript.js" type="module" defer></script>
 
     <link rel="shortcut icon" type="imagex/png" href="../static/images/icone.ico">
 </head>
@@ -81,8 +82,13 @@
                                     <i class="fa-solid fa-user" style="color: var(--banana-snow);"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Cadastre-se</a></li>
-                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                    {% if user_data %}
+                                        <span>{{ user_data.first_name + " " + user_data.last_name }}</span>
+                                        <button id="btn-logout">Sair</button>
+                                    {% else %}
+                                        <li><a class="dropdown-item" href="#">Cadastre-se</a></li>
+                                        <li><a class="dropdown-item" href="#">Login</a></li>
+                                    {% endif %}
                                 </ul>
                             </li>
                         </ul>

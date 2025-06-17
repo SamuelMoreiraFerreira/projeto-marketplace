@@ -8,7 +8,13 @@ prefix = '/api/carts'
 @blueprint.route('/create/')
 def cart_create():
 
-    pass
+    if Carts.create(session['user']['email']):
+        
+        return Routes.default_response(200)
+    
+    else:
+        
+        return Routes.default_response(500)
 
 # /add-item/<cart_id>?product_id=<product_id>&quantity=<quantity>
 
@@ -31,7 +37,7 @@ def cart_get_by_user():
     
     if 'user' in session:
         
-        cart_id = Carts.get_by_user(session['user']['email'])
+        cart_id = Carts.get_by_user(session['user']['email'])['id']
         
         if cart_id:
 
@@ -53,7 +59,7 @@ def cart_get(cart_id):
 
     if data:
 
-        return Routes.default_response(200, { 'data': data })
+        return Routes.default_response(200, data)
     
     else:
 
@@ -64,6 +70,17 @@ def cart_delete(cart_id):
 
     if Carts.delete(cart_id):
 
+        return Routes.default_response(200)
+
+    else:
+
+        return Routes.default_response(500)
+    
+@blueprint.route('/finish/<cart_id>')
+def cart_finish(cart_id):
+    
+    if Carts.finish(cart_id):
+        
         return Routes.default_response(200)
 
     else:

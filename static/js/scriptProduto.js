@@ -1,3 +1,5 @@
+//#region Stars
+
 const starsInput = document.querySelectorAll('.radio__inputs input');
 const starsLabel = document.querySelectorAll('.radio__inputs img');
 const rating = 0;
@@ -41,3 +43,45 @@ const markStar = (index)=> {
     }
 
 };
+
+//#endregion
+
+import { fetchApi } from './fetchFunction.js';
+
+const purchaseButton = document.querySelector('.product__button');
+const quantity = document.getElementById('productQuantity');
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    purchaseButton.addEventListener('click', async function () {
+
+        const response = await fetchApi('/api/users/logged');
+
+        if (response?.data?.is_logged == true)
+        {
+
+            const url = window.location.href.split('/');
+
+            const cart = await fetchApi(`/api/carts/get-by-user`);
+            const added = await fetchApi(`/api/carts/add-item/${cart}?product_id=${url[url.length - 1]}&quantity=${quantity.value}`);
+
+            if (added.status_code == 200)
+            {
+                // SWEET ALERT DE CONFIRMAÇÃO
+            }
+
+            else
+            {
+                // SWAL ERRO
+            }
+
+        }
+
+        else
+        {
+            location.href = '/login';
+        }
+
+    });
+
+});
