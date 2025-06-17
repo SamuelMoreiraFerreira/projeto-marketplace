@@ -79,6 +79,8 @@ class Carts:
 
         try:
 
+            print(email)
+
             cursor.execute('INSERT INTO tb_shopping_cart (user_email) VALUES (%s);', (email, ))
 
             # cart_id = cursor.lastrowid

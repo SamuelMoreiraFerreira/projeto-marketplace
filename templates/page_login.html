@@ -81,14 +81,9 @@
                                     aria-expanded="false">
                                     <i class="fa-solid fa-user" style="color: var(--banana-snow);"></i>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    {% if user_data %}
-                                        <span>{{ user_data.first_name + " " + user_data.last_name }}</span>
-                                        <button id="btn-logout">Sair</button>
-                                    {% else %}
-                                        <li><a class="dropdown-item" href="#">Cadastre-se</a></li>
-                                        <li><a class="dropdown-item" href="#">Login</a></li>
-                                    {% endif %}
+                                <ul class="dropdown-menu" id="user-info">
+                                    <li><a class="dropdown-item" href="#">Cadastre-se</a></li>
+                                    <li><a class="dropdown-item" href="#">Login</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -1,15 +1,36 @@
 import { fetchApi } from './fetchFunction.js';
 
-const btnLogout = document.getElementById('btn-logout');
+const userinfoContainer = document.getElementById('user-info');
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
-    btnLogout.addEventListener('click', async function () {
+    const response = (await fetchApi('/api/users/logged')).data;
+
+    if (response?.is_logged)
+    {
+
+        userinfoContainer.innerHTML = '';
+
+        const user_data = response.user_data;
+
+        const username = document.createElement('span');
+        username.textContent = user_data.first_name + ' ' + user_data.last_name;
         
-        const logout = await fetchApi('/api/users/logout');
+        const btnLogout = document.createElement('button');
+        btnLogout.setAttribute('id', 'btn-logout');
+        btnLogout.textContent = 'Sair';
 
-        if (logout) location.reload();
+        btnLogout.addEventListener('click', async function () {
+        
+            const logout = await fetchApi('/api/users/logout');
+    
+            if (logout) location.reload();
+    
+        });
 
-    });
+        userinfoContainer.appendChild(username);
+        userinfoContainer.appendChild(btnLogout);
+
+    }
 
 });

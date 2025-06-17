@@ -76,7 +76,7 @@ async function renderCart ()
 
             });
 
-            valorTotal.textContent = `${cart.products.reduce((sum, product) => sum + product.price, 0)} Bananas`;
+            valorTotal.textContent = `${cart.products.reduce((sum, product) => sum + parseFloat(product.price) * product.quantity, 0)} Bananas`;
 
             finalizarCompra.addEventListener('click', async function () {
 

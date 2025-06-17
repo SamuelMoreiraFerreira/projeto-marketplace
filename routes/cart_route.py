@@ -37,15 +37,15 @@ def cart_get_by_user():
     
     if 'user' in session:
         
-        cart_id = Carts.get_by_user(session['user']['email'])['id']
+        cart_id = Carts.get_by_user(session['user']['email'])
         
-        if cart_id:
+        if hasattr(cart_id, 'id'):
 
-            return Routes.default_response(200, { 'cart_id': cart_id })
+            return Routes.default_response(200, { 'cart_id': cart_id['id'] })
         
         else:
 
-            return Routes.default_response(500)
+            return cart_create()
     
     else:
         

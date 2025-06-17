@@ -281,7 +281,7 @@ BEGIN
   ELSE
 
     INSERT INTO tb_cart_products (cart_id, product_id, quantity)
-    VALUES (p_cart_id, product_id, quantity);
+    VALUES (p_cart_id, p_product_id, p_quantity);
 
   END IF;
 

@@ -60,18 +60,25 @@ document.addEventListener('DOMContentLoaded', function () {
         if (response?.data?.is_logged == true)
         {
 
-            const url = window.location.href.split('/');
+            const url = window.location.pathname.split('/');
 
             const cart = await fetchApi(`/api/carts/get-by-user`);
-            const added = await fetchApi(`/api/carts/add-item/${cart}?product_id=${url[url.length - 1]}&quantity=${quantity.value}`);
+
+            const added = await fetchApi(`/api/carts/add-item/${cart.data.cart_id}?product_id=${url[url.length - 1]}&quantity=${quantity.value}`);
 
             if (added.status_code == 200)
             {
+
+                console.log('FUNCIONOU PORRA');
+
                 // SWEET ALERT DE CONFIRMAÇÃO
             }
 
             else
             {
+
+                console.log('ALGUMA COISA DEU ERRADO');
+
                 // SWAL ERRO
             }
 
