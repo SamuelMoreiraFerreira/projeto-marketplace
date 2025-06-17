@@ -47,10 +47,8 @@ class Product:
 
                 LEFT JOIN tb_bloons 
                     ON tb_products.product_id = tb_bloons.product_id
-                LEFT JOIN tb_bloon_type_relation 
-                    ON tb_bloons.bloon_id = tb_bloon_type_relation.bloon_id
                 LEFT JOIN tb_bloons_types 
-                    ON tb_bloon_type_relation.type_id = tb_bloons_types.type_id
+                    ON tb_bloons.type_id = tb_bloons_types.type_id
 
                 LEFT JOIN tb_products_images 
                     ON tb_products.product_id = tb_products_images.product_id

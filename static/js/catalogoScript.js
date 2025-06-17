@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', function () {
     //#region Filtrar por URL
 
     const currentUrl = window.location.href;
-    let args = currentUrl.split('?')[1].split('&');
+    let args = currentUrl.split('?')[1]?.split('&');
 
-    if (args.length > 0)
+    if (args && args.length > 0)
     {       
         
         const typeIndex = args.findIndex(arg => arg.startsWith('type='));
