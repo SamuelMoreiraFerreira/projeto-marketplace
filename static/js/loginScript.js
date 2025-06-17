@@ -17,41 +17,46 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
 
-        if (validate.status_code == 200)
-        {
+        if (validate.status_code == 200) {
 
             const data = Object.fromEntries(formData.entries());
 
             let login = await fetchApi(`/api/users/login/${data.email}`);
 
-            if (login.status_code == 200)
-            {
+            if (login.status_code == 200) {
 
-                console.log('deu certo');
+                Swal.fire({
+                    title: "Você logou!",
+                    icon: "sucess",
+                    interval: 3000
+                })
 
                 location.reload();
 
-                // Sweet Alert de Confirmação
+                Swal.fire()
 
             }
 
-            else
-            {
+            else {
 
-                console.log('deu errado');
+                Swal.fire({
+                    title: "Erro ao tentar fazer login tente novamente!",
+                    icon: "error",
+                    interval: 4000
+                })
 
-                // Sweet Alert de Erro
-
-            }   
+            }
 
         }
 
-        else
-        {
+        else {
 
-            console.log('oi');
-
-            // Sweet Alert de Email ou Senha Errados
+            Swal.fire({
+                title: "Erro!",
+                text: "Email ou senha incorreto",
+                icon: "warning",
+                interval: 6000
+            })
 
         }
 
