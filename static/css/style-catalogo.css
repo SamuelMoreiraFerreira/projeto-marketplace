@@ -91,6 +91,15 @@
   margin-top: 12vh;
 }
 
+.catalogo__produtos {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(4, 200px);
+  gap: 10rem;
+  margin-bottom: 20px;
+}
+
 .catalogo__filtros {
   display: flex;
   width: 40%;
