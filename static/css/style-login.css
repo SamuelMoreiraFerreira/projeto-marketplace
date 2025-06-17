@@ -19,7 +19,6 @@
 
 .header{
     width: 100%;
-    height: 12%;
 }
 
 .navbar{
@@ -98,8 +97,13 @@
     height: 100%;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
+
+}
+
+.teste{
+    width: 400px;
 }
 
 .forms__email, .forms__senha{
@@ -118,22 +122,21 @@
     border: none;
     cursor: pointer;
 
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .forms{
     width: 362px;
     height: 40px;
     
-    background-color: var(--banana-snow);
+    background-color: var(--banana-snow) !important;
     
 }
 
 .login__cadastro {
-    margin-top: 20px;
     font-weight: bold;
 
-    font-size: 16px;
+    font-size: 1.8rem;
 }
 
 
@@ -158,4 +161,34 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.header__nav.show .nav__li{
+    align-self: end;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--banana-yellow);
+}
+
+.header__nav.show .header__perfil{
+    background-color: var(--bloon-red);
+}
+
+@media screen and (max-width: 576px) {
+
+    .header__logo img {
+        width: 80px;
+        height: 60px;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1024px) {
+
+    .header__logo img {
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 60px;
+    }
 }

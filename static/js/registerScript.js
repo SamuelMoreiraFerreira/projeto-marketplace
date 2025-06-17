@@ -17,41 +17,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
 
-        if (register.status_code == 200)
-        {
+        if (register.status_code == 200) {
 
             const data = Object.fromEntries(formData.entries());
 
             let login = await fetchApi(`/api/users/login/${data.email}`);
 
-            if (login.status_code == 200)
-            {
+            if (login.status_code == 200) {
 
-                console.log('deu certo');
+
 
                 location.reload();
 
-                // Sweet Alert de Confirmação
+                Swal.fire({
+                    title: "Sucesso!",
+                    icon: "sucess",
+                    interval: 2000
+                })
 
             }
 
-            else
-            {
+            else {
 
-                console.log('deu errado');
+                Swal.fire({
+                    title: "Erro!",
+                    icon: "error",
+                    interval: 2000
+                })
 
-                // Sweet Alert de Erro
-
-            }   
+            }
 
         }
 
-        else
-        {
+        else {
 
-            console.log('oi');
-
-            // Sweet Alert de Erro SLA
+            Swal.fire({
+                title: "Erro!",
+                icon: "error",
+                interval: 2000
+            })
 
         }
 

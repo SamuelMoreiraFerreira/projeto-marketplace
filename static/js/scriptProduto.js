@@ -4,41 +4,40 @@ const starsInput = document.querySelectorAll('.radio__inputs input');
 const starsLabel = document.querySelectorAll('.radio__inputs img');
 let rating = 0;
 
-document.addEventListener('DOMContentLoaded',()=>{
-    starsInput.forEach((element,index)=>{
-        element.addEventListener('click', ()=>markStar(index));
+document.addEventListener('DOMContentLoaded', () => {
+    starsInput.forEach((element, index) => {
+        element.addEventListener('click', () => markStar(index));
     });
-    document.querySelector('.quantity__button--decrease').addEventListener('click',decreaseQuantity);
-    document.querySelector('.quantity__button--increase').addEventListener('click',increaseQuantity);
+    document.querySelector('.quantity__button--decrease').addEventListener('click', decreaseQuantity);
+    document.querySelector('.quantity__button--increase').addEventListener('click', increaseQuantity);
 });
 
-const decreaseQuantity = ()=> {
-
-    const inputElem = document.querySelector('#productQuantity');
-    let value = parseInt(inputElem.value);
-    
-    if (value > 1)inputElem.value = value - 1;
-
-};
-
-const increaseQuantity = ()=> {
+const decreaseQuantity = () => {
 
     const inputElem = document.querySelector('#productQuantity');
     let value = parseInt(inputElem.value);
 
-    if (value >= 1) inputElem.value = value+1;
+    if (value > 1) inputElem.value = value - 1;
+
+};
+
+const increaseQuantity = () => {
+
+    const inputElem = document.querySelector('#productQuantity');
+    let value = parseInt(inputElem.value);
+
+    if (value >= 1) inputElem.value = value + 1;
 
 };
 
 
-const markStar = (index)=> {
+const markStar = (index) => {
 
     rating = index;
 
-    starsLabel.forEach(label=>label.src='/static/images/empity_star.svg');
+    starsLabel.forEach(label => label.src = '/static/images/empity_star.svg');
 
-    for (let i = 0; i <= index; i++)
-    {
+    for (let i = 0; i <= index; i++) {
         starsLabel[i].src = '/static/images/full_star.svg';
     }
 
@@ -57,15 +56,8 @@ const messageInput = document.querySelector('.user-comment__comment');
 document.addEventListener('DOMContentLoaded', async function () {
 
     const response = (await fetchApi('/api/users/logged')).data;
-    
-    console.log(response);
 
-    if (!response?.is_logged)
-    {
-        commentButton.setAttribute('disabled', ''); 
-    }
-
-    commentButton.addEventListener('click', async function (event) {
+        commentButton.addEventListener('click', async function (event) {
         
         event.preventDefault();
 
@@ -99,7 +91,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         else
         {
-            // SWAL DE ERRO
+            Swal.fire({
+                title: "Erro!",
+                icon: "error",
+                timer: 2000
+            });
         }
 
     });
@@ -121,22 +117,22 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         if (added.status_code == 200)
         {
-
-            console.log('FUNCIONOU PORRA');
-
-            // SWEET ALERT DE CONFIRMAÇÃO
+            Swal.fire({
+                title: "Sucesso!",
+                icon: "sucess",
+                timer: 2000
+            });
         }
 
         else
         {
-
-            console.log('ALGUMA COISA DEU ERRADO');
-
-            // SWAL ERRO
+            Swal.fire({
+                title: "Erro!",
+                icon: "error",
+                timer: 2000
+            });
         }
 
     });
-
-    
 
 });

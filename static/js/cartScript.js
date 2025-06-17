@@ -4,19 +4,16 @@ const itemsCart = document.querySelector('.cart__items');
 const valorTotal = document.getElementById('totalValor');
 const finalizarCompra = document.getElementById('cart__btn');
 
-async function renderCart ()
-{
+async function renderCart() {
 
     const response = await fetchApi('/api/carts/get-by-user');
 
-    if (response.status_code == 200)
-    {
+    if (response.status_code == 200) {
 
         const cartID = response.data.cart_id;
         let cart = await fetchApi(`/api/carts/get/${cartID}`);
 
-        if (cart.status_code == 200)
-        {
+        if (cart.status_code == 200) {
 
             cart = cart.data;
 
@@ -63,7 +60,7 @@ async function renderCart ()
                 removeBtn.addEventListener('click', async function () {
 
                     await fetchApi(`/api/carts/delete-product/${cartID}/${product.cart_product_id}`);
-                    
+
                     location.reload();
 
                 });
@@ -88,19 +85,19 @@ async function renderCart ()
 
         }
 
-        else
-        {
-
-            console.log('SEM ITEM NO CARRINHO');
-
-            // Sweet Alert SEM ITEM NO CARRINHO 
+        else {
+            Swal.fire({
+                title: "Erro",
+                text: "O carrinho não contém nenhum item",
+                icon: "sucess",
+                interval: 1000
+            })
 
         }
 
     }
 
-    else
-    {
+    else {
         location.href = '/login';
     }
 

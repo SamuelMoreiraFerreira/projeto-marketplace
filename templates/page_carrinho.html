@@ -21,6 +21,9 @@
     <!-- Material icons google -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
 
+    <!-- Link Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
     <!-- OBSERVAÇÂO: COLOCAR ICONES DO FONT AWESOME PARA PONTO A MAIS !!! -->
     <script src="https://kit.fontawesome.com/91808f6bac.js" crossorigin="anonymous" defer></script>
 
@@ -40,7 +43,7 @@
         <header class="header">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <figure class="header__logo">
                             <img src="../static/images/logo.svg" alt="logo Macacaria">
                         </figure>
@@ -53,36 +56,30 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav d-flex justify-content-around align-items-center">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">Pagina Inicial</a>
+                                <a class="nav-link" aria-current="page" href="/">Pagina Inicial</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Catálogo</a>
+                                <a class="nav-link" href="/catalog">Catálogo</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Macacos</a>
+                            <li class="nav-item nav__li">
+                                <a class="nav-link" href="/catalog?type=1">Macacos</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Bloons</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Melhorias</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Conta</a>
+                            <li class="nav-item nav__li">
+                                <a class="nav-link" href="/catalog?type=2">Bloons</a>
                             </li>
                             <li class="nav-item header__carrinho">
-                                <a href="">
+                                <a href="/cart">
                                     <i class="fa-solid fa-cart-shopping" style="color: var(--banana-snow);"></i>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown header__perfil">
+                            <li class="nav-item dropdown header__perfil nav__li">
                                 <a class=" dropdown" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <i class="fa-solid fa-user" style="color: var(--banana-snow);"></i>
                                 </a>
                                 <ul class="dropdown-menu" id="user-info">
-                                    <li><a class="dropdown-item" href="#">Cadastre-se</a></li>
-                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                    <li><a class="dropdown-item" href="/register">Cadastre-se</a></li>
+                                    <li><a class="dropdown-item" href="/login">Login</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -97,26 +94,74 @@
 
                 <!-- Lista de produtos -->
                 <section class="cart__items col-12 col-lg-8">
+                    <article class="cart__item d-flex align-items-center p-3 mb-3 bg-warning rounded">
+                        <img src="../static/images/aaa.png" alt="Imagem do Macaco" class="cart__item-image me-3"
+                            style="width: 80px; height: auto;">
+                        <div class="cart__item-info flex-grow-1">
+                            <h2 class="cart__item-title"></h2>
+                            <p class="cart__item-description mb-1"></p>
+                        </div>
+                        <div class="cart__item-price text-end">
+                            <p class="fw-bold mb-2">Valor: <span class="text-dark"></span></p>
+                            <button class="cart__item-remove btn btn-danger btn-sm"></button>
+                        </div>
+                    </article>
+                    <article class="cart__item d-flex align-items-center p-3 mb-3 bg-warning rounded">
+                        <img src="../static/images/aaa.png" alt="Imagem do Macaco" class="cart__item-image me-3"
+                            style="width: 80px; height: auto;">
+                        <div class="cart__item-info flex-grow-1">
+                            <h2 class="cart__item-title"></h2>
+                            <p class="cart__item-description mb-1"></p>
+                        </div>
+                        <div class="cart__item-price text-end">
+                            <p class="fw-bold mb-2">Valor: <span class="text-dark"></span></p>
+                            <button class="cart__item-remove btn btn-danger btn-sm"></button>
+                        </div>
+                    </article>
+                    <article class="cart__item d-flex align-items-center p-3 mb-3 bg-warning rounded">
+                        <img src="../static/images/aaa.png" alt="Imagem do Macaco" class="cart__item-image me-3"
+                            style="width: 80px; height: auto;">
+                        <div class="cart__item-info flex-grow-1">
+                            <h2 class="cart__item-title"></h2>
+                            <p class="cart__item-description mb-1"></p>
+                        </div>
+                        <div class="cart__item-price text-end">
+                            <p class="fw-bold mb-2">Valor: <span class="text-dark"></span></p>
+                            <button class="cart__item-remove btn btn-danger btn-sm"></button>
+                        </div>
+                    </article>
+                    <article class="cart__item d-flex align-items-center p-3 mb-3 bg-warning rounded">
+                        <img src="../static/images/aaa.png" alt="Imagem do Macaco" class="cart__item-image me-3"
+                            style="width: 80px; height: auto;">
+                        <div class="cart__item-info flex-grow-1">
+                            <h2 class="cart__item-title"></h2>
+                            <p class="cart__item-description mb-1"></p>
+                        </div>
+                        <div class="cart__item-price text-end">
+                            <p class="fw-bold mb-2">Valor: <span class="text-dark"></span></p>
+                            <button class="cart__item-remove btn btn-danger btn-sm"></button>
+                        </div>
+                    </article>
                     
                 </section>
 
                 <!-- Formulário de finalização -->
-                <aside class="cart__checkout col-12 col-lg-3 bg-success p-3 rounded text-white">
+                <aside class="cart__checkout col-12 col-lg-3 p-3 rounded text-white">
                     <form class="cart__form d-flex flex-column">
                         <label for="cep" class="cart__form-label mb-1">CEP:</label>
-                        <input type="text" id="cep" class="cart__form-input form-control mb-3" required>
+                        <input type="text" id="cep" class="cart__form-input form-control mb-3 bg-light" required>
 
                         <label for="endereco" class="cart__form-label mb-1">Endereço:</label>
-                        <input type="text" id="endereco" class="cart__form-input form-control mb-3" required>
+                        <input type="text" id="endereco" class="cart__form-input form-control mb-3 bg-light" required>
 
                         <label for="complemento" class="cart__form-label mb-1">Complemento:</label>
-                        <input type="text" id="complemento" class="cart__form-input form-control mb-3">
+                        <input type="text" id="complemento" class="cart__form-input form-control mb-3 bg-light">
 
                         <label for="pagamento" class="cart__form-label mb-1">Forma de pagamento:</label>
-                        <input type="text" id="pagamento" class="cart__form-input form-control mb-3" required>
+                        <input type="text" id="pagamento" class="cart__form-input form-control mb-3 bg-light" required>
 
                         <div class="cart__total d-flex justify-content-between align-items-center mt-3">
-                            <p class="mb-0 text-dark fw-bold">Valor: <span id="totalValor" class="text-dark">99 999 Bananas</span></p>
+                            <p class="mb-0 text-dark fw-bold">Valor: <span class="text-dark"></span></p>
                             <button type="submit" class="cart__btn btn btn-danger">Finalizar compra</button>
                         </div>
                     </form>
