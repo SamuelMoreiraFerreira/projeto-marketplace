@@ -1,12 +1,45 @@
+from flask import session
 from data.connection_controller import Connection
 from mysql.connector import Error
 
 class User:
 
+    @staticmethod
+    def login(email):
+
+        user_data = User.get_data(email)
+
+        if user_data:
+
+            session['user'] = user_data
+            return True
+
+        else:
+
+            return False
+
+    @staticmethod   
+    def get_session():
+
+        if 'user' in session:
+
+            return session['user']
+        
+        else:
+
+            return False
+
+    @staticmethod
+    def logout():
+
+        session.clear()
+
+        return True
+
     # '**' -> Indica para a função a presença de argumentos nomeados extras (Argumentos que você especifica o nome do parâmetro junto com seu valor)
 
     @staticmethod
-    def create(**user_data):
+    def create(email, password, first_name, last_name, phone_number, address):
 
         connection_db = Connection.create()
         cursor = connection_db.cursor()
@@ -21,24 +54,24 @@ class User:
                 
                 (
 
-                    user_data.get('email'),
-                    user_data.get('first_name'),
-                    user_data.get('last_name'),
-                    user_data.get('phone_number', None),
-                    user_data.get('address'),
-                    user_data.get('password')
+                    email,
+                    first_name,
+                    last_name,
+                    phone_number or None,
+                    address,
+                    password
 
                 ), 
                 
             )
 
-            cursor.commit()
+            connection_db.commit()
 
             return True
 
         except Error as e:
 
-            print(f'Error Criação de Usuário: {e}')
+            print(f'Erro - User "create": {e}')
             
             return False
 
@@ -57,13 +90,19 @@ class User:
 
             cursor.execute('DELETE FROM tb_users WHERE tb_users.email = %s;', (email, ))
 
-            cursor.commit()
+            connection_db.commit()
 
-            return True
+            if cursor.rowcount > 0:
+
+                return True
+            
+            else:
+
+                return False
 
         except Error as e:
 
-            print(f'Error Excluindo Usuário: {e}')
+            print(f'Erro - User "delete": {e}')
             
             return False
 
@@ -94,7 +133,7 @@ class User:
 
         except Error as e:
 
-            print(f'Error Encontrando Usuário: {e}')
+            print(f'Erro - User "get_data": {e}')
             
             return False
 
@@ -122,7 +161,7 @@ class User:
 
         except Error as e:
 
-            print(f'Error Validação de Usuário: {e}')
+            print(f'Erro - User "validate": {e}')
             
             return False
 

@@ -17,6 +17,10 @@
     <!-- Material icons google -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
 
+    
+    <!-- Link Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    
     <!-- OBSERVAÇÂO: COLOCAR ICONES DO FONT AWESOME PARA PONTO A MAIS !!! -->
     <script src="https://kit.fontawesome.com/91808f6bac.js" crossorigin="anonymous" defer></script>
 
@@ -26,7 +30,8 @@
     <link rel="stylesheet" href="../static/css/style-cards.css">
 
     <!-- SCRIPT Local -->
-    <script src="../static/js/scriptInicial.js" defer></script>
+    <script src="../static/js/mainScript.js" type="module" defer></script>
+    <script src="../static/js/headerScript.js" type="module" defer></script>
 
     <link rel="shortcut icon" type="imagex/png" href="../static/images/icone.ico">
 
@@ -38,7 +43,7 @@
         <header class="header">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <figure class="header__logo">
                             <img src="../static/images/logo.svg" alt="logo Macacaria">
                         </figure>
@@ -48,22 +53,22 @@
                         aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse header__nav"  id="navbarNavDropdown">
-                        <ul class="navbar-nav d-flex justify-content-evenly align-items-center">
-                            <li class="nav-item nav__li">
-                                <a class="nav-link" aria-current="page" href="#">Pagina Inicial</a>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav d-flex justify-content-around align-items-center">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/">Pagina Inicial</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/catalog">Catálogo</a>
                             </li>
                             <li class="nav-item nav__li">
-                                <a class="nav-link" href="#">Catálogo</a>
+                                <a class="nav-link" href="/catalog?type=1">Macacos</a>
                             </li>
                             <li class="nav-item nav__li">
-                                <a class="nav-link" href="#">Macacos</a>
+                                <a class="nav-link" href="/catalog?type=2">Bloons</a>
                             </li>
-                            <li class="nav-item nav__li">
-                                <a class="nav-link" href="#">Bloons</a>
-                            </li>
-                            <li class="nav-item header__carrinho nav__li">
-                                <a href="">
+                            <li class="nav-item header__carrinho">
+                                <a href="/cart">
                                     <i class="fa-solid fa-cart-shopping" style="color: var(--banana-snow);"></i>
                                 </a>
                             </li>
@@ -72,9 +77,9 @@
                                     aria-expanded="false">
                                     <i class="fa-solid fa-user" style="color: var(--banana-snow);"></i>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Cadastre-se</a></li>
-                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                <ul class="dropdown-menu" id="user-info">
+                                    <li><a class="dropdown-item" href="/register">Cadastre-se</a></li>
+                                    <li><a class="dropdown-item" href="/login">Login</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -106,56 +111,9 @@
 
             <h2 class="main__subtitle">Destaques</h2>
             <section class="catalogo__produtos">
-                <!-- Cards de produtos -->
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="catalogo__card">
-                    <img src="../static/images/aaa.png" alt="Macaco dardo" class="catalogo__imagem">
-                    <div class="catalogo__info">
-                        <h2 class="catalogo__titulo">Macaco dardo</h2>
-                        <p class="catalogo__descricao">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry.</p>
-                        <div class="catalogo__acoes">
-                            <button class="catalogo__botao">Ver mais</button>
-                            <span class="catalogo__preco">Valor: <strong>25 Bananas</strong></span>
-                        </div>
-                    </div>
-                </div>
+                
             </section>
+
         </main>
 
         <!-- Rodapé -->
