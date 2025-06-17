@@ -335,6 +335,18 @@ input[type="number"] {
     appearance: textfield;
 }
 
+.header__nav.show .nav__li{
+    align-self: end;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--banana-yellow);
+}
+
+.header__nav.show .header__perfil{
+    background-color: var(--bloon-red);
+}
+
 /* Rodapé */
 
 .footer{
