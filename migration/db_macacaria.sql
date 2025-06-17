@@ -745,3 +745,17 @@ VALUES ('luigi@example.com', 7, 'Bom contra bloons camuflados.', 3);
 -- Comentário da Peach para o produto 33
 INSERT INTO tb_comments (user_email, product_id, message, rating)
 VALUES ('peach@example.com', 33, 'Muito fofo e eficaz!', 5);
+
+-- 1) Aponta todas as imagens de produtos do tipo "Macacos" (type = 1)
+UPDATE tb_products_images AS img
+JOIN tb_products AS p
+  ON img.product_id = p.product_id
+SET img.image_url = 'https://imgur.com/a/JJO8lsx'
+WHERE p.type = 1;
+
+-- 2) Aponta todas as imagens de produtos do tipo "Bloons" (type = 2)
+UPDATE tb_products_images AS img
+JOIN tb_products AS p
+  ON img.product_id = p.product_id
+SET img.image_url = 'https://imgur.com/a/lIrsOe3'
+WHERE p.type = 2;

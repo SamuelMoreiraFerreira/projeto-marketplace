@@ -14,7 +14,7 @@ new bootstrap.Carousel(carousel, {
 import { renderProducts } from "./renderProducts.js";
 import { fetchApi } from "./fetchFunction.js";
 
-const highlightsContainer = document.querySelector('.main__destaques');
+const highlightsContainer = document.querySelector('.catalogo__produtos');
 
 document.addEventListener('DOMContentLoaded', async function () {
 

@@ -107,8 +107,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             location.href = '/login';
         }
 
-        console.log('TO AQUI');
-
         const cart = await fetchApi(`/api/carts/get-by-user`);
 
         console.log(cart);

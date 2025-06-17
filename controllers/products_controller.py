@@ -156,7 +156,7 @@ class Products:
                 tb_products.name,
                 tb_products.description,
 
-                tb_products.price,
+                REPLACE(CAST(tb_products.price AS CHAR), \'.\', \',\') AS "price",
                 tb_products.rating,
 
                 COALESCE(SUM(tb_cart_products.quantity), 0) AS 'sold',

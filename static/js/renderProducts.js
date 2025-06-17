@@ -3,6 +3,8 @@ function renderProducts(productsArr, productsContainer)
 
     productsArr.forEach(product => {
 
+        console.log(product);
+
         const productCard = document.createElement('div');
         productCard.classList.add('catalogo__card')
 
@@ -64,7 +66,7 @@ function renderProducts(productsArr, productsContainer)
         // Btn Ver Mais
 
         const purchaseButton = document.createElement('a');
-        purchaseButton.setAttribute('href', `/product/${product.product_id}`)
+        purchaseButton.setAttribute('href', `/product/${product.id}`)
         purchaseButton.textContent = 'Ver Mais';
         purchaseButton.classList.add('catalogo__botao');
 

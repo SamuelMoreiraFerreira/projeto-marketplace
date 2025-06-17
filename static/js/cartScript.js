@@ -1,8 +1,8 @@
 import { fetchApi } from './fetchFunction.js';
 
 const itemsCart = document.querySelector('.cart__items');
-const valorTotal = document.getElementById('totalValor');
-const finalizarCompra = document.getElementById('cart__btn');
+const valorTotal = document.getElementById('total-value');
+const finalizarCompra = document.getElementById('purchase-button');
 
 async function renderCart() {
 

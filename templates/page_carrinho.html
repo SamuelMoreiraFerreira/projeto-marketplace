@@ -93,56 +93,7 @@
             <div class="cart__content justify-content-center gap-3">
 
                 <!-- Lista de produtos -->
-                <section class="cart__items col-12 col-lg-8">
-                    <article class="cart__item d-flex align-items-center p-3 mb-3 bg-warning rounded">
-                        <img src="../static/images/aaa.png" alt="Imagem do Macaco" class="cart__item-image me-3"
-                            style="width: 80px; height: auto;">
-                        <div class="cart__item-info flex-grow-1">
-                            <h2 class="cart__item-title"></h2>
-                            <p class="cart__item-description mb-1"></p>
-                        </div>
-                        <div class="cart__item-price text-end">
-                            <p class="fw-bold mb-2">Valor: <span class="text-dark"></span></p>
-                            <button class="cart__item-remove btn btn-danger btn-sm"></button>
-                        </div>
-                    </article>
-                    <article class="cart__item d-flex align-items-center p-3 mb-3 bg-warning rounded">
-                        <img src="../static/images/aaa.png" alt="Imagem do Macaco" class="cart__item-image me-3"
-                            style="width: 80px; height: auto;">
-                        <div class="cart__item-info flex-grow-1">
-                            <h2 class="cart__item-title"></h2>
-                            <p class="cart__item-description mb-1"></p>
-                        </div>
-                        <div class="cart__item-price text-end">
-                            <p class="fw-bold mb-2">Valor: <span class="text-dark"></span></p>
-                            <button class="cart__item-remove btn btn-danger btn-sm"></button>
-                        </div>
-                    </article>
-                    <article class="cart__item d-flex align-items-center p-3 mb-3 bg-warning rounded">
-                        <img src="../static/images/aaa.png" alt="Imagem do Macaco" class="cart__item-image me-3"
-                            style="width: 80px; height: auto;">
-                        <div class="cart__item-info flex-grow-1">
-                            <h2 class="cart__item-title"></h2>
-                            <p class="cart__item-description mb-1"></p>
-                        </div>
-                        <div class="cart__item-price text-end">
-                            <p class="fw-bold mb-2">Valor: <span class="text-dark"></span></p>
-                            <button class="cart__item-remove btn btn-danger btn-sm"></button>
-                        </div>
-                    </article>
-                    <article class="cart__item d-flex align-items-center p-3 mb-3 bg-warning rounded">
-                        <img src="../static/images/aaa.png" alt="Imagem do Macaco" class="cart__item-image me-3"
-                            style="width: 80px; height: auto;">
-                        <div class="cart__item-info flex-grow-1">
-                            <h2 class="cart__item-title"></h2>
-                            <p class="cart__item-description mb-1"></p>
-                        </div>
-                        <div class="cart__item-price text-end">
-                            <p class="fw-bold mb-2">Valor: <span class="text-dark"></span></p>
-                            <button class="cart__item-remove btn btn-danger btn-sm"></button>
-                        </div>
-                    </article>
-                    
+                <section class="cart__items col-12 col-lg-8">                    
                 </section>
 
                 <!-- Formulário de finalização -->
@@ -161,8 +112,8 @@
                         <input type="text" id="pagamento" class="cart__form-input form-control mb-3 bg-light" required>
 
                         <div class="cart__total d-flex justify-content-between align-items-center mt-3">
-                            <p class="mb-0 text-dark fw-bold">Valor: <span class="text-dark"></span></p>
-                            <button type="submit" class="cart__btn btn btn-danger">Finalizar compra</button>
+                            <p class="mb-0 text-dark fw-bold">Valor: <span id="total-value" class="text-dark"></span></p>
+                            <button type="submit" id="purchase-button" class="cart__btn btn btn-danger">Finalizar compra</button>
                         </div>
                     </form>
                 </aside>
