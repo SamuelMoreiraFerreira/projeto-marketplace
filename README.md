@@ -1,9 +1,7 @@
 <h1 align="center" justify=""center> Macacaria - Store </h1>
-<hr><hr/>
 <p align="center">
 <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=%20FINALIZADO&color=GREEN&style=for-the-badge"/>
 </p>
-![GitHub Org's stars](https://img.shields.io/github/stars/SamuelMoreiraFerreira?style=social)
 <h2> Descrição do projeto </h2>
 <p> O projeto Macacaria store é um projeto cujo o objetivo é uma loja onde tenha como os produtos do jogo BloonsTD6. O intuito do projeto é apenas fazer o site e não vender os produtos já que o mesmo não tem estoque </p>
 <h4 align="center"> 
@@ -20,5 +18,5 @@
 
 # Autores
 | [<img loading="lazy" width=115><sub>Vitor Henrique Fonseca</sub>](https://github.com/vitor-henri) |  
-| [<img loading="lazy" width=115><sub>Vitor Henrique Fonseca</sub>](https://github.com/SamuelMoreiraFerreira) |  
-| [<img loading="lazy" width=115><sub>Vitor Henrique Fonseca</sub>](https://github.com/LuconhaOliveira) |  
+| [<img loading="lazy" width=115><sub>Samuel Moreira Ferreira</sub>](https://github.com/SamuelMoreiraFerreira) |  
+| [<img loading="lazy" width=115><sub>Lucas Oliveira da Silva</sub>](https://github.com/LuconhaOliveira) |  
