@@ -168,3 +168,21 @@
     align-self: end;
     margin-right: 1rem;
 }
+
+@media screen and (max-width: 576px) {
+
+    .header__logo img {
+        width: 80px;
+        height: 60px;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1024px) {
+
+    .header__logo img {
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 60px;
+    }
+}
