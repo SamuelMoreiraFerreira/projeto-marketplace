@@ -9,8 +9,8 @@ prefix = '/api/users'
 def user_validate():
 
     email = request.form.get('email')
-    password = request.form.get('password')
-
+    password = request.form.get('senha')
+    
     # Sucesso - Usuário Encontrado
 
     if User.validate(email, password):
@@ -68,7 +68,27 @@ def user_create():
 
         return Routes.default_response(500)
     
+@blueprint.route('/login/<email>')
+def user_login(email):
+    
+    if User.login(email):
+        
+        return Routes.default_response(200)
+    
+    else:
+        
+        return Routes.default_response(500)
 
+@blueprint.route('/logout')
+def user_logout():
+    
+    if User.logout():
+        
+        return Routes.default_response(200)
+    
+    else:
+        
+        return Routes.default_response(500)
 
 @blueprint.route('/get-data/<email>')
 def user_getdata(email):

@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 from controllers.cart_controller import Carts
 from controllers.routes_controller import Routes
 
@@ -26,6 +26,25 @@ def cart_add_item(cart_id):
 
         return Routes.default_response(500)
     
+@blueprint.route('/get-by-user')
+def cart_get_by_user():
+    
+    if 'user' in session:
+        
+        cart_id = Carts.get_by_user(session['user']['email'])
+        
+        if cart_id:
+
+            return Routes.default_response(200, { 'cart_id': cart_id })
+        
+        else:
+
+            return Routes.default_response(500)
+    
+    else:
+        
+        return Routes.default_response(500)
+        
 
 @blueprint.route('/get/<cart_id>')
 def cart_get(cart_id):

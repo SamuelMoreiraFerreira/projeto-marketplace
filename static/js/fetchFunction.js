@@ -1,10 +1,10 @@
-async function fetchApi(url) 
+async function fetchApi(url, data={}) 
 {
     
     try
     {
 
-        let request = await fetch(url);
+        let request = await fetch(url, data);
         request = await request.json();
 
         if (request.status_code != 200) return false;

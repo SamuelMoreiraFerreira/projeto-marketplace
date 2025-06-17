@@ -4,6 +4,46 @@ from mysql.connector import Error
 class Carts:
 
     @staticmethod
+    def get_cart_user(email):
+        
+        connection_db = Connection.create()
+        cursor = connection_db.cursor(dictionary=True)
+        
+        try:
+            
+            cursor.execute(
+                
+                """
+                SELECT tb_shopping_cart.cart_id AS "id" FROM tb_shopping_cart
+                INNER JOIN tb_users
+                    ON tb_shopping_cart.user_email = %s
+                WHERE tb_shopping_cart.finished = FALSE
+                ORDER BY tb_shopping_cart.cart_id ASC;
+                """,
+            
+                (email, )
+                
+            )
+            
+            cart_id = cursor.fetchone()
+
+            print(cart_id)
+            
+            return cart_id
+            
+        except Error as e:
+            
+            print(f'Erro - Cart "get_cart_user": {e}')
+            
+            return False
+
+        finally:
+
+            cursor.close()
+            connection_db.close()
+            
+
+    @staticmethod
     def create(**cart_data):
 
         # cart_data:
