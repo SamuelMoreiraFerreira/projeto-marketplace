@@ -43,7 +43,7 @@ class Products:
                 'tb_monkeys_classes.class AS "monkey_class",',
                 'GROUP_CONCAT(tb_bloons_types.type) AS "bloon_types",',
 
-                'tb_products_images.image_url AS "images"',
+                'GROUP_CONCAT(tb_products_images.image_url) AS "images"',
 
                 'FROM tb_products',
 

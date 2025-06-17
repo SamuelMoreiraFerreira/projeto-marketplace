@@ -750,12 +750,12 @@ VALUES ('peach@example.com', 33, 'Muito fofo e eficaz!', 5);
 UPDATE tb_products_images AS img
 JOIN tb_products AS p
   ON img.product_id = p.product_id
-SET img.image_url = 'https://imgur.com/a/JJO8lsx'
+SET img.image_url = 'https://s2-g1.glbimg.com/MVIpOVDJgHL5JQkPIkh6NbAtkzw=/0x0:620x794/984x0/smart/filters:strip_icc()/s.glbimg.com/jo/g1/f/original/2012/03/06/caters_monkey_snapper_03.jpg'
 WHERE p.type = 1;
 
 -- 2) Aponta todas as imagens de produtos do tipo "Bloons" (type = 2)
 UPDATE tb_products_images AS img
 JOIN tb_products AS p
   ON img.product_id = p.product_id
-SET img.image_url = 'https://imgur.com/a/lIrsOe3'
+SET img.image_url = 'https://ih1.redbubble.net/image.4903694855.8053/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.u10.jpg'
 WHERE p.type = 2;
