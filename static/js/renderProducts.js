@@ -17,27 +17,27 @@ function renderProducts(productsArr, productsContainer)
         const inner = document.createElement('div');
         inner.className = 'carousel-inner';
 
-        product.images.forEach((image, index) => {
+        //product.images.forEach((image, index) => {
 
-            const carouselItem = document.createElement('div');
-            carouselItem.className = 'carousel-item';
+            // const carouselItem = document.createElement('div');
+            // carouselItem.className = 'carousel-item';
 
-            if (index == 0)
-            {
-                carouselItem.classList.add('active');
-            }
+            // if (index == 0)
+            // {
+            //     carouselItem.classList.add('active');
+            // }
 
             const img = document.createElement('img');
             img.className = 'd-block w-100';
-            img.setAttribute('src', image);
+            img.setAttribute('src', product.images);
 
-            carouselItem.appendChild(img);
-            inner.appendChild(carouselItem);
+            productCard.appendChild(img);
+            //inner.appendChild(carouselItem);
 
-        });
+        // });
 
-        carousel.appendChild(inner);
-        productCard.appendChild(carousel);
+        //carousel.appendChild(inner);
+        //productCard.appendChild(carousel);
 
         const infoContainer = document.createElement('div');
         infoContainer.classList.add('catalogo__info');
@@ -66,7 +66,7 @@ function renderProducts(productsArr, productsContainer)
         // Btn Ver Mais
 
         const purchaseButton = document.createElement('a');
-        purchaseButton.setAttribute('href', `/product/${product.id}`)
+        purchaseButton.setAttribute('href', `/product/${product.id || product.product_id}`)
         purchaseButton.textContent = 'Ver Mais';
         purchaseButton.classList.add('catalogo__botao');
 

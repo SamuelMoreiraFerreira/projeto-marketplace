@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 Swal.fire({
                     title: "Sucesso!",
-                    icon: "sucess",
+                    icon: "success",
                     interval: 2000
                 })
 

@@ -55,14 +55,14 @@ const messageInput = document.querySelector('.user-comment__comment');
 
 document.addEventListener('DOMContentLoaded', async function () {
 
+    const url = window.location.pathname.split('/');
+    const productID = url[url.length - 1];
+
     const response = (await fetchApi('/api/users/logged')).data;
 
         commentButton.addEventListener('click', async function (event) {
         
         event.preventDefault();
-
-        const url = window.location.pathname.split('/');
-        const productID = url[url.length - 1];
 
         const comment = await fetchApi(`/api/comments/create/${productID}`, {
 
@@ -92,8 +92,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         else
         {
             Swal.fire({
-                title: "Erro!",
-                icon: "error",
+                title: 'Erro!',
+                icon: 'error',
                 timer: 2000
             });
         }
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         {
             Swal.fire({
                 title: "Sucesso!",
-                icon: "sucess",
+                icon: "success",
                 timer: 2000
             });
         }

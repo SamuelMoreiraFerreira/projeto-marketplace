@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 Swal.fire({
                     title: "Você logou!",
-                    icon: "sucess",
+                    icon: "success",
                     interval: 3000
                 })
 
