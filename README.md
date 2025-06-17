@@ -11,7 +11,7 @@
 - `Funcionalidade 3`: Adcionar produtos aos carrinhos
 
 # 🛠️ Abrir e rodar o projeto
-**Bastan entrar no site: https://macacaria.onrender.com**
+**Basta entrar no site: https://macacaria.onrender.com**
 
 # Autores
 | <sub>Vitor Henrique Fonseca</sub>](https://github.com/vitor-henri) |  
